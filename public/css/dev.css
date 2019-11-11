@@ -1,0 +1,114 @@
+/*셀렉트박스*/
+.customSelectWrap{position: relative;}
+.customSelectWrap .cstSelect{width: 100%; height: 100%; display: block; position: absolute; left: 0; top: 0; opacity: 0; z-index: 2;}
+.customSelectWrap .virSelect{width: 100%; height: 100%; display: block; position: relative; padding-right: 18px; z-index: 1;}
+.customSelectWrap .virSelect .attacSelect{position: absolute; right: 0; top: 0; background: url(/resources/images/sub/virSelect.png) no-repeat center center; width: 18px; height: 100%;}
+.customSelectWrap .virSelectTxt{width: 100%; display: block; height: 100%; text-align: left; font-size: 15px; color: #6d6d6d; line-height: 22px; overflow: hidden; vertical-align: middle; text-overflow: ellipsis; white-space: nowrap; text-indent: 2px;}
+
+.systemArea{background: #e7e8f1; min-height: 100vh;}
+.systemArea .customSelectWrap{width: 100px; margin-bottom: 18px;}
+.pageTopBanner.tp1{background-image: url(/resources/images/sub/pageTopBanner02.jpg);}
+.systemArea .cmmSort{margin-top: 52px;}
+.systemArea .cmmTableList{margin-top: 38px;}
+
+.cmmTableList .lst .tp .tblInner .img .btsw{position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 75%; text-align: center; z-index: 3; display: none;}
+.cmmTableList .lst .tp .tblInner .img.isBtsw:hover:after{background: none;}
+.cmmTableList .lst .tp .tblInner .img:hover .btsw{display: block;}
+.cmmTableList .lst .tp .tblInner .img .bts{width: 147px; line-height: 38px; display: inline-block; vertical-align: middle; margin: 0 5px; text-align: center; font-size: 18px; color: #fff; border: 1px solid #fff;}
+.cmmTableList .lst .tp .tblInner .img .bts:hover{color: #1c1b1f; background: #fff;}
+.cmmTableList.tp1{}
+.cmmTableList.tp1 .lst{margin: -9px -4px; font-size: 0; text-align: left;}
+.cmmTableList.tp1 .lst .tp{display: inline-block; width: 33.333%; padding: 9px 4px; vertical-align: top;}
+.cmmTableList.tp1 .lst .tp .tblInner{padding-left: 0; min-height: 285px;}
+.cmmTableList.tp1 .lst .tp .tblInner .img{position: relative; display: block;  height: 220px;  width: 100%;} 
+.cmmTableList.tp1 .lst .tp .tblInner .txts{padding-top: 0; padding-right: 0; padding-left: 7px;}
+.cmmTableList.tp1 .lst .tp .tblInner .txts .tit{font-size: 18px; line-height: 60px; text-overflow: ellipsis; overflow: hidden; vertical-align: middle; white-space: nowrap; margin-bottom: 0; margin-top: 0; letter-spacing: -.5px;}
+.cmmTableList.tp1 .lst .tp .tblInner .img:after{background-size: 60px;}
+.cmmTableList.tp1 .lst .tp+.tp{margin-top: 0;}
+
+
+.cmmTableListDetail.popup{padding-left: 20px; padding-right: 20px;}
+
+.cmmTableListDetail.popup .cmmTableDetailTop .tit{margin-top: 0; font-weight: 500;}
+.cmmTableListDetail.popup .cmmTableDetailCont{padding: 30px 25px;}
+.cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie{width: 100%; background: #000; text-align: center;}
+.cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie .scImg{width: 617px; position: relative; margin:0 auto;}
+.cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie .scImg img{display: inline-block; max-height: 400px; }
+.cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie .scImg .scb{position: absolute; right: 0; bottom: 0; width: 70px; height: 60px; background: url(/resources/images/sub/ico_search.png) no-repeat center center;}
+.cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie iframe{width: 800px; height: 450px; vertical-align: top;}
+.cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap{padding: 0 25px;}
+.cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .lst .tp .imgs{font-size: 15px; height: 136px; line-height: 136px;}
+.cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .contr.prev{left: -3px;}
+.cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .contr.next{right: -3px;}
+.cmmTableListDetail.popup .cmmTableDetailBottom{padding-top: 27px; padding-bottom: 31px;}
+
+
+.systemPop {position: fixed; left:0; top:0; width: 100%; height: 100%; z-index: 500; display: none; bottom:0; overflow-y:scroll;}
+.systemPop .bg { position: fixed; left:0; top:0; width: 100%; height: 100%; z-index: 1; background:rgba(0,0,0,.8);}
+.systemPop .popIn {position:absolute; left:0; top:48%;  min-width:100px; width: 100%;  box-sizing:border-box;  z-index:2;  text-align: center; transform: translateY(-46%);  margin-top:35px; margin-bottom:35px;}
+.systemPop .popIn .closePop {position: absolute; left:0; width: 100%; text-align: center; top:-55px;}
+.systemPop .popIn .closePop a {display: inline-block; width:43px; height: 43px; position: relative; text-indent: -999em;}
+.systemPop .popIn .closePop a:before,
+.systemPop .popIn .closePop a:after{content: ''; width: 100%; height: 1px; background: #fff; position: absolute; left: 0; top: 50%; margin-top: -1px;}
+.systemPop .popIn .closePop a:before{transform: rotate(45deg);}
+.systemPop .popIn .closePop a:after{transform: rotate(-45deg);}
+.systemPop .popIn .content {display: inline-block; position: relative;}
+.systemPop .cmmTableListDetail.popup{max-width: 900px; display: inline-block; position: relative; width: 890px;}
+
+.originImgSize {position: fixed; left:0; top:0; width: 100%; height: 100%; z-index: 500; display: none; overflow-y: auto;}
+.originImgSize .bg { position: fixed; left:0; top:0; width: 100%; height: 100%; z-index: 1; background:rgba(0,0,0,.8);}
+.originImgSize .popIn {position:absolute; left:0; top:0; min-width:100px; width: 100%;  box-sizing:border-box;  z-index:2;  text-align: center; width: 100%; display: table; height: 100%;}
+.originImgSize .popIn .popInArea{display: table-cell; vertical-align: middle;}
+.originImgSize .closePop {position: absolute; right:20px; top:20px; z-index: 100;}
+.originImgSize .closePop a {display: block; width:43px; height: 43px; position: relative; text-indent: -999em;}
+.originImgSize .closePop a:before,
+.originImgSize .closePop a:after{content: ''; width: 100%; height: 1px; background: #fff; position: absolute; left: 0; top: 50%; margin-top: -1px;}
+.originImgSize .closePop a:before{transform: rotate(45deg);}
+.originImgSize .closePop a:after{transform: rotate(-45deg);}
+.originImgSize .content {display: inline-block; position: relative;}
+.originImgSize .cmmTableListDetail.popup{max-width: 900px; display: inline-block; position: relative;}
+
+.systemPop .scrollBox{height:80px; margin-top:18px; } 
+.systemPop .scrollBox .iScrollIndicator {background:#b3b4be !important; right:0 !important } 
+.systemPop .scroller {font-size:18px; color:#2e2d2d; line-height:25px; padding-right: 10px;} 
+
+
+/* PC해상도 대응 */
+@media all and (max-width:1920px) and (min-width:1280px) and (max-height:751px){
+ .systemPop {bottom:0; overflow-y:scroll;}
+ .systemPop .popIn {top:60px; transform: translateY(0);}
+}
+
+
+@media all and (max-width:767px){
+    .systemPop .scrollBox{height: 81px; margin-top: 10px;} 
+    .systemPop .scroller {font-size:12px; line-height:20px;padding-right: 5px; } 
+
+    .cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap {padding:0 5px;}
+    .cmmTableListDetail.popup .cmmTableDetailTop{padding:25px 0;}
+    .cmmTableListDetail.popup .cmmTableDetailCont {padding:15px 5px;}
+    .cmmTableListDetail.popup .cmmTableDetailBottom {padding:15px 0 20px 0;}
+    .cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .lst .tp .imgs {height: 50px; line-height: 50px; font-size: 12px; }
+    
+    .cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .contr.prev {left:-13px}
+    .cmmTableListDetail.popup .cmmTableDetailBottom .cmdImgWrap .contr.next {right:-13px}
+    
+    .systemPop .popIn .closePop {top:-27px}
+    .systemPop .popIn .closePop a {width:23px; height:23px;}
+    
+    .systemArea .cmmSort {margin:18px 0;}
+    .pageTopBanner.tp1{background-image: url(/resources/images/sub/pageTopBanner02_mob.jpg);}
+    
+    .originImgSize .popIn {padding:0 15px;}
+    .originImgSize .closePop a {width: 23px; height: 23px;}
+    
+    .cmmTableListDetail.popup .cmmTableDetailCont .cmdImgMovie .scImg .scb {right:10px; bottom:10px; background-size:20px auto; width: 20px; height: 20px;}
+
+}
+
+
+
+
+
+
+

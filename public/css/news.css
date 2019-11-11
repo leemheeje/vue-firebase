@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+body {background: #e7e8f1;}
+#viewport {position: relative;}
+.footer {position: absolute;}
+.footer .in .info a:after {background: #d1d2d8;}
+
+
+@media all and (max-width:1280px){
+    .head {background:rgba(0,0,0,.8);}    
+}

@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+.headCont.ghc .visualArea .item {top: 75px; transform: translateY(0);}
+.headCont.ghc1 {background: url("/resources/images/common/gstarBg01.png") no-repeat center center; background-size: 100% 100%;}
+.headCont.ghc2 {position: relative; background: url("/resources/images/common/gstarBg02.png") no-repeat center center; background-size: cover;}
+.headCont.ghc3 {background: url("/resources/images/common/gstarBg03B.jpg") no-repeat center bottom; background-size: cover;}
+.headCont.ghc3 .visualArea {position: relative;}
+.headCont.ghc3 .visualArea::before {position: absolute; right: 0; top: 110px; content: ''; width: 567px; height: 421px; background: url("/resources/images/common/gstarBgLogo03.png") no-repeat; background-size: 100%;}
+.headCont.ghc .visualArea .item .tit {width: 516px; height: 340px; margin-bottom: 75px; background: url("/resources/images/common/headerSignGstar.png") no-repeat left center; background-size: 100%;}
+.headCont.ghc1 .visualArea .item .tit {margin-bottom: 63px;}
+.headCont.ghc .visualArea .item .ind .ttc {font-size: 16px; line-height: 16px; color: #bbb; margin-bottom: 5px; font-weight: bold;}
+.headCont.ghc .visualArea .item .ind .ttx .tts {font-size: 16px;}
+.headCont.ghc .visualArea .item .ind .rt {float: left; margin-left: 60px; padding-left: 60px; position: relative;}
+
+.commuEventWrap .innerWrap>.cmmTit+.cmmsTit {margin-top: 25px;}
+.commuEvent .row>[class^="col"]{padding-left: 34.5px; padding-right: 34.5px;}
+.commuEvent .row .cmmCard {overflow: hidden; padding: 0; padding-bottom: 128px;}
+.commuEvent .row .cmmCard.PB_INIT{padding: 40px 25px; background: #fff url("/resources/images/common/GoogleCloudBannerBG.png") no-repeat right bottom;}
+.cmmImg {width: 100%;}
+.cmmImg a {display: block;}
+.cmmImg img {width: 100%;}
+.cmmCont {padding: 21px 55px 0;}
+.cmmCont .cmmTit {font-size: 30px;}
+.cmmCont .cmmLine {width: 100%; height: 1px; margin: 20px 0; background: #D5D5D5;}
+.cmmCont .stit {display: inline-block; width: 40px; font-weight: bold;}
+.cmmCont .cmmInfo span {font-size: 18px; color: #000;}
+.cmmCard.PB_INIT .cmmCont{padding: 0;} 
+.cmmProgram {}
+.cmmProgram .stit {padding-bottom: 5px; font-size: 16px;}
+.cmmProgram .cmmLst .cmmtp {display: inline-block;}
+.cmmProgram .cmmLst.l1 {width: 250px; height: 90px;}
+.cmmProgram .cmmLst.l1 .cmmtp {width: 125px;}
+.commuEvent .row .cmmCard .cumtBtn {left: 55px;}
+.commuEvent .commuTxt {margin-top: 80px; text-align: center;}
+
+.commuEventWrap2 {}
+.commuEventWrap2 .cmmProgram .stit {padding-bottom: 10px; font-weight: bold;}
+.commuEventWrap2 .cmmProgram .noticeTxt {position: relative; display: inline-block; padding-left: 40px; font-size: 24px; font-weight: bold;}
+.commuEventWrap2 .cmmProgram .noticeTxt::after {position: absolute; left: 0; top: 6px; content: ''; width: 25px; height: 25px; background: url("/resources/images/common/iconProgramDate.png") no-repeat; background-size: 100%;}
+.commuEventWrap2 .cmmProgram .cmmLst.l1 {width: 400px; height: 90px;}
+.commuEventWrap2 .cmmProgram .cmmLst.l1 .cmmtp {width: 180px;}
+.commuEventWrap2 .cmmProgram .cmmLst.l2 .cmmtp {width: 100%;}
+.commuEventWrap2 .cmmPapSection {margin-top: 80px; padding: 60px 65px;}
+.commuEventWrap2 .maArea {position: relative; overflow: hidden;}
+.commuEventWrap2 .maArea .mlt {float: left; width: 600px;}
+.commuEventWrap2 .maArea .mrt {float: right; width: 600px;}
+.commuEventWrap2 .maArea .mrt .daumMap {position: relative; z-index: 1; overflow: hidden; max-height: 400px;}
+.commuEventWrap2 .maArea .mrt .daumMap .root_daum_roughmap {width: 100% !important; height: 400px;}
+.commuEventWrap2 .maArea .mrt .txts .dl {position: relative; font-size: 18px;}
+.commuEventWrap2 .maArea .mrt .txts .dl .dt {display: inline-block; font-weight: bold; vertical-align: top;}
+.ghc3 .commuEventWrap2 .maArea .mrt .txts .dl .dt {vertical-align: 0;}
+.commuEventWrap2 .maArea .mrt .txts .dl .dd {display: inline-block; padding-left: 5px;}
+.commuEventWrap2 .reserFormArea {margin-top: 40px;}
+.commuEventWrap2 .reserFormArea .userInfoWrap {overflow: hidden; padding: 0; border: 0;}
+.commuEventWrap2 .reserFormArea .userInfoWrap.first {padding-bottom: 60px;}
+.commuEventWrap2 .reserFormArea .userInfoWrap.first .row>div .cmmInput.first {margin-bottom: 60px; padding-top: 30px; border-top: 1px solid #D5D5D5; border-bottom: 1px solid #D5D5D5;}
+.ip.inBgGray input {background: #f6f6f6;}
+
+.cmmCard.complete {min-height: 550px; padding: 55px 65px; box-sizing: border-box;}
+.cmmCard.complete .colorBlue {font-weight: 500;}
+
+.gstar .mypageInfoBt {margin-top: 60px; padding: 0; background: #fff;}
+.gstar .mypageInfoBt .cmmCardWrap .cmmCard+.cmmCard {margin-top: 60px;}
+.gstar .mypageInfoBt .cmmCardWrap .cmmCard {padding-bottom: 0;}
+.gstar .cmmCard .mpayHst {padding: 0 40px;}
+.gstar .cmmCard .mpayHst .mpTp {padding-top: 6px; padding-right: 0; padding-bottom: 42px;}
+.gstar .cmmCard .mpayHst .mpTp .tit {display: inline-block; width: 225px; color: #000;}
+.gstar .cmmCard .mpayHst .mpTp .stit {display: inline-block; font-size: 18px; color: #383838; vertical-align: 7px;}
+.gstar .cmmCard .mpayHst .mpBt {display: none; width: 100%; margin-top: 0; padding-top: 30px; padding-bottom: 60px; border-top: 1px solid #D5D5D5;}
+.gstar .cmmBtn {text-align: right;}
+.gstar .cmmBtn a:first-child {margin-right: 16px;}
+
+.gstar .cmmInput.inline {margin-right: 0;}
+.gstar .cmmInput.radiochk input[type="checkbox"] + .lb:after {border-radius: 50%;}
+.gstar .cmmInput.radiochk input[type="checkbox"]:checked+.lb:after {background: url("/resources/images/common/icoBlueRaio.png") no-repeat center center; background-size: 13px auto;}
+
+.antLayArea{padding-left: 295px; min-height: 190px; position: relative;}
+.antLayArea .antLaylt{position: absolute; width: 197px; height: 190px; left: 35px; top: 50%; margin-top: -95px;}
+.antLayArea .antLaylt .thumb{display: block; width: 100%; height: 100%; background: url("/resources/images/common/googleCloud.png") no-repeat center center; background-size: 100%;}
+.antLayArea .antLayrt{}
+.antLayArea .antLayrt .antBtns{position: relative; padding-left: 140px; min-height: 44px; font-size: 14px; color: #999; line-height: 24px;;}
+.antLayArea .antLayrt .antBtns .btns{position: absolute; left: 0; top: 4px;}
+
+@media only screen and (max-width: 1920px){
+    .headCont.ghc3 {background: url("/resources/images/common/gstarBg03.jpg") no-repeat center bottom;}    
+}
+@media only screen and (max-width: 1300px){
+    .antLayArea{padding-left: 0;}
+    .antLayArea .antLaylt{position: static; margin-top: 0; width: 162px; height: 156px; margin-left: auto; margin-right: auto;}
+    .antLayArea .antLayrt{margin-top: 40px;;}
+    .commuEvent .row .cmmCard.PB_INIT{padding-left: 15px; padding-right: 15px;;}
+    .antLayArea .antLayrt .antBtns{padding-left: 0;}
+    .antLayArea .antLayrt .antBtns .btns{position: static; display: block; margin-bottom: 30px; max-width: 120px;}
+    .commuEvent {margin-top: 30px;}
+    .commuEvent .row>div {margin-bottom: 30px;}
+    .commuEvent .row>div:last-child {float: right;}
+    .commuEvent .row>[class^="col"] {padding-left: 0; padding-right: 0; width: 49% !important;}
+    .commuEvent .row .cmmCard {padding-bottom: 100px;}
+    .cmmCont {padding: 21px 15px 0;}
+    .cmmCont .cmmTit {margin-top: 0;}
+    .commuEventWrap .innerWrap>.cmmTit+.cmmsTit {margin-top: 18px; font-size: 16px; line-height: 30px;}
+    .commuEventWrap .cmmsTit {margin-top: 15px; font-size: 16px; line-height: 30px;}
+    .cmmCont .cmmInfo span {font-size: 16px;}
+    .commuEvent .row .cmmCard .cumtBtn {left: 15px; bottom: 30px;}
+    .commuEvent .commuTxt {margin-top: 10px;}
+    
+    .commuEventWrap2 .maArea {padding-right: 0;}
+    .commuEventWrap2 .maArea .mlt {width: 100%; margin-bottom: 40px;}
+    .commuEventWrap2 .maArea .mlt .cmmsTit {margin-top: 18px; font-size: 16px;}
+    .commuEventWrap2 .maArea .mrt {position: static; width: 100%;}
+    .commuEventWrap2 .root_daum_roughmap .wrap_map {height: 230px !important;}
+    .commuEventWrap2 .maArea .mrt .daumMap .root_daum_roughmap {height: 262px;}
+    .commuEventWrap2 .maArea .mrt .txts .dl {font-size: 16px;}
+    .commuEventWrap2 .cmmProgram .noticeTxt {margin-top: 30px; padding-left: 35px; font-size: 18px;}
+    .commuEventWrap2 .cmmProgram .noticeTxt::after {top: 2px;}
+    .commuEventWrap2 .cmmPapSection {margin-top: 40px; padding: 40px 0; padding-left: 15px; padding-right: 15px;}
+    
+    .cmmCard.complete {padding: 40px 20px;}
+    .mypageInfoBt .innerWrap {padding: 0;}
+    
+    .gstar .cmmCard .mpayHst {padding: 0 15px;}
+    .gstar .cmmCard .mpayHst .mpTp .stt {position: static; float: left; width: 100%; margin-top: 20px; text-align: left;} 
+    .gstar .mypageInfoBt .cmmCard {padding: 25px 0 0;}
+    .gstar .cmmCard .mpayHst .mpTp {padding-bottom: 100px;}
+    .gstar .cmmCard .mpayHst .mpTp.open {padding-bottom: 35px;}
+    .gstar .cmmCard .mpayHst .mpTp .stt {right: auto; left: 0; top: 60px;}
+    .gstar .cmmCard .mpayHst .mpBt {padding-bottom: 35px;}
+    
+    .gstar .mypageInfoBt {margin-top: 40px; margin-bottom: 20px;}
+    .gstar .mypageInfoBt .cmmCardWrap .cmmCard+.cmmCard {margin-top: 30px;}
+}
+@media only screen and (max-width: 1080px) {
+    .headCont.ghc .visualArea .item {top: 50%; transform: translateY(-50%);}
+    .headCont.ghc1, .headCont.ghc2, .headCont.ghc3 {background-size: cover;}
+    .headCont.ghc3 .visualArea::before {visibility: hidden;}
+    .headCont.ghc .visualArea .item .tit {width: 439px; height: 303px; margin-bottom: 45px;}
+    .headCont.ghc .visualArea .item .ind .rt {margin-left: 0; padding-left: 0;}
+    
+    .commuEvent .row>[class^="col"] {width: 100% !important; padding-left: 0; padding-right: 0;}
+}
+@media only screen and (max-width: 768px) {
+    .headCont.ghc2 {background: url("/resources/images/common/gstarBg02.png") no-repeat right center;}
+    .headCont.ghc .visualArea .item .tit {width: 361px; height: 249px;}
+        
+    .commuEventWrap2 .cmmInput.radiochk .lb {word-break: normal;}
+    .commuEventWrap2 .maArea .mrt .txts .dl .dd {display: block; padding-left: 0;}
+    
+    .commuEvent .row .cmmCard .cumtBtn a {min-width:105px;}
+}
+
+@media  only screen and (max-width: 450px) {
+    .headCont.ghc .visualArea .item .tit {width: 284px; height: 196px;}
+    
+    .cmmInfo .cmmTime {overflow: hidden;}
+    .cmmInfo .cmmTime span {float: left;}
+    .cmmCont .cmmInfo .cDate {display: block; margin-right: 5px;}
+    .cmmCont .cmmInfo .cTime {display: block;}
+    .cmmInfo .cmmTime .stit {width: 40px;}
+    .cmmInfo .cmmTime .stxt {width: calc(100% - 40px);}
+}
+@media  only screen and (max-width: 320px) {
+    .commuEvent .row .cmmCard .cumtBtn a {padding:0 5px; min-width:100px; font-size: 14px;}
+}
