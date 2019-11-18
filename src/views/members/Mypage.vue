@@ -32,12 +32,12 @@
 
             <div class="cmmItemsWrap">
                     <Item
-                        :item_id="key.item_id"
-                        :userthumb="key.item_user_thumb"
-                        :usernm="key.item_user_nm"
-                        :userid="key.item_user_email"
-                        :uid="key.item_user_uid"
-
+                        :item_id="key.item_user_uid"
+                        :item_user_thumb="key.item_user_thumb"
+                        :item_user_nm="key.item_user_nm"
+                        :item_user_email="key.item_user_email"
+                        :uid="key.uid"
+                        :data-asdf="key.item_user_thumb"
                         :item_title="key.item_title"
                         :item_intro="key.item_intro"
                         :item_favorite="key.item_favorite"

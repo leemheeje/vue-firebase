@@ -52,7 +52,7 @@
     </div>
 </template>
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapState,mapActions, mapMutations } from "vuex";
 const ar = ["pffiles"];
 export default {
     data() {
@@ -62,6 +62,9 @@ export default {
             pf_intro: "",
             pt_date: ""
         };
+    },
+    computed:{
+        ...mapState(['user'])
     },
     methods: {
         ...mapActions(["fnUserFileUpload"]),
@@ -90,6 +93,8 @@ export default {
                                 this.$current_date
                             );
                             if (d.useritems) {
+                                console.log(this.user.thumb);
+                                
                                 res_d[`useritems`] = d.useritems;
                                 res_d[`useritems`][`item${getTime}`] = {
                                     item_id : `${getTime}`,
@@ -101,10 +106,10 @@ export default {
                                     item_comment: 0,
                                     item_create_date: this.pt_date,
                                     item_comment_group: [],
-                                    item_user_nm : this.guest.usernm,
-                                    item_user_email : this.guest.userid,
-                                    item_user_thumb : this.guest.userthumb,
-                                    item_user_uid : this.guest.uid,
+                                    item_user_nm : this.user.name,
+                                    item_user_email : this.user.email,
+                                    item_user_thumb : this.user.thumb,
+                                    item_user_uid : this.user.uid,
                                 };
                                 this.$firestore
                                     .collection("userinfo")

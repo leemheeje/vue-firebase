@@ -12,32 +12,43 @@
                         </span>
                         <i class="fas fa-thumbs-up"></i>
                     </a>
+
+
+
+
                 </div>
                 <div class="hdcont">
                      <div class="txts">
                         <a href="javascript:;" @click="userMypageView" class="txtop">
-                            <div class="u_thub" :style="`background-image: url(${userDetailView.userthumb});`"></div>
+                            <div class="u_thub" :style="`background-image: url(${userDetailView.item_user_thumb});`"></div>
                             <span class="tt">{{userDetailView.item_title}}</span>
                             <span class="st">{{userDetailView.item_intro}}</span>
                             <span class="st">{{userDetailView.item_create_date}}</span>
                         </a>
-                        <span class="sts">{{userDetailView.usernm}}</span>
-                        <span class="et">{{userDetailView.userid}}</span>
+                        <span class="sts">{{userDetailView.item_user_nm}}</span>
+                        <span class="et">{{userDetailView.item_user_email}}</span>
                     </div>
                     <div class="deFov"></div>
                     <div class="deVisual">
-                        <div class="img cmmRibBar">
+                        <div class="cmmRibBar">
                                 <Slick ref="userInfoSlick" class="slick" :options="slickOptions" v-if="userDetailView.item_thumb.length > 1">
-                                    <img :src="k" v-for="(k,i) in userDetailView.item_thumb" :key="i" alt="">
+                                    <div class="img" v-for="(k,i) in userDetailView.item_thumb" :key="i">
+                                        <span class="VALIGN"></span>
+                                        <img :src="k" alt="">
+                                    </div>
                                 </Slick>
-                                <img :src="userDetailView.item_thumb" alt="" v-else>
+                                <div class="img" v-else><img :src="userDetailView.item_thumb" alt=""></div>
                         </div>
                         <div class="fblb">
                             <span class="flb tp0">
+                                <i class="fas fa-eye"></i>
+                                <span class="t">{{userDetailView.item_view}}</span>
+                            </span>
+                            <span class="flb tp1">
                                 <i class="far fa-thumbs-up"></i> 
                                 <span class="t">{{userDetailView.item_favorite}}</span>
                             </span>
-                            <span class="flb tp1">
+                            <span class="flb tp2">
                                 <i class="fas fa-comment-dots"></i>
                                 <span class="t">{{userDetailView.item_comment}}</span>
                             </span>

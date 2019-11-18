@@ -18,6 +18,9 @@
                             <span class="t">{{item_comment}}</span>
                         </span>
                     </div>
+                    <div class="mblb" v-if="item_thumb.length > 1">
+                        <span class="t">{{item_thumb.length - 1}}</span>
+                    </div>
                 </a>
                 <div class="txts">
                     <div class="txtop">
