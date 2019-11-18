@@ -22,10 +22,11 @@ const unAuth = (to, from, next) => {
   }
   next();
 }
+const afterEach = ((to, from) => {})
 const routes = [{
     path: '*',
     name: 'error',
-    component: () => import('@/views/error/error404')
+    component: () => import('@/views/error/error404'),
   }, {
     path: '/',
     name: 'main',
@@ -39,12 +40,23 @@ const routes = [{
       path: '/login',
       name: 'login',
       component: () => import('@/views/members/Login'),
-      beforeEnter: unAuth
+      beforeEnter: unAuth,
     }, {
       path: '/register',
       name: 'register',
       component: () => import('@/views/members/Register'),
-      beforeEnter: unAuth
+      beforeEnter: unAuth,
+    }, {
+      path: '/mypage/:uid',
+      name: 'mypage',
+      component: () => import('@/views/members/Mypage'),
+      //beforeEnter: isAuth
+    },
+    {
+      path: '/create/:uid',
+      name: 'create',
+      component: () => import('@/views/members/Create'),
+      beforeEnter: isAuth
     }]
   }
 ]
@@ -52,7 +64,14 @@ const routes = [{
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  },
   routes
 })
+router.afterEach(afterEach)
 
 export default router

@@ -1,7 +1,7 @@
 <template>
-    <div class="registerArea MT40">
+    <div class="container">
         <div class="innerWrap">
-            <roundbox class="tp2">
+            <roundbox>
                 <div class="cmmTit">회원가입</div>
                 <div class="reserFormArea MT30">
                     <div class="row">
@@ -17,6 +17,7 @@
                             <forminput
                                 label="이름"
                                 required="true"
+                                v-model="usernm"
                                 type="text"
                             ></forminput>
                         </div>
@@ -32,8 +33,9 @@
                         </div>
                         <div class="col4 MMT30">
                             <forminput
-                                label="비밀번호확인"
+                                label="비밀번호 확인"
                                 required="true"
+                                v-model="userpwcf"
                                 type="password"
                             ></forminput>
                         </div>
@@ -41,42 +43,64 @@
                     <div class="row MT30">
                         <div class="col8">
                             <forminput
-                                id="form"
-                                label="대표이미지"
+                                label="간략소개"
                                 required="true"
-                                type="file"
+                                v-model="userintro"
+                                formType="textarea"
                             ></forminput>
                         </div>
                     </div>
-                    <div class="cmmsTit MT60">관련스킬</div>
+                    <div class="row MT30">
+                        <div class="col4">
+                            <input @change="fileUpload" type="file" />
+                        </div>
+                        <div class="col4 MMT30">
+                            <forminput
+                                label="소속/직급"
+                                required="true"
+                                v-model="usercomp"
+                                type="text"
+                            ></forminput>
+                        </div>
+                    </div>
+
+                    <div class="cmmsTit MT60 required">관련스킬 <small>(하나이상 선택해주세요.)</small></div>
                     <div class="row MT30">
                         <div class="col12">
-                            <forminput
-                                :label="key"
-                                :id="`chk${index}`"
-                                class="meta"
+
+                            <div
+                                class="cmmInput radiochk meta"
                                 formType="checkbox"
-                                v-for="(key,index) in skills"
-                            ></forminput>
+                                v-for="(k, i) in skills"
+                                :key="i"
+                            >
+                                <input
+                                    type="checkbox"
+                                    :id="`chk${i}`"
+                                    :name="`chk${i}`"
+                                    :value="k"
+                                    v-model="user_skills_model"
+                                />
+                                <label :for="`chk${i}`" class="lb">{{ k }}</label>
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="btnsWrap MT50 TXTC">
-                    <btn
-                        class="blue"
-                        @eventBus_click="register"
-                    >회원가입</btn>
+                    <btn href="javascript:;" class="blue" @eventBus_click="register">회원가입</btn>
                     <router-link
-                        :to="{name:'main'}"
+                        :to="{ name: 'main' }"
                         class="btns outline ML10"
-                    >홈으로</router-link>
+                        >홈으로</router-link
+                    >
                 </div>
             </roundbox>
         </div>
     </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
     data() {
         return {
@@ -157,17 +181,47 @@ export default {
                 "cgi",
                 "VRML"
             ],
+            user_skills_model: [],
             userid: "",
-            userpw: ""
+            userpw: "",
+            userpwcf: "",
+            usernm: "",
+            userintro: "df",
+            userthumb: null
         };
     },
     methods: {
-        ...mapActions(["fnUserCreate"]),
+        fileUpload(event) {
+            this.userthumb = event.target;
+        },
+        ...mapActions(["fnUserCreate", "fnUserFileUpload"]),
+        ...mapMutations(["geUserDetailView"]),
         register() {
-            this.fnUserCreate({
+            if (
+                !this.userid ||
+                !this.userpw ||
+                !this.usernm ||
+                !this.userthumb ||
+                !this.userintro||
+                !this.user_skills_model.length
+            ) {
+                alert("회원정보를 입력해주세요");
+                return;
+            }
+            if (this.userpw == this.userpwcf) {
+                alert("비밀번호가 일치하지않습니다.");
+                return;
+            }
+            let userinfo = {
                 userid: this.userid,
-                userpw: this.userpw
-            });
+                userpw: this.userpw,
+                usernm: this.usernm,
+                userthumb: this.userthumb,
+                usercomp: this.usercomp,
+                userintro: this.userintro,
+                user_skills_model: this.user_skills_model,
+            };
+            this.fnUserCreate(userinfo);
         }
     }
 };

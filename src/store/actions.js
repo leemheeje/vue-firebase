@@ -1,94 +1,182 @@
 import vue from 'vue';
+import router from '@/router';
 export const actions = {
-	fnUserCreate: ({
+	fnUserFileUpload: ({
 		dispatch
+	}, payload) => { //payload => event.target
+		let pad = payload;
+		if (payload.data) {
+			pad = payload.data;
+		}
+		let storageRef = vue.prototype.$storage.ref();
+		let files = [] //리스폰스 리턴용
+		for (var i = 0; i < pad.files.length; i++) {
+			var child = storageRef.child(`${pad.files[i].name}`)
+			var uploadTask = child.put(pad.files[i]).then(res=>{
+				console.log(res);
+				
+			})
+			return;
+			dispatch('fnUserFileUploadCallback',{
+				task : uploadTask,
+				callback : payload.callback
+			})
+		}
+		
+	},
+	fnUserFileUploadCallback:({},payload)=>{
+		let snapshot = null
+		payload.task.on('state_changed', snapshot => {
+			snapshot = snapshot
+		}, err => {}, () => {
+			payload.task.snapshot.ref.getDownloadURL().then(res => {
+				if (typeof payload.callback === 'function') {
+					payload.callback(res);
+				}
+			})
+		})
+	},
+	fnUserCreate: ({
+		dispatch,
+		commit,
 	}, payload) => {
+		commit('geIsLoading', {
+			bool: true
+		});
 		let {
 			userid,
-			userpw
+			usernm,
+			userthumb,
 		} = payload;
-		console.log(payload);
 		//vue.prototype.UI.Alert('회원가입이 완료되었습니다.\n로그인페이지로 이동합니다.')
-		vue.prototype.$firebase.auth().createUserWithEmailAndPassword(userid, userpw).then(res => {
+		vue.prototype.$firebase.auth().createUserWithEmailAndPassword(userid, payload.userpw).then(res => {
 			console.log('이메일 가입 성공 : ', res);
 			res.user.updateProfile({
-				displayName: '임희재히',
-				testsibar0: 'sibar0',
-				testsibar1: 'sibar1',
-				testsibar2: 'sibar2',
-				testsibar3: 'sibar3',
-				testsibar4: 'sibar4',
-				testsibar5: 'sibar5',
+				displayName: usernm,
 			}).then(() => {
-				console.log(res);
-				console.log('userName 업데이트 성공')
+				dispatch('fnUserFileUpload', {
+					data: userthumb,
+					callback: c => {
+						payload.userthumb = c;
+						payload.uid = res.user.uid;
+						vue.prototype.$firestore.collection("userinfo").doc(res.user.uid).set(payload);
+						console.log('userName 업데이트 성공')
+						console.log(res);
+						dispatch('fnSignInCallBack', () => {
+							router.push({
+								name: 'main'
+							})
+						});
+					}
+				});
 			}).catch(err => {
 				console.error('userName 업데이트 실패 : ', err);
 			})
-			//dispatch('fnSignInCallBack');
 		}).catch(err => {
 			console.log(err);
 
 			switch (err.code) {
 				case "auth/email-already-in-use":
-					alert('이미 사용중인 이메일 입니다.');
+					alert(vue.prototype.$Msg.error.msg4);
 					break;
 				case "auth/invalid-email":
-					alert('유효하지 않은 메일입니다');
+					alert(vue.prototype.$Msg.error.msg5);
 					break;
 				case "auth/operation-not-allowed":
-					alert('이메일 가입이 중지되었습니다.');
+					alert(vue.prototype.$Msg.error.msg6);
 					break;
 				case "auth/weak-password":
-					alert("비밀번호를 6자리 이상 필요합니다");
+					alert(vue.prototype.$Msg.error.msg7);
 					break;
 			}
+			commit('geIsLoading', false);
 		})
 	},
 	fnSignIn: ({
-		dispatch
+		dispatch,
+		commit,
 	}, payload) => {
+		commit('geIsLoading', true);
 		let {
 			userid,
 			userpw
 		} = payload;
 		vue.prototype.$firebase.auth().signInWithEmailAndPassword(userid, userpw).then(res => {
-			alert('로그인')
-			dispatch('fnSignInCallBack');
+			console.log(res);
+			alert(vue.prototype.$Msg.error.msg2)
+			dispatch('fnSignInCallBack', () => {
+				router.push({
+					name: 'main'
+				})
+			});
 		}).catch(err => {
 			switch (err.code) {
 				case "auth/invalid-email":
-					alert('유효하지 않은 메일입니다');
+					alert(vue.prototype.$Msg.error.msg5);
 					break;
 				case "auth/user-disabled":
-					alert('사용이 정지된 유저 입니다.');
+					alert(vue.prototype.$Msg.error.msg8);
 					break;
 				case "auth/user-not-found":
-					alert('사용자를 찾을 수 없습니다.');
+					alert(vue.prototype.$Msg.error.msg9);
 					break;
 				case "auth/wrong-password":
-					alert("잘못된 패스워드 입니다.");
+					alert(vue.prototype.$Msg.error.msg10);
 					break;
 			}
+			commit('geIsLoading', false);
 
 		})
 	},
 	fnSignInCallBack: ({
 		commit
-	}) => {
+	}, callback) => {
 		vue.prototype.$firebase.auth().onAuthStateChanged(user => {
-
 			if (user) {
-				commit('geSignIn', user);
+				vue.prototype.$firestore.collection("userinfo").doc(user.uid).get().then(res => {
+					console.log();
+					commit('geSignIn', {
+						uid: user.uid,
+						name: user.displayName,
+						email: user.email,
+						thumb: res.data().userthumb,
+					})
+					if (typeof callback === 'function') callback();
+					commit('geIsLoading', false);
+				});
 			}
 		})
 	},
 	fnSignOut: ({
 		commit
 	}) => {
-		vue.prototype.$firebase.auth().signOut().then(res => {
-			alert(vue.prototype.$Msg.error.msg3);
-			commit('geSignOut');
-		}).catch(err => {})
+		if (confirm(vue.prototype.$Msg.error.msg11)) {
+			vue.prototype.$firebase.auth().signOut().then(res => {
+				alert(vue.prototype.$Msg.error.msg3);
+				commit('geSignOut');
+			}).catch(err => {})
+		}
+	},
+	fnGetUserInfo: ({
+		commit,
+		state
+	}, payload) => {
+		if (payload == state.guest.uid) return
+		commit('geIsLoading', true);
+		console.log(payload);
+
+		vue.prototype.$firestore.collection("userinfo").doc(payload).get().then(res => {
+			console.log(res);
+			console.log(res.data());
+			let p = {
+				me: false,
+				data: res.data()
+			}
+			if (state.isAuth && state.user.uid == payload) {
+				p.me = true;
+			}
+			commit('geUserInfo', p);
+			commit('geIsLoading', false);
+		});
 	}
 };

@@ -198,7 +198,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .footer .footCont .footTopIn .fcnInput .cmmInput.radiochk .lb a{color: #fff;}
 .footer .footCont .footTopIn .fcnInput .cmmInput.radiochk .lb a.UNDERLINE:hover{text-decoration: underline;}
     
-.container{padding: 80px 0; background: #fff;}
+.container{padding: 80px 0;}
 .container.main{padding-bottom: 0;}
 .container.PB0{padding-bottom: 0;}
 .container.gray{background-color: #f5f5f5;}
@@ -227,7 +227,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .mainBottom{background: #f5f5f5; padding: 80px 0; margin-top: 80px;}
 .mainBottom .img{display: block; margin-top: 30px;}
         
-.btns{min-width: 120px; height: 44px; line-height: 40px; border: 2px solid transparent; border-radius: 4px; padding: 0 18px; font-size: 16px; color: #000; text-align: center; display: inline-block; vertical-align: baseline; white-space: nowrap;}
+.btns{min-width: 120px; height: 44px; line-height: 40px; border: 2px solid transparent; border-radius: 4px; padding: 0 18px; font-size: 16px; color: #000; text-align: center; display: inline-block; vertical-align: baseline; white-space: nowrap; cursor: pointer;}
 .btns.init{min-width: 0; height: auto; line-height: initial; border: none; border-radius: 0; padding: 0; font-size: initial; color: initial; display: initial; text-align: initial;}
 .btns.block{display: block;}
 .btns.blue{background-color: #2196f3; color: #fff;}
@@ -267,7 +267,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 
 .cmmTit{font-size: 40px; line-height: 52px; text-align: left; color: #000; font-weight: 600; word-break: break-all;}
 .cmmTit small{font-size: 60%;}
-.cmmTit.sm{font-size: 24px; line-height: 34px;}
+.cmmTit.sm{font-size: 18px; line-height: 34px;}
 .cmmTit.md{font-size: 32px; line-height: 34px;}
 .cmmTit .tx{vertical-align: top; color: #2196f3; font-size: 24px;}
 .cmmsTit{font-size: 18px; line-height: 30px; text-align: left; color: #000; font-weight: 400; word-break: keep-all;}
@@ -312,8 +312,8 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .cmmInput.radiochk input{position: absolute; left: -999em; opacity: 0; width: 0; height: 0; overflow: hidden;}
 .cmmInput.radiochk input[type="checkbox"]:checked+.lb:after{background-image: url("/resources/images/common/icoBlueCheck.png"); background-size: 17px auto;}
 .cmmInput.radiochk input[type="radio"]:checked+.lb:after{background-image: url("/resources/images/common/icoBlueRaio.png"); background-size: 13px auto;}
-.cmmInput.radiochk.meta{margin-right: 15px; margin-bottom: 15px; display: inline-block; vertical-align: top;}
-.cmmInput.radiochk.meta .lb{border: 1px solid #999; border-radius: 5px; font-size: 16px; text-align: center; padding: 0 25px; line-height: 34px; color: #999; font-weight: 600;}
+.cmmInput.radiochk.meta{margin-right: 7px; margin-bottom: 7px; display: inline-block; vertical-align: top;}
+.cmmInput.radiochk.meta .lb{border: 1px solid #999; border-radius: 3px; font-size: 13px; text-align: center; padding: 0 15px; line-height: 24px; color: #999; font-weight: normal;}
 .cmmInput.radiochk.meta .lb:after{content: none;}
 .cmmInput.radiochk.meta input:checked+.lb{border-color: #2196f3; color: #2196f3;}
 .cmmInput.search{}
@@ -327,7 +327,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .cmmInput .cmmInputFile{padding-right: 155px; position: relative;}
 .cmmInput .cmmInputFile .btns{position: absolute; right: 0; top: 0; min-width: 132px;}
 .cmmInput .cmmInputFile .fkf_input{display: block; padding: 10px 0; font-size: 15px; color: #000; padding-left: 10px; height: 42px;}
-.cmmInput .textarea{width: 100%; height: 100%; border: none; resize: none; padding: 10px; outline: none; font-size: 15px;}
+.cmmInput .textarea{width: 100%; height: 100%; border: none; resize: none; padding: 10px; outline: none; font-size: 15px; min-height: 150px;}
 .cmmLst{}
 .cmmLst.sm{font-size: 14px; line-height: 24px;}
 .cmmLst .cmmtp{display: block; font-size: 16px; color: #000; line-height: 30px; text-align: left;}
@@ -395,7 +395,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .bgGray{background-color: #f5f5f5; padding: 80px 0;}
 .bgonGray{background-color: #f5f5f5;}
 .cmmCardWrap{}
-.cmmCard{border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); padding: 40px 25px; padding-bottom: 128px; background: #fff; position: relative;}
+.cmmCard{border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.05); padding: 30px; background: #fff; position: relative;}
 .cmmCardWrap .cmmCard+.cmmCard{margin-top: 30px;}
 .cmmCard .cumtBtn{position: absolute; left: 25px; bottom: 40px;}
 .cmmCard.tp2{margin-left: -65px; margin-right: -65px; padding-left: 65px; padding-right: 65px; padding-bottom: 60px;}
@@ -1175,7 +1175,6 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
     .btnTop{top: auto; bottom: 14px; right: 11px;}
     .header .headTop{position: fixed; left: 0; width: 100%; top: 0; z-index: 10;}
     .headCont{margin-top: 56px;}
-    .dimm{position: fixed; width: 100%; top: 56px; bottom: 0; background: #000; opacity: 0; left: 0; transform: translateX(-100%); transition: opacity .3s;}
     .header.mobileMenuOpen .dimm{transform: translateX(0); opacity: .4;}
     .innerWrap{padding-left: 15px; padding-right: 15px; max-width: 100%;}
     .header .headTop .gnb{padding: 19px 15px; width: 80%; position: fixed; left: 0; top: 56px; bottom: 0; background: #fff; z-index: 10; opacity: 0; transform: translateX(-100%); overflow-y: auto; }
@@ -1280,7 +1279,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
     .reserFormArea{margin-top: 40px;}
     .reserFormArea .userInfoWrap{padding: 40px 0;}
     .training .trainingMd .cmmCard{min-height: 0;}
-    .cmmCard{padding: 20px; padding-bottom: 88px;}
+    .cmmCard{}
     .cmmCard .cumtBtn{bottom: 20px;}
     .cmmCard+.cmmCard{margin-top: 40px;}
     .training .trainingMd{padding: 40px 0 0;}

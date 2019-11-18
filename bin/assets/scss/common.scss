@@ -57,6 +57,7 @@ body {
 .navibar .innerWrap{position: relative; padding: 0;}
 .navibar .btns.init{display: inline-block; width: 54px; text-align: center;}
 .navibar .btns.init i{line-height: 60px; display: block; color: #fff; font-size: 20px;}
+.navibar .btns.init i.revers{transform: rotateY(90deg)}
 .navibar .rtbox{position: absolute; right: 15px; top: 0;}
 .navibar .rtbox .rtboxin{}
 

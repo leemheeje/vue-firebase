@@ -1,11 +1,11 @@
 <template>
     <div class="cmmInput radiochk" v-if="formType == 'checkbox'">
-        <input type="checkbox" :id="id" name="USR_PTYE" :value="label" />
-        <label :for="id" class="lb">{{label}}</label>
+        <input type="checkbox" :id="id" :name="name" :value="cssValue" @input="eventBusInputVmodel"/>
+        <label :for="id" class="lb">{{ label }}</label>
     </div>
     <div class="cmmInput radiochk" v-else-if="formType == 'radio'">
         <input type="radio" id="agr03" name="unity_use_agree" value="Y" />
-        <label for="agr03" class="lb">{{label}}</label>
+        <label for="agr03" class="lb">{{ label }}</label>
     </div>
     <div class="cmmInput" v-else-if="formType == 'select'">
         <div class="cmmInput">
@@ -20,9 +20,27 @@
             </div>
         </div>
     </div>
+    <div class="cmmInput" v-else-if="formType == 'textarea'">
+        <div class="cmmInput">
+            <label :for="id" :class="required ? `lb required` : 'lb'">{{
+                label
+            }}</label>
+            <div class="ip">
+                <textarea
+                    class="textarea"
+                    :class="cssClass"
+                    :name="name"
+                    :id="id"
+                    :title="title"
+                    :placeholder="placeholder"
+                    @input="eventBusInputVmodel"
+                ></textarea>
+            </div>
+        </div>
+    </div>
     <div class="cmmInput" v-else>
         <template v-if="type == 'file'">
-            <span :class="required ? `lb required` : 'lb'">{{label}}</span>
+            <span :class="required ? `lb required` : 'lb'">{{ label }}</span>
             <div class="cmmInputFile fakFile">
                 <div class="ip">
                     <input
@@ -40,7 +58,9 @@
             </div>
         </template>
         <template v-else>
-            <label :for="id" :class="required ? `lb required` : 'lb'">{{label}}</label>
+            <label :for="id" :class="required ? `lb required` : 'lb'">{{
+                label
+            }}</label>
             <div class="ip">
                 <input
                     :type="type"
@@ -64,6 +84,7 @@ export default {
         "label",
         "name",
         "title",
+        "cssValue",
         "id",
         "cssClass",
         "minlength",

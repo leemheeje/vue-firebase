@@ -1,9 +1,19 @@
 
-$color-set1 : #f2f2f2;
-$color-set2 : #2d2d2d;
-$background-color-set : $color-set1;
+$gray1 : #f1f1f1;
+$gray2 : #666;
+$normal : #2d2d2d;
+$primary : #2196f3;
+$primary2 : #ea4c89;
+$background-color-set : $gray1;
 $font-size : 16px;
 $width_100 : 100%;
+@mixin ellipsis($vertical-align:middle){
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: $vertical-align;
+}
 @mixin padding($l, $r, $t, $b) {
     padding-left: $l;
     padding-right: $r;
@@ -14,12 +24,13 @@ $width_100 : 100%;
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-overflow-scrolling:touch;
 }
 
 body {
-    background: #fff;
-
+    background: $gray1;
+	overflow-x: hidden;
     @if($font-size==16px) {
         font-size: $font-size;
     }
@@ -28,7 +39,6 @@ body {
         font-size: 20px;
     }
 }
-
 
 
 .btns.block{display: block;}
@@ -51,13 +61,239 @@ body {
     @include padding(15px, 15px, 15px, 15px);
 }
 
-
-
-.navibar{position: fixed; width: 100%; background-color: $color-set2;}
+.container+.container{position: absolute; top: 0; width: 100%;}
+.memeberWrap{overflow: hidden;}
+.memeberWrap.gray{min-height: 100vh; background-color: #fafafa;}
+.navibar{position: fixed; width: 100%; background-color: #fff; left: 0; top: 0;}
 .navibar .innerWrap{position: relative; padding: 0; max-width: 100%;}
 .navibar .btns.init{display: inline-block; width: 54px; text-align: center;}
-.navibar .btns.init i{line-height: 60px; display: block; color: #fff; font-size: 20px;}
-.navibar .rtbox{position: absolute; right: 15px; top: 0;}
+.navibar .btns.init i{line-height: 60px; display: block; color: #555; font-size: 14px;}
+.navibar .btns.init i.revers{transform: rotateY(180deg)}
+.navibar .ltbox{position: absolute; left: 0; top: 0;}
+.navibar .rtbox{position: absolute; right: 0; top: 0;}
+.navibar .tit{text-align: center; line-height: 60px; height: 60px; font-size: 40px;  overflow: hidden;}
+.navibar .tit a{color: $primary2;}
 .navibar .rtbox .rtboxin{}
+.memeberWrap {padding: 30px 30px 40px 30px }
+.mypageWrap{margin-top: -15px;}
+.container{padding-top: 75px; min-height: 100vh;}
+.container.center{position: absolute; left: 50%; transform: translate(-50%,-50%); top: 50%;}
+.mainWrap{margin-top: -15px;}
+.mainWrap .innerWrap{padding-left: 0; padding-right: 0; max-width: 100%;}
+.mainWrap .mainAside{font-size: 16px; position: absolute; right: 15px; top: 20px; width: 385px;  }
+.mainWrap .mainAside .mainAsideInner{background-color: #ffe1a4; min-height: 300px; border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,.1);}
+.mainWrap .cmmTit.sm{padding-left: 20px;}
 
-.container{padding-top: 75px;}
+.cmmItemsWrap{}
+.cmmItemsWrap .items{display: block;}
+.cmmItemsWrap .items+.items{margin-top: 25px;}
+.cmmItemsWrap .items .itin{position: relative; background-color: #fff; border-radius: 20px; border-top-left-radius: 0; border-top-right-radius: 0; overflow: hidden;}
+.cmmItemsWrap .items .thub .fblb{position: absolute; right: 10px; top: 10px;}
+.cmmItemsWrap .items .fblb{background-color: $primary; display: inline-block; padding: 0 15px; border-radius: 30px; min-width: 100px; text-align: center;}
+.cmmItemsWrap .items .fblb .flb{}
+.cmmItemsWrap .items .fblb .flb i{color: #fff; font-size: 12px; line-height: 30px; display: inline-block; vertical-align: middle; margin-right: 3px;}
+.cmmItemsWrap .items .fblb .flb .t{color: #fff; font-size: 12px; line-height: 30px; display: inline-block; vertical-align: middle;}
+.cmmItemsWrap .items .fblb .flb+.flb{margin-left: 10px;}
+.cmmItemsWrap .items .itin .uinf{}
+.cmmItemsWrap .items .itin .uinf .thub{display: block; width: 100%; padding-bottom: 75%; background: no-repeat center center; background-size: cover; position: relative; }
+.cmmItemsWrap .items .txts{background: #fff; padding: 25px 15px; text-align: left;}
+.cmmItemsWrap .items .txtop{position: relative; padding-left: 50px; display: block;}
+.cmmItemsWrap .items .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; top: 0;}
+.cmmItemsWrap .items .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis();}
+.cmmItemsWrap .items .txts .st{line-height: 20px; font-size: 13px; color: $gray2; @include ellipsis();}
+.cmmItemsWrap .items .txts .et{font-size: 13px; color: $gray2; margin-top: 5px; display: block;}
+.cmmItemsWrap .items .txts .sts{margin-top: 10px; font-size: 16px; line-height: 23px; display: block;}
+
+.cmmRibBar{background: #ffd292; padding: 0 0; text-align: center; font-size: 14px; color: #fff;}
+.cmmRibBar .cmmItemsWrap{padding: 0;}
+.cmmRibBar .cmmItemsWrap .items{padding: 0 15px; padding-top: 20px; padding-bottom: 20px;}
+.cmmRibBar .cmmItemsWrap .items .itin{border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+.cmmRibBar .cmmItemsWrap .items .txts .sts{display: none;}
+.cmmRibBar .cmmItemsWrap .items .txts .st{display: none;}
+.cmmRibBar .cmmItemsWrap .items .txts .et{display: none;}
+.cmmRibBar .cmmItemsWrap .slick-arrow{position: absolute; top: 0; width: 50px; height: 100%; background: #fff; outline: none; border: none; opacity: 0; z-index: 1; transition: opacity .3s;}
+.cmmRibBar .cmmItemsWrap .slick-arrow:hover{opacity: .4;}
+.cmmRibBar .cmmItemsWrap .slick-prev{left: 0;}
+.cmmRibBar .cmmItemsWrap .slick-next{right: 0;}
+.cmmRibBar .cmmItemsWrap .items .thub .fblb{display: none;}
+.cmmRibBar .cmmItemsWrap .items .txts{padding: 10px 15px; position: absolute; left: 0; bottom: 0; width: 100%; background-color: rgba(255,255,255,.8);}
+.cmmRibBar .cmmItemsWrap .items .txts .tt{font-size: 14px;;}
+.cmmRibBar .cmmTit.sm{padding-top: 20px;}
+.cmmRibBar .slick-dots{display: block; text-align: center; line-height: 30px;}
+.cmmRibBar .slick-dots li{width: 5px; height: 5px; background: #fff; display: inline-block; vertical-align: middle; margin: 0 2px; border-radius: 50%; cursor: pointer;}
+.cmmRibBar .slick-dots li.slick-active{background: $primary2;}
+.cmmRibBar .slick-dots li button{display: none;}
+
+
+.modalItemView{background-color: #fff; max-width: 1280px; width: 100%; height: calc(100% - 30px); position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; border-radius: 20px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: 0 -5px 15px rgba(0,0,0,.1);}
+.modalItemView .hdtop{padding: 0 70px; text-align: center;}
+.modalItemView .hdtop .tit{font-weight: normal; color: $normal; @include ellipsis(middle); font-size: $font-size; line-height: 60px;}
+.modalItemView .modalItemCloseBtn{position: absolute; left: 0; top: 0; width: 54px; text-align: center;}
+.modalItemView .modalItemCloseBtn i{line-height: 60px; color: #555; display: block; font-size: 14px;}
+.modalItemView .modalItemFavoritBtn{position: absolute; right: 0; top: 0; width: 54px; height: 60px; text-align: center;}
+.modalItemView .modalItemFavoritBtn i{line-height: 60px; color: #fff; display: block; font-size: 14px; position: relative; z-index: 1;}
+.modalItemView .modalItemFavoritBtn .cir{width: 40px; height: 40px; border-radius: 50%; background-color: $primary2; display: inline-block; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%)}
+.modalItemView .modalItemFavoritBtn.active .cir{background-color: $gray1;}
+.modalItemView .modalItemFavoritBtn .cir i{color: #fff; line-height: 60px;}
+.modalItemView .hdcont{padding: 0 0; height: calc(100% - 60px); overflow: hidden; overflow-y: auto; position: relative;}
+.modalItemView .deComt{padding: 20px 15px;}
+.modalItemView .deVisual{position: relative;  overflow: hidden;}
+.modalItemView .deVisual .fblb{position: absolute; right: 10px; top: 10px;}
+.modalItemView .txts{background: #fff; padding: 25px 15px; text-align: left;}
+.modalItemView .txtop{position: relative; padding-left: 50px; display: block;}
+.modalItemView .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; top: 0;}
+.modalItemView .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis();}
+.modalItemView .txts .st{line-height: 20px; font-size: 13px; color: $gray2; @include ellipsis();}
+.modalItemView .txts .et{font-size: 13px; color: $gray2; margin-top: 5px; display: block;}
+.modalItemView .txts .sts{margin-top: 10px; font-size: 16px; line-height: 23px; display: block;}
+.modalItemView .fblb{background-color: $primary; display: inline-block; padding: 0 15px; border-radius: 30px; min-width: 100px; text-align: center;}
+.modalItemView .fblb .flb{}
+.modalItemView .fblb .flb i{color: #fff; font-size: 12px; line-height: 30px; display: inline-block; vertical-align: middle; margin-right: 3px;}
+.modalItemView .fblb .flb .t{color: #fff; font-size: 12px; line-height: 30px; display: inline-block; vertical-align: middle;}
+.modalItemView .fblb .flb+.flb{margin-left: 10px;}
+
+
+.commtWrap{}
+.commtWrap .comtItem{padding-left: 55px; padding-top: 20px; position: relative;}
+.commtWrap .comtItem .commtWrap .comtItem{margin-top: -20px;}
+.commtWrap .comtItem .commtWrap{position: relative;}
+.commtWrap .comtItem .commtWrap .fa-reply{position: absolute; left: -20px; top: 33px; transform: rotate(180deg); color: $normal; font-size: 10px;}
+.commtWrap .comtItem+.comtItem{margin-top: 20px; border-top: 1px solid #eee;}
+.commtWrap .comtItem .comtThumb{width: 40px; height: 40px; border-radius: 50%; background: no-repeat center center; background-size: cover; display: block; position: absolute; left: 0; top: 20px;}
+.commtWrap .comtItem .comtTxts{}
+.commtWrap .comtItem .comtTxts .nm{font-size: 16px; word-break: break-all; color: $normal; padding-top: 6px;}
+.commtWrap .comtItem .comtTxts .tt{font-size: 14px; word-break: break-all; color: $normal; padding-top: 5px;}
+.commtWrap .comtItem .comtTxts .dt{font-size: 12px; word-break: break-all; color: $gray2; display: block; margin-top: 5px;}
+.modalItemView .deComtField{display: block; padding: 15px 15px; background-color: $gray1; position: relative;}
+.modalItemView .deComtField .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: $font-size; color: $normal; border-radius: 5px; border: 1px solid #eee;}
+.modalItemView .deComtField .textarea:focus{outline: none;}
+.modalItemView .deComtField .deComtDimm{text-align: center; left: 15px; top: 15px; position: absolute; width: calc(100% - 30px); height: calc(100% - 35px); border-radius: 5px; background: rgba(0,0,0,0.3); }
+.modalItemView .deComtField .deComtDimm .tt{font-size: 14px; color: #fff; display: block; margin-top: 22px; margin-bottom: 10px;}
+ .txts{}
+// .cmmItemsWrap .items .modalItemView .txts .u_thub{position: static; width: 80px; height: 80px; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
+.cmmItemsWrap .items .modalItemView .txts{}
+.cmmItemsWrap .items .modalItemView .txts .txtop{padding-left: 75px;}
+.cmmItemsWrap .items .modalItemView .txts .u_thub{width: 60px; height: 60px;}
+.cmmItemsWrap .items .modalItemView .txts .tt{white-space: inherit; overflow: visible; text-overflow: inherit; word-break: break-all; line-height: 28px; padding-top: 6px;}
+.cmmItemsWrap .items .modalItemView .txts .st{margin-top: 5px;}
+
+.preloader{color: $primary2; font-size: 80px;}
+.btnCreate{position: fixed; right: 15px; bottom: 15px; width: 60px; height: 60px; line-height: 60px; background: $primary2; text-align: center; border-radius: 50%; box-shadow: 10px 10px 15px rgba(0,0,0,0.15);}
+.btnCreate i{color: #fff;}
+
+.mypage_userinfo {
+	background: #fff;
+}
+
+.mypage_userinfo .lrow {
+	padding: 20px 30px;
+}
+
+.mypage_userinfo .lrow+.lrow {
+	border-top: 1px solid #eee;
+}
+
+.mypage_userinfo .tag_area {
+	margin-right: 5px !important;
+	margin-bottom: 5px !important;
+}
+.mypage_userinfo .tag_area .lb{
+	font-size: 12px !important;
+}
+
+.mypage_userinfo .title {
+	font-size: 15px;
+	color: #999;
+	margin-bottom: 10px;
+	display: block;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+
+.btns.tag {
+	margin-left: 4px;
+	margin-bottom: 4px;
+}
+
+.mypage_userinfo .user_t {
+	text-align: center;
+}
+
+.mypage_userinfo .thumb {
+	width: 80px;
+	height: 80px;
+	display: block;
+	margin: 0 auto 5px;
+	border-radius: 50%;
+	overflow: hidden;
+	position: relative;
+}
+
+.mypage_userinfo .thumb img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+.mypage_userinfo .user_name {
+	font-weight: 600;
+	color: #444;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.mypage_userinfo .user_info {
+	word-break: break-all;
+	font-size: 13px;
+	color: #444;
+	font-weight: normal;
+	display: block;
+}
+.mypageWrap .mypage_userinfo{box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-radius: 20px; width: calc(100% - 30px); margin-left: 15px; margin-top: 30px; margin-bottom: 30px;}
+@media only screen and (max-width: 1200px) {
+	.mypage_userinfo {
+		float: none;
+		width: 100%;
+		border-radius: 3px;
+	}
+}
+
+
+@media only screen and (min-width: 320px){
+	.cmmRibBar .cmmItemsWrap .items{padding-left: 7px; padding-right: 7px;}
+	.cmmRibBar .cmmItemsWrap .slick-arrow{display: none !important;}
+}
+
+@media only screen and (min-width: 480px){
+}
+
+@media only screen and (min-width: 768px){
+	.cmmItemsWrap{background: none; font-size: 0; padding: 10px;}
+	.cmmItemsWrap .items{display: inline-block; width: 50%; vertical-align: top; padding: 10px;}
+	.cmmItemsWrap .items+.items{margin-top: 0;}
+	.cmmRibBar .cmmItemsWrap .items{padding-left: 15px; padding-right: 15px;}
+}
+
+@media only screen and (min-width: 960px){
+    .cmmItemsWrap .items{width: 33.333%;}
+}
+
+@media only screen and (min-width: 1280px){
+	.cmmItemsWrap .items{width: 25%;}
+	.modalItemView{box-shadow: 0 0 30px rgba(0,0,0,0.15);}
+}
+
+@media only screen and (min-width: 1301px){
+	.cmmRibBar .cmmItemsWrap .slick-arrow{display: block !important;}
+	.loginArea{width: 500px; display: inline-block;}
+	.mypageWrap{padding-left: 400px; position: relative;}
+	.cmmItemsWrap .items{width: 20%;}
+	.mypageWrap .mypage_userinfo{position: absolute; left: 15px; top: 20px; width: 385px; margin-left: 0; margin-top: 0; margin-bottom: 0;}
+}
+
+@media only screen and (min-width: 1921px){
+	.loginArea{width: 500px;}
+	.cmmItemsWrap .items{width: 16.666%;}
+}
