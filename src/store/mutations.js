@@ -39,8 +39,8 @@ export const mutations = {
 		})
 	},
 	geUserDetailView: (state, payload) => {
+		let o = {}
 		if (typeof payload === 'object') {
-			let o = {}
 			let ar = payload.k.forEach((a, i) => {
 				o[a] = payload.v[i];
 			})
@@ -48,6 +48,11 @@ export const mutations = {
 			state.userDetailView = o
 		} else if (typeof payload === 'boolean') {
 			state.userDetailView.modalDetailViewShow = payload
+		}
+		if(state.userDetailView.modalDetailViewShow){
+			router.push({query:{item:o.item_id}})
+		}else{
+			router.replace({query:null})
 		}
 	},
 	geTransDirection: (state, payload) => {

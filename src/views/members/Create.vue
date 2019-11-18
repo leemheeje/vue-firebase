@@ -59,7 +59,8 @@ export default {
         return {
             pf_file_target: null,
             pf_title: "",
-            pf_intro: ""
+            pf_intro: "",
+            pt_date: ""
         };
     },
     methods: {
@@ -70,6 +71,7 @@ export default {
         },
         locFnPortFolioUpdate() {
             let img_ar = [];
+            let getTime = this.$current_date_live(new Date())
             this.geIsLoading({
                 bool: true
             });
@@ -80,10 +82,41 @@ export default {
                     this.$firestore
                         .collection("userinfo")
                         .doc(this.$route.params.uid)
-                        .update({
-                            pf_files: img_ar
+                        .get()
+                        .then(res => {
+                            let d = res.data();
+                            let res_d = [];
+                            this.pt_date = this.$options.filters.date_format(
+                                this.$current_date
+                            );
+                            if (d.useritems) {
+                                res_d[`useritems`] = d.useritems;
+                                res_d[`useritems`][`item${getTime}`] = {
+                                    item_id : `${getTime}`,
+                                    item_thumb: img_ar,//포트폴리오 썸네일 array
+                                    item_title: this.pf_title,
+                                    item_intro: this.pf_intro,
+                                    item_favorite: 0,
+                                    item_view: 0,
+                                    item_comment: 0,
+                                    item_create_date: this.pt_date,
+                                    item_comment_group: [],
+                                    item_user_nm : this.guest.usernm,
+                                    item_user_email : this.guest.userid,
+                                    item_user_thumb : this.guest.userthumb,
+                                    item_user_uid : this.guest.uid,
+                                };
+                                this.$firestore
+                                    .collection("userinfo")
+                                    .doc(this.$route.params.uid)
+                                    .update({
+                                        useritems: res_d[`useritems`]
+                                    });
+                            }
+                            this.geIsLoading(false);
+                            this.$router.push({name:'mypage' , params:this.$route.params.uid})
                         });
-                    this.geIsLoading(false);
+                    
                 }
             });
         }

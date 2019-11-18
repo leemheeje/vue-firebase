@@ -220,6 +220,7 @@ export default {
                 usercomp: this.usercomp,
                 userintro: this.userintro,
                 user_skills_model: this.user_skills_model,
+                useritems: {}
             };
             this.fnUserCreate(userinfo);
         }

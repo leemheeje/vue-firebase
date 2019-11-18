@@ -3,7 +3,7 @@
     <modal :show="userDetailView.modalDetailViewShow" v-slot:itemsDetailView>
             <div class="modalItemView">
                 <div class="hdtop">
-                    <a href="javascript:;" @click.prevent="userDetailView.modalDetailViewShow=false" class="modalItemCloseBtn">
+                    <a href="javascript:;" @click.prevent="geUserDetailView(false)" class="modalItemCloseBtn">
                         <i class="fas fa-chevron-down"></i>
                     </a>
                     <div class="tit">아이템 상세보기</div>
@@ -16,40 +16,41 @@
                 <div class="hdcont">
                      <div class="txts">
                         <a href="javascript:;" @click="userMypageView" class="txtop">
-                            <div class="u_thub" :style="`background-image: url(${userDetailView.user_thumb});`"></div>
-                            <span class="tt">{{userDetailView.title}}</span>
-                            <span class="st">{{userDetailView.name}}</span>
+                            <div class="u_thub" :style="`background-image: url(${userDetailView.userthumb});`"></div>
+                            <span class="tt">{{userDetailView.item_title}}</span>
+                            <span class="st">{{userDetailView.item_intro}}</span>
+                            <span class="st">{{userDetailView.item_create_date}}</span>
                         </a>
-                        <span class="sts">{{userDetailView.stitle}}</span>
-                        <span class="et">{{userDetailView.email}}</span>
+                        <span class="sts">{{userDetailView.usernm}}</span>
+                        <span class="et">{{userDetailView.userid}}</span>
                     </div>
                     <div class="deFov"></div>
                     <div class="deVisual">
-                        <div class="img">
-                                <Slick ref="userInfoSlick" class="slick cmmRibBar" :options="slickOptions" v-if="userDetailView.main_thumb.length > 1">
-                                    <img :src="userDetailView.main_thumb" alt="">
+                        <div class="img cmmRibBar">
+                                <Slick ref="userInfoSlick" class="slick" :options="slickOptions" v-if="userDetailView.item_thumb.length > 1">
+                                    <img :src="k" v-for="(k,i) in userDetailView.item_thumb" :key="i" alt="">
                                 </Slick>
-                                <img :src="userDetailView.main_thumb" alt="" v-else>
+                                <img :src="userDetailView.item_thumb" alt="" v-else>
                         </div>
                         <div class="fblb">
                             <span class="flb tp0">
-                                <i class="far fa-thumbs-up"></i>
-                                <span class="t">{{userDetailView.favorite}}</span>
+                                <i class="far fa-thumbs-up"></i> 
+                                <span class="t">{{userDetailView.item_favorite}}</span>
                             </span>
                             <span class="flb tp1">
                                 <i class="fas fa-comment-dots"></i>
-                                <span class="t">{{userDetailView.comment_length}}</span>
+                                <span class="t">{{userDetailView.item_comment}}</span>
                             </span>
                         </div>
                     </div>
                     <div class="deComt">
-                        <div class="cmmsTit sm"><i class="fas fa-comment-dots"></i>&nbsp;{{userDetailView.comment_length}}개의 댓글</div>
+                        <div class="cmmsTit sm"><i class="fas fa-comment-dots"></i>&nbsp;{{userDetailView.item_comment}}개의 댓글</div>
                         <div class="commtWrap MT20 MB20">
 
                             <div class="comtItem">
-                                <span class="comtThumb" :style="`background-image:url(${userDetailView.user_thumb})`"></span>
+                                <span class="comtThumb" :style="`background-image:url(${userDetailView.userthumb})`"></span>
                                 <div class="comtTxts">
-                                    <div class="nm">{{userDetailView.name}}</div>
+                                    <div class="nm">{{userDetailView.usernm}}</div>
                                     <div class="tt">
                                         Tere is my new shot for Travel app
                                         Travel App
@@ -71,9 +72,9 @@
                                 <div class="commtWrap MT20 MB20">
                                     <i class="fas fa-reply"></i>
                                     <div class="comtItem">
-                                        <span class="comtThumb" :style="`background-image:url(${userDetailView.user_thumb})`"></span>
+                                        <span class="comtThumb" :style="`background-image:url(${userDetailView.userthumb})`"></span>
                                         <div class="comtTxts">
-                                            <div class="nm">{{userDetailView.name}}</div>
+                                            <div class="nm">{{userDetailView.usernm}}</div>
                                             <div class="tt">{{userDetailView.stitle}}</div>
                                             <div class="dt">2019-09-30 15:30:16</div>
                                         </div>
@@ -83,9 +84,9 @@
                             </div>
 
                             <div class="comtItem">
-                                <span class="comtThumb" :style="`background-image:url(${userDetailView.user_thumb})`"></span>
+                                <span class="comtThumb" :style="`background-image:url(${userDetailView.userthumb})`"></span>
                                 <div class="comtTxts">
-                                    <div class="nm">{{userDetailView.name}}</div>
+                                    <div class="nm">{{userDetailView.usernm}}</div>
                                     <div class="tt">{{userDetailView.stitle}}</div>
                                     <div class="dt">2019-09-30 15:30:16</div>
                                 </div>

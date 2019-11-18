@@ -3,43 +3,45 @@
         <div class="mainWrap">
             <div class="cmmRibBar">
                 <div class="cmmItemsWrap slick">
-                   <Slick ref="slick" :options="slickOptions">
-
-					<Item 
-					:main_thumb="key.main_thumb"
-					:favorite="key.favorite"
-					:comment_length="key.comment_length"
-					:user_thumb="key.user_thumb"
-					:title="key.title"
-					:name="key.name"
-					:email="key.email"
-					:stitle="key.stitle"
-					:uid="key.uid"
-					v-for="(key,index) in allDataFortfolio" :key="index"></Item>
-
+                    <Slick ref="slick" :options="slickOptions" v-if="allitems">
+                       <Item
+                        :item_id="key.item_id"
+                        :userthumb="key.item_user_thumb"
+                        :usernm="key.item_user_nm"
+                        :userid="key.item_user_email"
+                        :uid="key.item_user_uid"
+                        :item_title="key.item_title"
+                        :item_intro="key.item_intro"
+                        :item_favorite="key.item_favorite"
+                        :item_comment="key.item_comment"
+                        :item_create_date="key.item_create_date"
+                        :item_view="key.item_view"
+                        :item_thumb="key.item_thumb"
+                        v-for="(key, index) in allitems"
+                        :key="index"
+                    ></Item>
                     </Slick>
-
                 </div>
             </div>
             <div class="innerWrap">
                 <div class="cmmTit sm MT40 MMB20">All Items</div>
                 <div class="cmmItemsWrap">
-
-
-					<Item 
-					:main_thumb="key.main_thumb"
-					:favorite="key.favorite"
-					:comment_length="key.comment_length"
-					:user_thumb="key.user_thumb"
-					:title="key.title"
-					:name="key.name"
-					:email="key.email"
-					:stitle="key.stitle"
-					:uid="key.uid"
-					v-for="(key,index) in allDataFortfolio" :key="index"></Item>
-
-
-
+                    <Item
+                        :item_id="key.item_id"
+                        :userthumb="key.item_user_thumb"
+                        :usernm="key.item_user_nm"
+                        :userid="key.item_user_email"
+                        :uid="key.item_user_uid"
+                        :item_title="key.item_title"
+                        :item_intro="key.item_intro"
+                        :item_favorite="key.item_favorite"
+                        :item_comment="key.item_comment"
+                        :item_create_date="key.item_create_date"
+                        :item_view="key.item_view"
+                        :item_thumb="key.item_thumb"
+                        v-for="(key, index) in allitems"
+                        :key="index"
+                    ></Item>
                 </div>
             </div>
         </div>
@@ -47,59 +49,68 @@
 </template>
 
 <script>
-import Item from '@/components/Item'
-import Slick from 'vue-slick'
-import extendData from '@/data'
+import Item from "@/components/Item";
+import Slick from "vue-slick";
+import extendData from "@/data";
+import { mapActions } from "vuex";
 export default {
-    extends:extendData,
-    data(){
+    extends: extendData,
+    data() {
         return {
             slickOptions: {
                 slidesToShow: 1,
-                centerMode : true,
-                infinite:false,
+                centerMode: true,
+                infinite: false,
                 dots: true,
                 autoplay: true,
                 autoplaySpeed: 3000,
-                responsive:[
+                responsive: [
                     {
                         breakpoint: 2561,
-                        settings:{
+                        settings: {
                             slidesToShow: 5,
-                            centerMode : true,
+                            centerMode: true
                         }
                     },
                     {
                         breakpoint: 1921,
-                        settings:{
+                        settings: {
                             slidesToShow: 3,
-                            centerMode : true,
+                            centerMode: true
                         }
-                    }, {
+                    },
+                    {
                         breakpoint: 960,
-                        settings:{
+                        settings: {
                             slidesToShow: 2,
-                            centerMode : false,
+                            centerMode: false,
                             slidesToShow: 2
                         }
-                    },{
+                    },
+                    {
                         breakpoint: 768,
-                        settings:{
+                        settings: {
                             slidesToShow: 1,
-                            centerMode : true,
+                            centerMode: true
                         }
                     }
                 ]
             },
-        }
+            allitems: null
+        };
     },
     components: {
         Item,
         Slick
-	},
-    mounted() {
     },
+    created() {
+        this.fnGetAllCollection(res => {
+            this.allitems = res;
+        });
+    },
+    mounted() {},
     methods: {
+        ...mapActions(["fnGetAllCollection"])
     }
 };
 </script>

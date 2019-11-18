@@ -12,20 +12,18 @@ export const actions = {
 		let files = [] //리스폰스 리턴용
 		for (var i = 0; i < pad.files.length; i++) {
 			var child = storageRef.child(`${pad.files[i].name}`)
-			var uploadTask = child.put(pad.files[i]).then(res=>{
-				console.log(res);
-				
-			})
-			return;
-			dispatch('fnUserFileUploadCallback',{
-				task : uploadTask,
-				callback : payload.callback
+			var uploadTask = child.put(pad.files[i])
+			dispatch('fnUserFileUploadCallback', {
+				task: uploadTask,
+				callback: payload.callback
 			})
 		}
-		
+
 	},
-	fnUserFileUploadCallback:({},payload)=>{
+	fnUserFileUploadCallback: ({}, payload) => {
 		let snapshot = null
+		console.log(payload);
+
 		payload.task.on('state_changed', snapshot => {
 			snapshot = snapshot
 		}, err => {}, () => {
@@ -134,7 +132,6 @@ export const actions = {
 		vue.prototype.$firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				vue.prototype.$firestore.collection("userinfo").doc(user.uid).get().then(res => {
-					console.log();
 					commit('geSignIn', {
 						uid: user.uid,
 						name: user.displayName,
@@ -161,7 +158,6 @@ export const actions = {
 		commit,
 		state
 	}, payload) => {
-		if (payload == state.guest.uid) return
 		commit('geIsLoading', true);
 		console.log(payload);
 
@@ -178,5 +174,32 @@ export const actions = {
 			commit('geUserInfo', p);
 			commit('geIsLoading', false);
 		});
+	},
+	fnGetAllCollection: ({
+		commit,
+		dispatch
+	}, callback) => {
+		let db = vue.prototype.$firestore.collection('userinfo')
+		let rst = []
+		db.get().then(res => {
+			for (let i = 0; i < res.docs.length; i++) {
+				dispatch('fnGetAllCollection2', {
+					data: res.docs[i].data(),
+					callback: d => {
+						for (let key in d.useritems) {
+							rst.push(d.useritems[key])
+						}
+					}
+				})
+			}
+			if(typeof callback === 'function'){
+				callback(rst)
+			}
+		})
+	},
+	fnGetAllCollection2: ({}, payload) => {
+		if (typeof payload.callback === 'function') {
+			payload.callback(payload.data)
+		}
 	}
 };
