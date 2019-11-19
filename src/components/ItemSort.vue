@@ -5,28 +5,28 @@
                 href="javascript:;"
                 ref="sortbtn"
                 @eventBus_click="locFnSort(`n`)"
-                class="green sm"
+                :class="`green sm ${sortbtn_class == 'n' ? '' : 'outline'}`"
                 >최신순</btn
             >
             <btn
                 href="javascript:;"
                 ref="sortbtn"
                 @eventBus_click="locFnSort(`v`)"
-                class="green sm"
+                :class="`green sm ${sortbtn_class == 'v' ? '' : 'outline'}`"
                 >조회순</btn
             >
             <btn
                 href="javascript:;"
                 ref="sortbtn"
                 @eventBus_click="locFnSort(`f`)"
-                class="green sm"
+                :class="`green sm ${sortbtn_class == 'f' ? '' : 'outline'}`"
                 >좋아요순</btn
             >
             <btn
                 href="javascript:;"
                 ref="sortbtn"
                 @eventBus_click="locFnSort(`c`)"
-                class="green sm"
+                :class="`green sm ${sortbtn_class == 'c' ? '' : 'outline'}`"
                 >댓글순</btn
             >
         </div>
@@ -113,7 +113,8 @@ export default {
                         }
                     }
                 ]
-            }
+			},
+			sortbtn_class: `n`
         };
     },
     created() {
@@ -125,7 +126,7 @@ export default {
     },
     methods: {
         locFnSort(s) {
-            let t = "";
+			let t = "";
             switch (s) {
                 case "f":
                     t = "item_favorite";
@@ -140,7 +141,8 @@ export default {
                     t = "item_create_date";
             }
             if (t) {
-                this.sortdata = this.locFnSortApply(t);
+				this.sortdata = this.locFnSortApply(t)
+				this.sortbtn_class = s
             }
         },
         locFnSortApply(l) {
