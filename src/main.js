@@ -12,6 +12,9 @@ import Modal from '@/components/Modal'
 import RoundBox from '@/components/RoundBox'
 import Form from '@/components/Form'
 import FileUpload from '@/components/FileUpload'
+import {
+  Ui
+} from '@/assets/js/leemheeje'
 import firebase from "firebase"
 //import "firebase/firestore"
 import firebaseConfig from '../firebaseConfig'
@@ -34,14 +37,16 @@ let date = (p, c) => {
   }
 }
 
+Ui.alert('hello')
 Vue.config.productionTip = false
 Vue.prototype.$firebase = firebase;
+Vue.prototype.$Ui = Ui;
 Vue.prototype.$firestore = firebase.firestore();
 Vue.prototype.$storage = firebase.storage();
 Vue.prototype.$current_date = date();
 Vue.prototype.$current_date_full = date('full');
-Vue.prototype.$current_date_live = (c)=>{
-  return date('full' , c)
+Vue.prototype.$current_date_live = (c) => {
+  return date('full', c)
 }
 
 

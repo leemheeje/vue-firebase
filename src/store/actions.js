@@ -192,7 +192,7 @@ export const actions = {
 					}
 				})
 			}
-			if(typeof callback === 'function'){
+			if (typeof callback === 'function') {
 				callback(rst)
 			}
 		})

@@ -28,6 +28,25 @@
                         </div>
                     </div>
                 </div>
+                <!-- <div class="lrow noline">
+                    <div class="title">statistics</div>
+                    <div class="cont">
+                        <ul class="sta_ul">
+                            <li class="tp tp0">
+                                <span class="t">1,414</span>
+                                <span class="s">총 조회수</span>
+                            </li>
+                            <li class="tp tp1">
+                                <span class="t">87</span>
+                                <span class="s">총 좋아요수</span>
+                            </li>
+                            <li class="tp tp2">
+                                <span class="t">13</span>
+                                <span class="s">총 댓글수</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
             </div>
 
             <div class="cmmItemsWrap">
@@ -84,8 +103,6 @@ export default {
     },
     watch: {
         $route() {
-			console.log('mypage 진입');
-			
             this.fnGetUserInfo(this.$route.params.uid);
         }
     },

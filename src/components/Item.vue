@@ -45,7 +45,7 @@ import {userMypageView} from '@/extend'
 
 
 
-let ary = ['item_id','userthumb','usernm','userid','uid','item_title','item_intro','item_favorite','item_comment','item_create_date','item_view','item_thumb','item_user_nm','item_user_email','item_user_thumb']
+let ary = ['item_id','userthumb','usernm','userid','item_user_uid','item_title','item_intro','item_favorite','item_comment','item_create_date','item_view','item_thumb','item_user_nm','item_user_email','item_user_thumb']
 export default{
     props:ary,
     data(){

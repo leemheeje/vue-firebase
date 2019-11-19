@@ -5,10 +5,10 @@
                 <div class="cmmItemsWrap slick">
                     <Slick ref="slick" :options="slickOptions" v-if="allitems">
                        <Item
-                        :item_id="key.item_user_uid"
                         :item_user_thumb="key.item_user_thumb"
                         :item_user_nm="key.item_user_nm"
                         :item_user_email="key.item_user_email"
+                        :item_user_uid="key.item_user_uid"
                         :uid="key.uid"
                         :item_title="key.item_title"
                         :item_intro="key.item_intro"
@@ -27,10 +27,10 @@
                 <div class="cmmTit sm MT40 MMB20">All Items</div>
                 <div class="cmmItemsWrap">
                     <Item
-                        :item_id="key.item_user_uid"
                         :item_user_thumb="key.item_user_thumb"
                         :item_user_nm="key.item_user_nm"
                         :item_user_email="key.item_user_email"
+                        :item_user_uid="key.item_user_uid"
                         :uid="key.uid"
                         :item_title="key.item_title"
                         :item_intro="key.item_intro"

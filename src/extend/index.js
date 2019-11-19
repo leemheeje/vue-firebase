@@ -8,7 +8,7 @@ const FnExtends = {
 						this.$router.push({
 							name: 'mypage',
 							params: {
-								uid: this.uid
+								uid: this.item_user_uid
 							}
 						})
 					}, 250)
@@ -16,7 +16,7 @@ const FnExtends = {
 					this.$router.push({
 						name: 'mypage',
 						params: {
-							uid: this.uid
+							uid: this.item_user_uid
 						}
 					})
 				}

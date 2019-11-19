@@ -1,4 +1,5 @@
 import router from '@/router'
+import vuex from '@/store'
 export const mutations = {
 	geCmmPayload:(state, payload)=>{
 		state[payload.k] = payload.v
@@ -50,9 +51,9 @@ export const mutations = {
 			state.userDetailView.modalDetailViewShow = payload
 		}
 		if(state.userDetailView.modalDetailViewShow){
-			router.push({query:{item:o.item_id}})
+			//router.push({query:{item:o.item_id}})
 		}else{
-			router.replace({query:null})
+			//router.replace({query:null})
 		}
 	},
 	geTransDirection: (state, payload) => {

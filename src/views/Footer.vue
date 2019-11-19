@@ -37,7 +37,10 @@
                                         <img :src="k" alt="">
                                     </div>
                                 </Slick>
-                                <div class="img" v-else><img :src="userDetailView.item_thumb" alt=""></div>
+                                <div class="img only" v-else>
+                                    <span class="VALIGN"></span>
+                                    <img :src="userDetailView.item_thumb" alt="">
+                                </div>
                         </div>
                         <div class="fblb">
                             <span class="flb tp0">
@@ -138,9 +141,13 @@ export default {
   },
   computed:{
     ...mapState(['isAuth','userDetailView']),
-    uid(){
-      return this.userDetailView.uid
+    item_user_uid(){
+      return this.userDetailView.item_user_uid
     }
+  },
+  created(){ 
+      console.log(this.userDetailView.uid);
+      
   },
   methods: {
         ...mapMutations(['geUserDetailView']),

@@ -131,7 +131,7 @@ body {
 .modalItemView .cmmRibBar{background-color: $gray1;}
 .modalItemView .cmmRibBar .img{text-align: center; height: 500px;}
 .modalItemView .cmmRibBar .img img{display: inline-block; vertical-align: middle; max-height: 500px;}
-.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 15px;}
+.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 8px;}
 .modalItemView .cmmRibBar .slick-arrow.slick-prev{left: 0;  background-image: url(../images/common/icoArrowBlackLeft.png);}
 .modalItemView .cmmRibBar .slick-arrow.slick-next{right: 0; background-image: url(../images/common/icoArrowBlackRight.png); }
 .modalItemView .cmmRibBar .slick-arrow.slick-prev:after{content: '<'; color: #fff;}
@@ -154,8 +154,8 @@ body {
 .modalItemView .txts{background: #fff; padding: 25px 15px; text-align: left;}
 .modalItemView .txtop{position: relative; padding-left: 50px; display: block;}
 .modalItemView .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; top: 0;}
-.modalItemView .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis();}
-.modalItemView .txts .st{line-height: 20px; font-size: 13px; color: $gray2; display: block;}
+.modalItemView .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis(); min-height: 40px;}
+.modalItemView .txts .st{line-height: 20px; font-size: 13px; color: $gray2; display: block; min-height: 20px;}
 .modalItemView .txts .et{font-size: 13px; color: $gray2; margin-top: 5px; display: block;}
 .modalItemView .txts .sts{margin-top: 10px; font-size: 16px; line-height: 23px; display: block;}
 .modalItemView .fblb{background-color: $primary; display: inline-block; padding: 0 15px; border-radius: 30px; min-width: 100px; text-align: center;}
@@ -179,7 +179,7 @@ body {
 .modalItemView .deComtField{display: block; padding: 15px 15px; background-color: $gray1; position: relative;}
 .modalItemView .deComtField .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: $font-size; color: $normal; border-radius: 5px; border: 1px solid #eee;}
 .modalItemView .deComtField .textarea:focus{outline: none;}
-.modalItemView .deComtField .deComtDimm{text-align: center; left: 15px; top: 15px; position: absolute; width: calc(100% - 30px); height: calc(100% - 35px); border-radius: 5px; background: rgba(0,0,0,0.3); }
+.modalItemView .deComtField .deComtDimm{text-align: center; left: 15px; top: 15px; position: absolute; width: calc(100% - 30px); height: calc(100% - 35px); border-radius: 5px; background: rgba(0,0,0,0.3); z-index: 1;}
 .modalItemView .deComtField .deComtDimm .tt{font-size: 14px; color: #fff; display: block; margin-top: 22px; margin-bottom: 10px;}
  .txts{}
 // .cmmItemsWrap .items .modalItemView .txts .u_thub{position: static; width: 80px; height: 80px; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
@@ -204,7 +204,7 @@ body {
 .mypage_userinfo .lrow+.lrow {
 	border-top: 1px solid #eee;
 }
-
+.mypage_userinfo .lrow.noline{border-top: none;}
 .mypage_userinfo .tag_area {
 	margin-right: 5px !important;
 	margin-bottom: 5px !important;
@@ -214,12 +214,12 @@ body {
 }
 
 .mypage_userinfo .title {
-	font-size: 15px;
-	color: #999;
-	margin-bottom: 10px;
+	font-size: 13px;
+	color: #555;
+	margin-bottom: 20px;
 	display: block;
 	text-transform: uppercase;
-	font-weight: 600;
+	font-weight: normal;
 }
 
 .btns.tag {
@@ -235,10 +235,11 @@ body {
 	width: 80px;
 	height: 80px;
 	display: block;
-	margin: 0 auto 5px;
+	margin: 0 auto 20px;
 	border-radius: 50%;
 	overflow: hidden;
 	position: relative;
+	background: #eee;
 }
 
 .mypage_userinfo .thumb img {
@@ -253,16 +254,30 @@ body {
 	font-weight: 600;
 	color: #444;
 	font-size: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 .mypage_userinfo .user_info {
 	word-break: break-all;
-	font-size: 13px;
+	font-size: 15px;
 	color: #444;
 	font-weight: normal;
 	display: block;
+	margin-bottom: 10px;
 }
+.mypage_userinfo .user_email {
+	word-break: break-all;
+	font-size: 13px;
+	color: #aaa;
+	font-weight: 300;
+	display: block;
+}
+.mypage_userinfo .sta_ul{margin-left: -5px; margin-right: -5px; font-size: 0;}
+.mypage_userinfo .sta_ul .tp{font-size: 13px; text-align: center; padding-left: 5px; padding-right: 5px; display: inline-block; width: 33.333%;}
+.mypage_userinfo .sta_ul .tp .t{display: block; font-size: 17px; }
+.mypage_userinfo .sta_ul .tp.tp0 .t{color: $primary2;}
+.mypage_userinfo .sta_ul .tp.tp1 .t{color: $primary;}
+.mypage_userinfo .sta_ul .tp .s{display: block; margin-top: 10px;}
 .mypageWrap .mypage_userinfo{box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-radius: 20px; width: calc(100% - 30px); margin-left: 15px; margin-top: 30px; margin-bottom: 30px;}
 @media only screen and (max-width: 1200px) {
 	.mypage_userinfo {
@@ -276,6 +291,10 @@ body {
 @media only screen and (min-width: 320px){
 	.cmmRibBar .cmmItemsWrap .items{padding-left: 7px; padding-right: 7px;}
 	.cmmRibBar .cmmItemsWrap .slick-arrow{display: none !important;}
+	.modalItemView .cmmRibBar .img{height: 300px;}
+	.modalItemView .cmmRibBar .img.only{height: auto;}
+	.modalItemView .cmmRibBar .slick-slide .img{height: auto;}
+	.modalItemView .cmmRibBar .img img{max-height: 300px;}
 }
 
 @media only screen and (min-width: 480px){
@@ -290,6 +309,9 @@ body {
 
 @media only screen and (min-width: 960px){
     .cmmItemsWrap .items{width: 33.333%;}
+	.modalItemView .cmmRibBar .img{height: 500px;}
+	.modalItemView .cmmRibBar .slick-slide .img{height: 500px;}
+	.modalItemView .cmmRibBar .img img{max-height: 500px;}
 }
 
 @media only screen and (min-width: 1280px){
@@ -302,7 +324,9 @@ body {
 	.loginArea{width: 500px; display: inline-block;}
 	.mypageWrap{padding-left: 400px; position: relative;}
 	.cmmItemsWrap .items{width: 20%;}
+	.mypageWrap .cmmItemsWrap .items{width: 25%;}
 	.mypageWrap .mypage_userinfo{position: absolute; left: 15px; top: 20px; width: 385px; margin-left: 0; margin-top: 0; margin-bottom: 0;}
+	.mypage_userinfo .sta_ul .tp .t{font-size: 21px; }
 }
 
 @media only screen and (min-width: 1921px){
