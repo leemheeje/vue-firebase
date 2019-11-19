@@ -13,12 +13,10 @@ import RoundBox from '@/components/RoundBox'
 import Form from '@/components/Form'
 import FileUpload from '@/components/FileUpload'
 import {
-  Ui
-} from '@/assets/js/leemheeje'
+  isMobile
+} from 'mobile-device-detect';
 import firebase from "firebase"
-//import "firebase/firestore"
 import firebaseConfig from '../firebaseConfig'
-
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 let date = (p, c) => {
@@ -26,21 +24,25 @@ let date = (p, c) => {
   let cd = nd.getDate()
   let y = nd.getFullYear()
   let m = nd.getMonth() + 1
-  let d = cd < 10 ? `0cd` : cd
+  let d = cd < 10 ? `0${cd}` : cd
   let h = nd.getHours()
-  let min = nd.getMinutes()
-  let s = nd.getMilliseconds()
+  let min = nd.getMinutes() < 10 ? `0${nd.getMinutes()}` : nd.getMinutes()
+  let s = nd.getSeconds() == 0 ? '00' : nd.getSeconds() < 10 ? `0${nd.getSeconds()}` : nd.getSeconds()
   if (p === 'full') {
     return `${y}${m}${d}${h}${min}${s}`
   } else {
     return `${y}${m}${d}`
   }
 }
-
-Ui.alert('hello')
+let ui_conf = {
+  alert,
+  confirm
+}
+ui_conf = require('@/assets/js/leemheeje')
 Vue.config.productionTip = false
 Vue.prototype.$firebase = firebase;
-Vue.prototype.$Ui = Ui;
+Vue.prototype.$isMobile = isMobile;
+Vue.prototype.$Ui = ui_conf;
 Vue.prototype.$firestore = firebase.firestore();
 Vue.prototype.$storage = firebase.storage();
 Vue.prototype.$current_date = date();
@@ -48,10 +50,6 @@ Vue.prototype.$current_date_full = date('full');
 Vue.prototype.$current_date_live = (c) => {
   return date('full', c)
 }
-
-
-
-
 Vue.prototype.$http = axios;
 Vue.prototype.$Msg = Msg;
 Vue.component('btn', Btns)
@@ -73,6 +71,64 @@ Vue.filter('date_format', (s, format) => {
     f = `$1-$2-$3`
   }
   return t.replace(regexp, f)
+})
+Vue.filter('date_after_day', s => {
+  let n = String(s)
+  let gt = String(date('full'))
+  let st = ''
+  if (isNaN(n) || isNaN(gt)) {
+    //console.log(`-filters 'date_after_day' NaN error`);
+    return
+  }
+  let mi = String(gt - n)
+  let t = '';
+  let smi = mi.split('')
+  if (mi.length == 1 || mi.length == 2) {
+    t = `1`
+  } else if (mi.length % 2 == 0) {
+    t = `${smi[0]+smi[1]}`
+  } else {
+    t = `${smi[0]}`
+  }
+  switch (mi.length) {
+    case 1:
+    case 2:
+        st = `분전`
+        break
+    case 3:
+    case 4:
+        // if (Math.floor(t / 60)) {
+        //   st = `${Math.round(t / 60)}시간전`
+        //   t = ''
+        // } else {
+        //   st = `분전`
+        // }
+        st = `분전`
+      break
+    case 5:
+    case 6:
+      // if (Math.floor(t / 24)) {
+      //   st = `${Math.round(t / 24)}일전`
+      //   t = ''
+      // } else {
+      //   st = `시간전`
+      // }
+      st = `시간전`
+      break
+    case 7:
+    case 8:
+      st = `일전`
+      break
+    case 9:
+    case 10:
+      st = `달전`
+      break
+    case 11:
+    case 12:
+      st = `년전`
+      break
+  }
+  return `${t}${st}`;
 })
 new Vue({
   router,

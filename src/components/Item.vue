@@ -27,9 +27,9 @@
                         <a href="javascript:;" @click="userMypageView" class="u_thub" :style="`background-image: url(${item_user_thumb});`"></a>
                         <span class="tt">{{item_title}}</span>
                         <a href="javascript:;" @click="userMypageView" class="st">{{item_intro}}</a>
+                        <a href="javascript:;" @click="itemDetailView" class="sts">{{item_user_nm}}</a>
+                        <a href="javascript:;" @click="itemDetailView" class="dt">{{item_create_date | date_after_day}}</a>
                     </div>
-                    <a href="javascript:;" @click="itemDetailView" class="et">{{item_user_nm}}</a>
-                    <a href="javascript:;" @click="itemDetailView" class="et">{{item_create_date}}</a>
                 </div>
             </div>
             

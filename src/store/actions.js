@@ -46,7 +46,6 @@ export const actions = {
 			usernm,
 			userthumb,
 		} = payload;
-		//vue.prototype.UI.Alert('회원가입이 완료되었습니다.\n로그인페이지로 이동합니다.')
 		vue.prototype.$firebase.auth().createUserWithEmailAndPassword(userid, payload.userpw).then(res => {
 			console.log('이메일 가입 성공 : ', res);
 			res.user.updateProfile({
@@ -75,16 +74,16 @@ export const actions = {
 
 			switch (err.code) {
 				case "auth/email-already-in-use":
-					alert(vue.prototype.$Msg.error.msg4);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg4);
 					break;
 				case "auth/invalid-email":
-					alert(vue.prototype.$Msg.error.msg5);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg5);
 					break;
 				case "auth/operation-not-allowed":
-					alert(vue.prototype.$Msg.error.msg6);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg6);
 					break;
 				case "auth/weak-password":
-					alert(vue.prototype.$Msg.error.msg7);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg7);
 					break;
 			}
 			commit('geIsLoading', false);
@@ -101,7 +100,7 @@ export const actions = {
 		} = payload;
 		vue.prototype.$firebase.auth().signInWithEmailAndPassword(userid, userpw).then(res => {
 			console.log(res);
-			alert(vue.prototype.$Msg.error.msg2)
+			vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg2)
 			dispatch('fnSignInCallBack', () => {
 				router.push({
 					name: 'main'
@@ -110,16 +109,16 @@ export const actions = {
 		}).catch(err => {
 			switch (err.code) {
 				case "auth/invalid-email":
-					alert(vue.prototype.$Msg.error.msg5);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg5);
 					break;
 				case "auth/user-disabled":
-					alert(vue.prototype.$Msg.error.msg8);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg8);
 					break;
 				case "auth/user-not-found":
-					alert(vue.prototype.$Msg.error.msg9);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg9);
 					break;
 				case "auth/wrong-password":
-					alert(vue.prototype.$Msg.error.msg10);
+					vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg10);
 					break;
 			}
 			commit('geIsLoading', false);
@@ -149,7 +148,7 @@ export const actions = {
 	}) => {
 		if (confirm(vue.prototype.$Msg.error.msg11)) {
 			vue.prototype.$firebase.auth().signOut().then(res => {
-				alert(vue.prototype.$Msg.error.msg3);
+				vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg3);
 				commit('geSignOut');
 			}).catch(err => {})
 		}

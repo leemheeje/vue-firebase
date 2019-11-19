@@ -23,10 +23,10 @@
                             <div class="u_thub" :style="`background-image: url(${userDetailView.item_user_thumb});`"></div>
                             <span class="tt">{{userDetailView.item_title}}</span>
                             <span class="st">{{userDetailView.item_intro}}</span>
-                            <span class="st">{{userDetailView.item_create_date}}</span>
+                            <span class="sts">{{userDetailView.item_user_nm}}</span>
+                            <span class="et">{{userDetailView.item_user_email}}</span>
+                            <span class="dt">{{userDetailView.item_create_date | date_after_day}}</span>
                         </a>
-                        <span class="sts">{{userDetailView.item_user_nm}}</span>
-                        <span class="et">{{userDetailView.item_user_email}}</span>
                     </div>
                     <div class="deFov"></div>
                     <div class="deVisual">
@@ -144,10 +144,6 @@ export default {
     item_user_uid(){
       return this.userDetailView.item_user_uid
     }
-  },
-  created(){ 
-      console.log(this.userDetailView.uid);
-      
   },
   methods: {
         ...mapMutations(['geUserDetailView']),

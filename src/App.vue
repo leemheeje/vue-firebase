@@ -38,23 +38,18 @@ export default {
         };
     },
     computed: {
-        ...mapState(['isMobile','user','isLoading','transDirection','isLoadingStyle','userDetailView']),
+        ...mapState(['user','isLoading','transDirection','isLoadingStyle','userDetailView']),
         transitionDirection(){
-            let ea = 'slideInRight'
-            let la = 'slideOutLeft'
+            let ea = this.$isMobile ? 'slideInRight' : 'fadeIn'
+            let la = this.$isMobile ? 'slideOutLeft' : 'fadeOut'
             if(!this.transDirection){//반대방향 뒤로버튼
-                ea = 'slideInLeft'
-                la = 'slideOutRight'
+                ea = this.$isMobile ? 'slideInLeft' : 'fadeIn'
+                la = this.$isMobile ? 'slideOutRight' : 'fadeOut'
             }
             return {
                 ea,
                 la
             }
-        }
-    },
-    watch:{
-        $route(){
-            this.locFnIsMobile()
         }
     },
     created() {
@@ -63,17 +58,10 @@ export default {
         }else{
             setTimeout(()=>this.geIsLoading(false),500)
         }
-        this.locFnIsMobile()
     },
     methods: {
         ...mapActions(['fnSignInCallBack']),
         ...mapMutations(['geIsLoading' , 'geCmmPayload']),
-        locFnIsMobile(){
-            this.geCmmPayload({
-                k : 'isMobile',
-                v : false
-            });
-        }
     },
     components: {
         Header,

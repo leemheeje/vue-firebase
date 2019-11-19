@@ -50,23 +50,10 @@
             </div>
 
             <div class="cmmItemsWrap">
-                    <Item
-                        :item_id="key.item_user_uid"
-                        :item_user_thumb="key.item_user_thumb"
-                        :item_user_nm="key.item_user_nm"
-                        :item_user_email="key.item_user_email"
-                        :uid="key.uid"
-                        :data-asdf="key.item_user_thumb"
-                        :item_title="key.item_title"
-                        :item_intro="key.item_intro"
-                        :item_favorite="key.item_favorite"
-                        :item_comment="key.item_comment"
-                        :item_create_date="key.item_create_date"
-                        :item_view="key.item_view"
-                        :item_thumb="key.item_thumb"
-                        v-for="(key, index) in guest.useritems"
-                        :key="index"
-                    ></Item>
+                <ItemSort
+                    v-if="guest.useritems"
+                    :sortitems="isItems"
+                ></ItemSort>
             </div>
         </div>
         <router-link
@@ -79,7 +66,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import Item from "@/components/Item";
+import ItemSort from "@/components/ItemSort";
 export default {
     data() {
         return {
@@ -90,7 +77,14 @@ export default {
     computed: {
         ...mapState(["isAuth", "user", "guest"]),
         isItems() {
-            return Object.keys(this.guest.useritems).length 
+            let ar = [];
+            if (this.guest.useritems) {
+                for (const k in this.guest.useritems) {
+                    ar.push(this.guest.useritems[k])
+                }
+            }
+            console.log(ar);
+            return ar;
         }
     },
     created() {
@@ -99,7 +93,7 @@ export default {
             this.stateSelector = this.user;
         } else {
             this.stateSelector = this.guest;
-		}
+        }
     },
     watch: {
         $route() {
@@ -109,6 +103,6 @@ export default {
     methods: {
         ...mapActions(["fnGetUserInfo"])
     },
-    components: { Item }
+    components: { ItemSort }
 };
 </script>

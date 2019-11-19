@@ -100,13 +100,14 @@ body {
 .cmmItemsWrap .items .fblb .flb+.flb{margin-left: 10px;}
 .cmmItemsWrap .items .itin .uinf{}
 .cmmItemsWrap .items .itin .uinf .thub{display: block; width: 100%; padding-bottom: 75%; background: no-repeat center center; background-size: cover; position: relative; }
-.cmmItemsWrap .items .txts{background: #fff; padding: 25px 15px; text-align: left;}
+.cmmItemsWrap .items .txts{background: #fff; padding: 15px 15px 25px; text-align: left;}
 .cmmItemsWrap .items .txtop{position: relative; padding-left: 50px; display: block;}
-.cmmItemsWrap .items .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; top: 0;}
-.cmmItemsWrap .items .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis();}
-.cmmItemsWrap .items .txts .st{line-height: 20px; font-size: 13px; color: $gray2; @include ellipsis();}
-.cmmItemsWrap .items .txts .et{font-size: 13px; color: $gray2; margin-top: 5px; display: block;}
-.cmmItemsWrap .items .txts .sts{margin-top: 10px; font-size: 16px; line-height: 23px; display: block;}
+.cmmItemsWrap .items .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; bottom: -10px;}
+.cmmItemsWrap .items .txts .tt{line-height: 32px; font-size: 16px; color: $normal; @include ellipsis(); margin-left: -50px;}
+.cmmItemsWrap .items .txts .st{line-height: 21px; font-size: 14px; color: $gray2; word-break: break-all; display: block; height: 42px; margin-left: -50px; font-weight: 300; overflow: hidden;}
+.cmmItemsWrap .items .txts .sts{margin-top: 20px; font-size: 13px; display: inline-block; }
+.cmmItemsWrap .items .txts .dt{font-size: 13px; color: $gray2; margin-top: 5px; display: inline-block; padding-left: 10px; margin-left: 10px; color: #999; position: relative;}
+.cmmItemsWrap .items .txts .dt:before{content: ''; width: 1px; height: 60%; left: 0; top: 20%; background: #999; position: absolute;}
 
 .cmmRibBar{background: #ffd292; padding: 0 0; text-align: center; font-size: 14px; color: #fff;}
 .cmmRibBar .cmmItemsWrap{padding: 0;}
@@ -115,13 +116,15 @@ body {
 .cmmRibBar .cmmItemsWrap .items .txts .sts{display: none;}
 .cmmRibBar .cmmItemsWrap .items .txts .st{display: none;}
 .cmmRibBar .cmmItemsWrap .items .txts .et{display: none;}
+.cmmRibBar .cmmItemsWrap .items .txts .dt{display: none;}
 .cmmRibBar .cmmItemsWrap .slick-arrow{position: absolute; top: 0; width: 50px; height: 100%; background: #fff; outline: none; border: none; opacity: 0; z-index: 1; transition: opacity .3s;}
 .cmmRibBar .cmmItemsWrap .slick-arrow:hover{opacity: .4;}
 .cmmRibBar .cmmItemsWrap .slick-prev{left: 0;}
 .cmmRibBar .cmmItemsWrap .slick-next{right: 0;}
 .cmmRibBar .cmmItemsWrap .items .thub .mblb{bottom: 70px;}
 .cmmRibBar .cmmItemsWrap .items .txts{padding: 10px 15px; position: absolute; left: 0; bottom: 0; width: 100%; background-color: rgba(255,255,255,.8);}
-.cmmRibBar .cmmItemsWrap .items .txts .tt{font-size: 14px;;}
+.cmmRibBar .cmmItemsWrap .items .txts .tt{font-size: 14px;; margin-left: 0; line-height: 40px;}
+.cmmRibBar .cmmItemsWrap .items .txts .u_thub{bottom: auto; top: 0;}
 .cmmRibBar .cmmTit.sm{padding-top: 20px;}
 .cmmRibBar .slick-dots{display: block; text-align: center; line-height: 30px;}
 .cmmRibBar .slick-dots li{width: 5px; height: 5px; background: #fff; display: inline-block; vertical-align: middle; margin: 0 2px; border-radius: 50%; cursor: pointer;}
@@ -131,11 +134,18 @@ body {
 .modalItemView .cmmRibBar{background-color: $gray1;}
 .modalItemView .cmmRibBar .img{text-align: center; height: 500px;}
 .modalItemView .cmmRibBar .img img{display: inline-block; vertical-align: middle; max-height: 500px;}
-.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 8px;}
+.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 8px; display: none;}
 .modalItemView .cmmRibBar .slick-arrow.slick-prev{left: 0;  background-image: url(../images/common/icoArrowBlackLeft.png);}
 .modalItemView .cmmRibBar .slick-arrow.slick-next{right: 0; background-image: url(../images/common/icoArrowBlackRight.png); }
 .modalItemView .cmmRibBar .slick-arrow.slick-prev:after{content: '<'; color: #fff;}
 .modalItemView .cmmRibBar .slick-dots{position: absolute; left: 0; width: 100%; bottom: 0;}
+
+
+.cmmSortWrap{position: relative;}
+.cmmSortWrap .btnsWrap{position: absolute; right: 10px; top: -42px;}
+.cmmSortWrap .btnsWrap a{margin-left: 5px;}
+.mypageWrap .cmmSortWrap .btnsWrap{text-align: left; position: static; padding-top: 10px; padding-left: 10px;}
+.mypageWrap .cmmSortWrap .btnsWrap a{margin-left: 0; margin-right: 5px;}
 
 .modalItemView{background-color: #fff; max-width: 1280px; width: 100%; height: calc(100% - 30px); position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; border-radius: 20px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: 0 -5px 15px rgba(0,0,0,.1);}
 .modalItemView .hdtop{padding: 0 70px; text-align: center;}
@@ -154,10 +164,13 @@ body {
 .modalItemView .txts{background: #fff; padding: 25px 15px; text-align: left;}
 .modalItemView .txtop{position: relative; padding-left: 50px; display: block;}
 .modalItemView .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; top: 0;}
-.modalItemView .txts .tt{line-height: 40px; font-size: 18px; color: $normal; @include ellipsis(); min-height: 40px;}
-.modalItemView .txts .st{line-height: 20px; font-size: 13px; color: $gray2; display: block; min-height: 20px;}
-.modalItemView .txts .et{font-size: 13px; color: $gray2; margin-top: 5px; display: block;}
-.modalItemView .txts .sts{margin-top: 10px; font-size: 16px; line-height: 23px; display: block;}
+.modalItemView .txts .tt{word-break: break-all; line-height: 26px; font-size: 18px; color: $normal; display: block; padding-top: 8px;}
+.modalItemView .txts .st{word-break: break-all; line-height: 22px; font-size: 14px; color: $gray2; display: block; min-height: 20px; margin-top: 5px;}
+.modalItemView .txts .et{font-size: 13px; color: $gray2; margin-top: 15px; display: block;}
+.modalItemView .txts .sts{margin-top: 15px; font-size: 16px; line-height: 23px; display: inline-block;}
+.modalItemView .txts .et{display: inline-block; color: #555;  margin-left: 10px; padding-left: 10px; position: relative;}
+.modalItemView .txts .et:before{content: ''; position: absolute; left: 0; top: 20%; background: #555; width: 1px; height: 60%;}
+.modalItemView .txts .dt{display: block; font-size: 12px; color: #999; margin-top: 5px;}
 .modalItemView .fblb{background-color: $primary; display: inline-block; padding: 0 15px; border-radius: 30px; min-width: 100px; text-align: center;}
 .modalItemView .fblb .flb{}
 .modalItemView .fblb .flb i{color: #fff; font-size: 12px; line-height: 30px; display: inline-block; vertical-align: middle; margin-right: 3px;}
@@ -323,10 +336,11 @@ body {
 	.cmmRibBar .cmmItemsWrap .slick-arrow{display: block !important;}
 	.loginArea{width: 500px; display: inline-block;}
 	.mypageWrap{padding-left: 400px; position: relative;}
-	.cmmItemsWrap .items{width: 20%;}
+	.cmmItemsWrap .items{width: 16.666%;}
 	.mypageWrap .cmmItemsWrap .items{width: 25%;}
 	.mypageWrap .mypage_userinfo{position: absolute; left: 15px; top: 20px; width: 385px; margin-left: 0; margin-top: 0; margin-bottom: 0;}
 	.mypage_userinfo .sta_ul .tp .t{font-size: 21px; }
+	.modalItemView .cmmRibBar .slick-arrow{display: block;}
 }
 
 @media only screen and (min-width: 1921px){

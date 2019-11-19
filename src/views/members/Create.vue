@@ -89,9 +89,7 @@ export default {
                         .then(res => {
                             let d = res.data();
                             let res_d = [];
-                            this.pt_date = this.$options.filters.date_format(
-                                this.$current_date
-                            );
+                            this.pt_date = getTime //ymdhm
                             if (d.useritems) {
                                 console.log(this.user.thumb);
                                 
