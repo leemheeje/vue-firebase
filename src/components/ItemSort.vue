@@ -1,6 +1,15 @@
 <template>
     <div class="cmmSortWrap">
         <div class="btnsWrap" v-if="!no_btn">
+			<div class="cmmSelect">
+				<select @change="locFnSortSelect">
+					<option value="n">최신순</option>
+					<option value="v">조회순</option>
+					<option value="f">좋아요순</option>
+					<option value="c">댓글순</option>
+				</select>
+				<span class="vTxt">{{vTxt}}</span>
+			</div>
             <btn
                 href="javascript:;"
                 ref="sortbtn"
@@ -114,7 +123,8 @@ export default {
                     }
                 ]
 			},
-			sortbtn_class: `n`
+			sortbtn_class: `n`,
+			vTxt:''
         };
     },
     created() {
@@ -127,27 +137,31 @@ export default {
     methods: {
         locFnSort(s) {
 			let t = "";
+			let txt = "";
             switch (s) {
                 case "f":
                     t = "item_favorite";
+                    txt = "좋아요순";
                     break;
                 case "v":
-                    t = "item_view";
+					t = "item_view";
+					txt = "조회순";
                     break;
                 case "c":
-                    t = "item_comment";
+					t = "item_comment";
+					txt = "댓글순";
                     break;
                 default:
-                    t = "item_create_date";
+					t = "item_create_date";
+					txt = "등록순";
             }
             if (t) {
 				this.sortdata = this.locFnSortApply(t)
 				this.sortbtn_class = s
+				this.vTxt = txt
             }
         },
         locFnSortApply(l) {
-			console.log(this.sortdata);
-			
             let ar = this.sortdata.sort((a, b) => {
                 if (a[l] > b[l]) {
                     return -1;
@@ -161,7 +175,10 @@ export default {
                 ar = ar.slice(0, this.limit_length);
             }
             return ar;
-        }
+		},
+		locFnSortSelect(event){
+			this.locFnSort(event.target.value)
+		}
     },
     components: {
         Item,

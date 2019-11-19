@@ -144,6 +144,10 @@ body {
 .cmmSortWrap{position: relative;}
 .cmmSortWrap .btnsWrap{position: absolute; right: 10px; top: -42px;}
 .cmmSortWrap .btnsWrap a{margin-left: 5px;}
+.cmmSortWrap .cmmSelect{position: relative; min-width: 150px; text-align: left;}
+.cmmSortWrap .cmmSelect select{position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; z-index: 2;}
+.cmmSortWrap .cmmSelect .vTxt{display: block; line-height: 40px; border-radius: 5px; background-color: #fff; color: #222; padding-left: 10px; font-size: 13px; border: 1px solid #eee; position: relative; padding-right: 30px; @include ellipsis(); z-index: 1;}
+.cmmSortWrap .cmmSelect .vTxt:after{content: ''; width: 30px; height: 100%; background: no-repeat url(../images/common/icoArrowSelect.png) center center; background-size: 10px; position: absolute; right: 0; top: 0;}
 .mypageWrap .cmmSortWrap .btnsWrap{text-align: left; position: static; padding-top: 10px; padding-left: 10px;}
 .mypageWrap .cmmSortWrap .btnsWrap a{margin-left: 0; margin-right: 5px;}
 
@@ -308,6 +312,10 @@ body {
 	.modalItemView .cmmRibBar .img.only{height: auto;}
 	.modalItemView .cmmRibBar .slick-slide .img{height: auto;}
 	.modalItemView .cmmRibBar .img img{max-height: 300px;}
+	.cmmSortWrap .btnsWrap{top: -60px;}
+	.cmmSortWrap .btnsWrap a{display: none;}
+	.mypageWrap .cmmSortWrap .btnsWrap{padding-left: 0; padding-right: 0; text-align: right;}
+	.mypageWrap .cmmSortWrap .btnsWrap .cmmSelect{display: inline-block; margin-bottom: 15px; margin-right: 15px;}
 }
 
 @media only screen and (min-width: 480px){
@@ -341,6 +349,11 @@ body {
 	.mypageWrap .mypage_userinfo{position: absolute; left: 15px; top: 20px; width: 385px; margin-left: 0; margin-top: 0; margin-bottom: 0;}
 	.mypage_userinfo .sta_ul .tp .t{font-size: 21px; }
 	.modalItemView .cmmRibBar .slick-arrow{display: block;}
+	.cmmSelect{display: none;}
+	.mypageWrap .cmmSortWrap .btnsWrap .cmmSelect{display: none;}
+	.mypageWrap .cmmSortWrap .btnsWrap{padding-top: 10px; padding-right: 10px;}
+	.cmmSortWrap .btnsWrap{top: -42px;}
+	.cmmSortWrap .btnsWrap a{display: inline-block;}
 }
 
 @media only screen and (min-width: 1921px){
