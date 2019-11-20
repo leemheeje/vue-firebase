@@ -200,5 +200,21 @@ export const actions = {
 		if (typeof payload.callback === 'function') {
 			payload.callback(payload.data)
 		}
+	},
+	fnUpdateUserInfo: ({
+		commit
+	}, payload) => {
+		/**
+		 * @params payload.item_id = doc(uid)
+		 * @params payload.callback = ()
+		 */
+		console.log(payload.item_id);
+		try{
+		vue.prototype.$firestore.collection('userinfo').doc(payload.item_id).get().then(res => {
+			if (typeof payload.callback === 'function') {
+				payload.callback(res.data())
+			}
+		})}
+		catch(err){}
 	}
 };

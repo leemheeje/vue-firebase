@@ -65,7 +65,7 @@
     </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import ItemSort from "@/components/ItemSort";
 export default {
     data() {
@@ -83,11 +83,13 @@ export default {
                     ar.push(this.guest.useritems[k])
                 }
             }
-            console.log(ar);
+            
             return ar;
         }
     },
     created() {
+        console.log('created');
+        
         this.fnGetUserInfo(this.$route.params.uid);
         if (this.$route.params.uid == this.user.uid) {
             this.stateSelector = this.user;
@@ -101,8 +103,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["fnGetUserInfo"])
+        ...mapActions(["fnGetUserInfo"]),
+        ...mapMutations(['geUserInfoNull'])
     },
-    components: { ItemSort }
+    components: { ItemSort },
+    beforeDestroy(){
+        this.geUserInfoNull()
+    }
 };
 </script>

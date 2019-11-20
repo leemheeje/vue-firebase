@@ -1,15 +1,15 @@
 <template>
     <div class="cmmSortWrap">
         <div class="btnsWrap" v-if="!no_btn">
-			<div class="cmmSelect">
-				<select @change="locFnSortSelect">
-					<option value="n">최신순</option>
-					<option value="v">조회순</option>
-					<option value="f">좋아요순</option>
-					<option value="c">댓글순</option>
-				</select>
-				<span class="vTxt">{{vTxt}}</span>
-			</div>
+            <div class="cmmSelect">
+                <select @change="locFnSortSelect">
+                    <option value="n">최신순</option>
+                    <option value="v">조회순</option>
+                    <option value="f">좋아요순</option>
+                    <option value="c">댓글순</option>
+                </select>
+                <span class="vTxt">{{ vTxt }}</span>
+            </div>
             <btn
                 href="javascript:;"
                 ref="sortbtn"
@@ -47,13 +47,15 @@
                 :item_user_uid="key.item_user_uid"
                 :uid="key.uid"
                 :item_title="key.item_title"
+                :item_id="key.item_id"
                 :item_intro="key.item_intro"
                 :item_favorite="key.item_favorite"
+                :item_favorite_group="key.item_favorite_group"
                 :item_comment="key.item_comment"
                 :item_create_date="key.item_create_date"
                 :item_view="key.item_view"
                 :item_thumb="key.item_thumb"
-                v-for="(key, index) in sortdata"
+                v-for="(key, index) in compSortitems"
                 :key="index"
             ></Item>
         </Slick>
@@ -64,13 +66,15 @@
             :item_user_uid="key.item_user_uid"
             :uid="key.uid"
             :item_title="key.item_title"
+            :item_id="key.item_id"
             :item_intro="key.item_intro"
             :item_favorite="key.item_favorite"
+            :item_favorite_group="key.item_favorite_group"
             :item_comment="key.item_comment"
             :item_create_date="key.item_create_date"
             :item_view="key.item_view"
             :item_thumb="key.item_thumb"
-            v-for="(key, index) in sortdata"
+            v-for="(key, index) in compSortitems"
             :key="index"
             v-else
         ></Item>
@@ -80,7 +84,7 @@
 import Slick from "vue-slick";
 import Item from "@/components/Item";
 export default {
-    props: ["sortitems", "sort", "limit_length", "slick" ,'no_btn'],
+    props: ["sortitems", "sort", "limit_length", "slick", "no_btn"],
     data() {
         return {
             sortdata: null,
@@ -122,43 +126,49 @@ export default {
                         }
                     }
                 ]
-			},
-			sortbtn_class: `n`,
-			vTxt:''
+            },
+            sortbtn_class: `n`,
+            vTxt: ""
         };
     },
     created() {
+        console.log(this.sortitems);
         let s = `n`;
         let ar = this.sortitems;
         this.sortdata = ar;
         if (this.sort) s = this.sort;
         this.locFnSort(s);
     },
+    computed:{
+        compSortitems(){
+            return this.sortitems
+        }
+    },
     methods: {
         locFnSort(s) {
-			let t = "";
-			let txt = "";
+            let t = "";
+            let txt = "";
             switch (s) {
                 case "f":
                     t = "item_favorite";
                     txt = "좋아요순";
                     break;
                 case "v":
-					t = "item_view";
-					txt = "조회순";
+                    t = "item_view";
+                    txt = "조회순";
                     break;
                 case "c":
-					t = "item_comment";
-					txt = "댓글순";
+                    t = "item_comment";
+                    txt = "댓글순";
                     break;
                 default:
-					t = "item_create_date";
-					txt = "등록순";
+                    t = "item_create_date";
+                    txt = "최신순";
             }
             if (t) {
-				this.sortdata = this.locFnSortApply(t)
-				this.sortbtn_class = s
-				this.vTxt = txt
+                this.sortdata = this.locFnSortApply(t);
+                this.sortbtn_class = s;
+                this.vTxt = txt;
             }
         },
         locFnSortApply(l) {
@@ -175,10 +185,10 @@ export default {
                 ar = ar.slice(0, this.limit_length);
             }
             return ar;
-		},
-		locFnSortSelect(event){
-			this.locFnSort(event.target.value)
-		}
+        },
+        locFnSortSelect(event) {
+            this.locFnSort(event.target.value);
+        }
     },
     components: {
         Item,

@@ -100,6 +100,7 @@ export default {
                                     item_title: this.pf_title,
                                     item_intro: this.pf_intro,
                                     item_favorite: 0,
+                                    item_favorite_group : [],
                                     item_view: 0,
                                     item_comment: 0,
                                     item_create_date: this.pt_date,

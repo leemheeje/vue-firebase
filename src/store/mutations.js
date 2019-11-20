@@ -4,8 +4,11 @@ export const mutations = {
 	geCmmPayload:(state, payload)=>{
 		state[payload.k] = payload.v
 	},
+	geGuestUserItem: (state, payload) => {
+		state.guest.useritems = payload
+	},
 	geUserInfo: (state, payload) => {
-		console.log(payload);
+		console.log(payload.data.useritems);
 		
 		state.guest = payload.data
 		// if (payload.me) {
@@ -13,6 +16,11 @@ export const mutations = {
 		// } else {
 		// 	state.guest = payload.data
 		// }
+	},
+	geUserInfoNull:(state)=>{
+		for (const k in state.guest) {
+			state.guest[k] = null
+		}
 	},
 	geIsLoading: (state, payload) => {
 		if (typeof payload === 'boolean') {
@@ -42,11 +50,16 @@ export const mutations = {
 	geUserDetailView: (state, payload) => {
 		let o = {}
 		if (typeof payload === 'object') {
-			let ar = payload.k.forEach((a, i) => {
-				o[a] = payload.v[i];
-			})
-			o['modalDetailViewShow'] = true;
-			state.userDetailView = o
+			if(typeof payload.k === 'string'){
+				state.userDetailView[payload.k] = payload.v
+			}else{
+				let ar = payload.k.forEach((a, i) => {
+					o[a] = payload.v[i];
+				})
+				o['modalDetailViewShow'] = true;
+				state.userDetailView = o
+			}
+			
 		} else if (typeof payload === 'boolean') {
 			state.userDetailView.modalDetailViewShow = payload
 		}
@@ -61,5 +74,5 @@ export const mutations = {
 		setTimeout(() => {
 			state.transDirection = true
 		}, 500) //페이지 트렌지션 하는 시간
-	}
+	},
 };

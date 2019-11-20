@@ -186,6 +186,7 @@ export default {
             userpw: "",
             userpwcf: "",
             usernm: "",
+            usercomp: "",
             userintro: "df",
             userthumb: null
         };
@@ -208,7 +209,7 @@ export default {
                 alert("회원정보를 입력해주세요");
                 return;
             }
-            if (this.userpw == this.userpwcf) {
+            if (this.userpw != this.userpwcf) {
                 alert("비밀번호가 일치하지않습니다.");
                 return;
             }

@@ -23,8 +23,30 @@ const FnExtends = {
 			}
 		}
 	},
-	bbb:()=>{
-		console.log(123);
+	userUpateExtend: {
+		methods: {
+			userUpateExtend(p, n) {
+				let org_o = p
+				let ext_o = n
+				if (org_o && typeof org_o === 'object' && !Array.isArray(org_o)) {
+					for (let k in org_o) {
+						if (ext_o && typeof ext_o === 'object' && !Array.isArray(ext_o)) {
+							for (let v in ext_o) {
+									if(k == v){
+										for (let c in ext_o[v]) {
+											org_o[k][c] = ext_o[v][c]
+										}
+									}
+							}
+						}
+					}
+				}
+				return org_o
+			}
+		}
 	}
 }
-export const {userMypageView,bbb} = FnExtends;
+export const {
+	userMypageView,
+	userUpateExtend
+} = FnExtends;

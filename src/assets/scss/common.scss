@@ -134,7 +134,7 @@ body {
 .modalItemView .cmmRibBar{background-color: $gray1;}
 .modalItemView .cmmRibBar .img{text-align: center; height: 500px;}
 .modalItemView .cmmRibBar .img img{display: inline-block; vertical-align: middle; max-height: 500px;}
-.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 8px; display: none;}
+.modalItemView .cmmRibBar .slick-arrow{position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 50px; outline: none; border: none; text-indent: -999em;; z-index: 1; background: no-repeat center center; background-size: 8px; display: none !important;}
 .modalItemView .cmmRibBar .slick-arrow.slick-prev{left: 0;  background-image: url(../images/common/icoArrowBlackLeft.png);}
 .modalItemView .cmmRibBar .slick-arrow.slick-next{right: 0; background-image: url(../images/common/icoArrowBlackRight.png); }
 .modalItemView .cmmRibBar .slick-arrow.slick-prev:after{content: '<'; color: #fff;}
@@ -157,10 +157,12 @@ body {
 .modalItemView .modalItemCloseBtn{position: absolute; left: 0; top: 0; width: 54px; text-align: center;}
 .modalItemView .modalItemCloseBtn i{line-height: 60px; color: #555; display: block; font-size: 14px;}
 .modalItemView .modalItemFavoritBtn{position: absolute; right: 0; top: 0; width: 54px; height: 60px; text-align: center;}
-.modalItemView .modalItemFavoritBtn i{line-height: 60px; color: #fff; display: block; font-size: 14px; position: relative; z-index: 1;}
-.modalItemView .modalItemFavoritBtn .cir{width: 40px; height: 40px; border-radius: 50%; background-color: $primary2; display: inline-block; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%)}
-.modalItemView .modalItemFavoritBtn.active .cir{background-color: $gray1;}
-.modalItemView .modalItemFavoritBtn .cir i{color: #fff; line-height: 60px;}
+.modalItemView .modalItemFavoritBtn i{line-height: 60px; color: $primary; display: block; font-size: 14px; position: relative; z-index: 1;}
+.modalItemView .modalItemFavoritBtn .cir{width: 40px; height: 40px; border-radius: 50%; background-color: #fff; display: inline-block; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border: 1px solid $primary;}
+.modalItemView .modalItemFavoritBtn.disabled .cir{background-color: $gray1; border-color: #fff;}
+.modalItemView .modalItemFavoritBtn.active .cir{background-color: $primary2; border-color: #fff;}
+.modalItemView .modalItemFavoritBtn.disabled i{color: #fff;}
+.modalItemView .modalItemFavoritBtn.active i{color: #fff;}
 .modalItemView .hdcont{padding: 0 0; height: calc(100% - 60px); overflow: hidden; overflow-y: auto; position: relative;}
 .modalItemView .deComt{padding: 20px 15px;}
 .modalItemView .deVisual{position: relative;  overflow: hidden;}
@@ -348,7 +350,7 @@ body {
 	.mypageWrap .cmmItemsWrap .items{width: 25%;}
 	.mypageWrap .mypage_userinfo{position: absolute; left: 15px; top: 20px; width: 385px; margin-left: 0; margin-top: 0; margin-bottom: 0;}
 	.mypage_userinfo .sta_ul .tp .t{font-size: 21px; }
-	.modalItemView .cmmRibBar .slick-arrow{display: block;}
+	.modalItemView .cmmRibBar .slick-arrow{display: block !important;}
 	.cmmSelect{display: none;}
 	.mypageWrap .cmmSortWrap .btnsWrap .cmmSelect{display: none;}
 	.mypageWrap .cmmSortWrap .btnsWrap{padding-top: 10px; padding-right: 10px;}

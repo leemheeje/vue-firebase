@@ -25,7 +25,7 @@ let date = (p, c) => {
   let y = nd.getFullYear()
   let m = nd.getMonth() + 1
   let d = cd < 10 ? `0${cd}` : cd
-  let h = nd.getHours()
+  let h = nd.getHours() < 10 ? `0${nd.getHours()}` : nd.getHours()
   let min = nd.getMinutes() < 10 ? `0${nd.getMinutes()}` : nd.getMinutes()
   let s = nd.getSeconds() == 0 ? '00' : nd.getSeconds() < 10 ? `0${nd.getSeconds()}` : nd.getSeconds()
   if (p === 'full') {

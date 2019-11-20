@@ -23,6 +23,10 @@ const unAuth = (to, from, next) => {
   next();
 }
 const afterEach = ((to, from) => {})
+const beforeEach = ((to, from,next) => {
+  store.commit('geUserDetailView' , false)
+  next()
+})
 const routes = [{
     path: '*',
     name: 'error',
@@ -73,5 +77,6 @@ const router = new VueRouter({
   routes
 })
 router.afterEach(afterEach)
+router.beforeEach(beforeEach)
 
 export default router

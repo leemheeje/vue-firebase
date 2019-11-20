@@ -6,7 +6,7 @@
                     <ItemSort
                         :sortitems="allitems"
                         :sort="`f`"
-                        :limit_length="5"
+                        :limit_length="7"
                         :slick="true"
                         :no_btn="true"
                         v-if="allitems"
@@ -16,7 +16,7 @@
             <div class="innerWrap">
                 <div class="cmmTit sm MT40 MMB20">All Items</div>
                 <div class="cmmItemsWrap">
-                    <ItemSort v-if="allitems" :sortitems="allitems"></ItemSort>
+                    <ItemSort v-if="compAllitems" :sortitems="compAllitems"></ItemSort>
                 </div>
             </div>
         </div>
@@ -26,7 +26,8 @@
 <script>
 import ItemSort from "@/components/ItemSort";
 import extendData from "@/data";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
+import { watch } from 'fs';
 export default {
     extends: extendData,
     data() {
@@ -36,6 +37,11 @@ export default {
     },
     components: {
         ItemSort,
+    },
+    computed:{
+        compAllitems(){
+            return this.allitems
+        }
     },
     created() {
         this.geIsLoading(true)
