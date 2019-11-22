@@ -100,7 +100,7 @@ export default {
                         ar => ar == this.user.uid
                     );
                 }
-                return ars.length ? true : false;
+                return ars&&ars.length ? true : false;
             };
             this.geUserDetailView({
                 modalDetailViewShow:true,
