@@ -215,7 +215,6 @@ export default {
             }
             let userinfo = {
                 userid: this.userid,
-                userpw: this.userpw,
                 usernm: this.usernm,
                 userthumb: this.userthumb,
                 usercomp: this.usercomp,

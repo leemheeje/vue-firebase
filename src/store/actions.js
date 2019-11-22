@@ -158,19 +158,26 @@ export const actions = {
 		state
 	}, payload) => {
 		commit('geIsLoading', true);
-		console.log(payload);
-
 		vue.prototype.$firestore.collection("userinfo").doc(payload).get().then(res => {
-			console.log(res);
-			console.log(res.data());
-			let p = {
-				me: false,
-				data: res.data()
+			let data = res.data()
+			let useritems = []
+			for (let k in data.useritems) {
+				if (data.useritems.hasOwnProperty(k)) {
+					useritems.push(data.useritems[k])
+				}
 			}
-			if (state.isAuth && state.user.uid == payload) {
-				p.me = true;
-			}
-			commit('geUserInfo', p);
+			commit('geCmmPayload', {
+				k: 'guest',
+				v: {
+					email: data.userid,
+					uid: data.item_user_uid,
+					name: data.usernm,
+					thumb: data.userthumb,
+					intro: data.userintro,
+					user_skills_model: data.user_skills_model,
+					useritems : useritems
+				}
+			});
 			commit('geIsLoading', false);
 		});
 	},
@@ -201,20 +208,37 @@ export const actions = {
 			payload.callback(payload.data)
 		}
 	},
-	fnUpdateUserInfo: ({
+	fnUpdateUserItemInfo: ({
 		commit
 	}, payload) => {
 		/**
-		 * @params payload.item_id = doc(uid)
+		 * @params payload.item_user_uid = doc(uid)
+		 * @params payload.item_id = res.data().useritems[`item${item_id}`]
 		 * @params payload.callback = ()
 		 */
-		console.log(payload.item_id);
-		try{
-		vue.prototype.$firestore.collection('userinfo').doc(payload.item_id).get().then(res => {
-			if (typeof payload.callback === 'function') {
-				payload.callback(res.data())
-			}
-		})}
-		catch(err){}
+		try {
+			vue.prototype.$firestore.collection('userinfo').doc(payload.item_user_uid).get().then(res => {
+				if (typeof payload.callback === 'function') {
+					payload.callback(res.data().useritems[`item${payload.item_id}`])
+				}
+			})
+		} catch (err) {}
+	},
+	//여기부터
+	fnOnceAllitemUpdate: ({
+		commit
+	}, payload) => {
+		commit('geOnceAllitemUpdate', payload)
+		let firestore = vue.prototype.$firestore.collection('userinfo').doc(payload.item_user_uid)
+		let $extend = vue.prototype.$extend
+		firestore.get().then(res => {
+			let useritems = res.data().useritems
+			let items = useritems[`item${payload.item_id}`]
+			let $extend_items = $extend(items, payload.value)
+			useritems[`item${payload.item_id}`] = $extend_items;
+			firestore.update({
+				useritems: useritems
+			})
+		})
 	}
 };

@@ -17,7 +17,13 @@
                     <btn
                         href="javascript:;"
                         class="init modalItemFavoritBtn"
-                        :class="!isAuth ? 'disabled' : isItemFavorit ? 'active' : ''"
+                        :class="
+                            !isAuth
+                                ? 'disabled'
+                                : userDetailView.isItemFavorit
+                                ? 'active'
+                                : ''
+                        "
                         @eventBus_click="locAddFaviorit"
                     >
                         <span class="cir"> </span>
@@ -34,23 +40,15 @@
                             <div
                                 class="u_thub"
                                 :style="
-                                    `background-image: url(${userDetailView.item_user_thumb});`
+                                    `background-image: url(${items.item_user_thumb});`
                                 "
                             ></div>
-                            <span class="tt">{{
-                                userDetailView.item_title
-                            }}</span>
-                            <span class="st">{{
-                                userDetailView.item_intro
-                            }}</span>
-                            <span class="sts">{{
-                                userDetailView.item_user_nm
-                            }}</span>
-                            <span class="et">{{
-                                userDetailView.item_user_email
-                            }}</span>
+                            <span class="tt">{{ items.item_title }}</span>
+                            <span class="st">{{ items.item_intro }}</span>
+                            <span class="sts">{{ items.item_user_nm }}</span>
+                            <span class="et">{{ items.item_user_email }}</span>
                             <span class="dt">{{
-                                userDetailView.item_create_date | date_after_day
+                                items.item_create_date | date_after_day
                             }}</span>
                         </a>
                     </div>
@@ -61,11 +59,14 @@
                                 ref="userInfoSlick"
                                 class="slick"
                                 :options="slickOptions"
-                                v-if="userDetailView.item_thumb.length > 1"
+                                v-if="
+                                    items.item_thumb &&
+                                        items.item_thumb.length > 1
+                                "
                             >
                                 <div
                                     class="img"
-                                    v-for="(k, i) in userDetailView.item_thumb"
+                                    v-for="(k, i) in items.item_thumb"
                                     :key="i"
                                 >
                                     <span class="VALIGN"></span>
@@ -74,34 +75,28 @@
                             </Slick>
                             <div class="img only" v-else>
                                 <span class="VALIGN"></span>
-                                <img :src="userDetailView.item_thumb" alt="" />
+                                <img :src="items.item_thumb" alt="" />
                             </div>
                         </div>
                         <div class="fblb">
                             <span class="flb tp0">
                                 <i class="fas fa-eye"></i>
-                                <span class="t">{{
-                                    userDetailView.item_view
-                                }}</span>
+                                <span class="t">{{ items.item_view }}</span>
                             </span>
                             <span class="flb tp1">
                                 <i class="far fa-thumbs-up"></i>
-                                <span class="t">{{
-                                    userDetailView.item_favorite
-                                }}</span>
+                                <span class="t">{{ items.item_favorite }}</span>
                             </span>
                             <span class="flb tp2">
                                 <i class="fas fa-comment-dots"></i>
-                                <span class="t">{{
-                                    userDetailView.item_comment
-                                }}</span>
+                                <span class="t">{{ items.item_comment }}</span>
                             </span>
                         </div>
                     </div>
                     <div class="deComt">
                         <div class="cmmsTit sm">
                             <i class="fas fa-comment-dots"></i>&nbsp;{{
-                                userDetailView.item_comment
+                                items.item_comment
                             }}개의 댓글
                         </div>
                         <div class="commtWrap MT20 MB20">
@@ -109,12 +104,12 @@
                                 <span
                                     class="comtThumb"
                                     :style="
-                                        `background-image:url(${userDetailView.userthumb})`
+                                        `background-image:url(${items.userthumb})`
                                     "
                                 ></span>
                                 <div class="comtTxts">
                                     <div class="nm">
-                                        {{ userDetailView.usernm }}
+                                        {{ items.usernm }}
                                     </div>
                                     <div class="tt">
                                         Tere is my new shot for Travel app
@@ -134,15 +129,15 @@
                                         <span
                                             class="comtThumb"
                                             :style="
-                                                `background-image:url(${userDetailView.userthumb})`
+                                                `background-image:url(${items.userthumb})`
                                             "
                                         ></span>
                                         <div class="comtTxts">
                                             <div class="nm">
-                                                {{ userDetailView.usernm }}
+                                                {{ items.usernm }}
                                             </div>
                                             <div class="tt">
-                                                {{ userDetailView.stitle }}
+                                                {{ items.stitle }}
                                             </div>
                                             <div class="dt">
                                                 2019-09-30 15:30:16
@@ -156,15 +151,15 @@
                                 <span
                                     class="comtThumb"
                                     :style="
-                                        `background-image:url(${userDetailView.userthumb})`
+                                        `background-image:url(${items.userthumb})`
                                     "
                                 ></span>
                                 <div class="comtTxts">
                                     <div class="nm">
-                                        {{ userDetailView.usernm }}
+                                        {{ items.usernm }}
                                     </div>
                                     <div class="tt">
-                                        {{ userDetailView.stitle }}
+                                        {{ items.stitle }}
                                     </div>
                                     <div class="dt">2019-09-30 15:30:16</div>
                                 </div>
@@ -195,9 +190,9 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 import Slick from "vue-slick";
-import { userMypageView, userUpateExtend } from "@/extend";
+import { userMypageView } from "@/extend";
 export default {
     props: [],
     data() {
@@ -205,94 +200,71 @@ export default {
             slickOptions: {
                 dots: true,
                 adaptiveHeight: true
-            }
+            },
+            items: null,
+            item_id:null,
+            item_user_uid:null,
         };
     },
     computed: {
-        ...mapState(["isAuth", 'user',"userDetailView" , 'isItemFavorit', 'guest']),
-        item_user_uid() {
-            return this.userDetailView.item_user_uid;
+        ...mapState(["isAuth", "user", "userDetailView"]),
+        ...mapGetters(["getOnceAllitem"]),
+        isModalShow() {
+            return this.userDetailView.modalDetailViewShow;
         }
     },
-    watch:{
-        userDetailView(){
-            if(this.isAuth && this.userDetailView.modalDetailViewShow){ //로그인되어있고, 팝업이 열렷을때
-                let ar = this.userDetailView.item_favorite_group;
-                let bool = false
-                console.log(ar);
-                
-                if(ar && ar.length){
-                    for (let i = 0; i < ar.length; i++) {
-                        if(ar[i] == this.user.uid){
-                            bool = true
-                        }
-                    }
-                }
-                this.geCmmPayload({
-                    k:'isItemFavorit',
-                    v:bool
-                })
-                console.log('isItemFavorit' , bool);
-                
+    watch: {
+        isModalShow() {
+            if (this.isModalShow) {
+                this.item_id= this.userDetailView.item_id
+                this.item_user_uid= this.userDetailView.item_user_uid
+                this.items = this.getOnceAllitem({
+                    item_id: this.item_id,
+                    item_user_uid: this.item_user_uid
+                });
             }
-            
         }
     },
     methods: {
-        ...mapMutations(["geUserDetailView", "geCmmPayload",'geGuestUserItem']), 
-        ...mapActions(["fnUpdateUserInfo"]),
+        ...mapMutations(["geUserDetailView"]),
+        ...mapActions(["fnOnceAllitemUpdate"]),
         login() {
             this.geUserDetailView(false);
             setTimeout(() => {
                 this.$router.push({ name: "login" });
             }, 350);
         },
-        locAddFaviorit(){
-            if(!this.isAuth){
-                this.$Ui.confirm('로그인후 이용가능합니다.\n로그인하시겠습니까?',()=>{
-                    this.$router.push({name:'login'})
-                })
+        locAddFaviorit() {
+            if (!this.isAuth) {
+                this.$Ui.confirm(
+                    "로그인후 이용가능합니다.\n로그인하시겠습니까?",
+                    () => {
+                        this.$router.push({ name: "login" });
+                    }
+                );
                 return;
             }
-            if(this.isItemFavorit){
-                this.$Ui.alert('이미 좋아요를 누른 아이템입니다')
+            if (this.userDetailView.isItemFavorit) {
+                this.$Ui.alert("이미 좋아요를 누른 아이템입니다");
                 return;
             }
-            this.fnUpdateUserInfo({
-                item_id : this.userDetailView.item_user_uid,
-                callback:res=>{
-                    let items = res.useritems
-                    let v_items = {}
-                    v_items[`item${this.userDetailView.item_id}`] = {}
-                    v_items[`item${this.userDetailView.item_id}`]['item_favorite_group'] = items[`item${this.userDetailView.item_id}`]['item_favorite_group']
-                    v_items[`item${this.userDetailView.item_id}`]['item_favorite_group'].push(this.user.uid)
-                    v_items[`item${this.userDetailView.item_id}`]['item_favorite'] = v_items[`item${this.userDetailView.item_id}`]['item_favorite_group'].length
-                    console.log(this.userUpateExtend(items,v_items))
-                    this.$firestore
-                        .collection("userinfo")
-                        .doc(this.userDetailView.item_user_uid)
-                        .update({
-                            useritems: this.userUpateExtend(items,v_items)
-                        });
-                    this.geGuestUserItem(this.userUpateExtend(items,v_items))
+            let fav_array = this.items.item_favorite_group;
+            fav_array.push(this.user.uid);
+            let fav_length = fav_array.length;
+            this.fnOnceAllitemUpdate({
+                item_id: this.items.item_id,
+                item_user_uid: this.items.item_user_uid,
+                value: {
+                    item_favorite_group: fav_array,
+                    item_favorite: fav_length
                 }
-            })
-            this.geCmmPayload({
-                k : 'isItemFavorit',
-                v : true
-            })
-            this.userDetailView.item_favorite_group.push(this.user.uid);
+            });
             this.geUserDetailView({
-                k : 'item_favorite_group',
-                v : this.userDetailView.item_favorite_group
-            })
-            this.geUserDetailView({
-                k : 'item_favorite',
-                v : this.userDetailView.item_favorite + 1
-            })
+                isItemFavorit: true
+            });
         }
     },
     components: { Slick },
-    mixins: [userMypageView, userUpateExtend]
+    mixins: [userMypageView]
 };
 </script>

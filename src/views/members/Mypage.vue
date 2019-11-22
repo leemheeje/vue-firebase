@@ -5,14 +5,14 @@
                 <div class="lrow">
                     <div class="user_t">
                         <span class="thumb">
-                            <img :src="guest.userthumb" />
+                            <img :src="guest.thumb" />
                         </span>
-                        <div class="user_name">{{ guest.usernm }}</div>
-                        <div class="user_info">{{ guest.userintro }}</div>
+                        <div class="user_name">{{ guest.name }}</div>
+                        <div class="user_info">{{ guest.intro }}</div>
                         <div class="user_comp" v-if="guest.usercomp">
                             {{ guest.usercomp }}
                         </div>
-                        <div class="user_email">{{ guest.userid }}</div>
+                        <div class="user_email">{{ guest.email }}</div>
                     </div>
                 </div>
                 <div class="lrow" v-if="guest.user_skills_model">
@@ -28,32 +28,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="lrow noline">
-                    <div class="title">statistics</div>
-                    <div class="cont">
-                        <ul class="sta_ul">
-                            <li class="tp tp0">
-                                <span class="t">1,414</span>
-                                <span class="s">총 조회수</span>
-                            </li>
-                            <li class="tp tp1">
-                                <span class="t">87</span>
-                                <span class="s">총 좋아요수</span>
-                            </li>
-                            <li class="tp tp2">
-                                <span class="t">13</span>
-                                <span class="s">총 댓글수</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
             </div>
 
             <div class="cmmItemsWrap">
-                <ItemSort
-                    v-if="guest.useritems"
-                    :sortitems="isItems"
-                ></ItemSort>
+                <ItemSort v-if="guest.useritems" :sortitems="guest.useritems"></ItemSort>
             </div>
         </div>
         <router-link
@@ -65,50 +43,45 @@
     </div>
 </template>
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 import ItemSort from "@/components/ItemSort";
 export default {
     data() {
         return {
-            stateSelector: null,
-            data_items: null
+            stateSelector: null
         };
     },
     computed: {
-        ...mapState(["isAuth", "user", "guest"]),
-        isItems() {
-            let ar = [];
-            if (this.guest.useritems) {
-                for (const k in this.guest.useritems) {
-                    ar.push(this.guest.useritems[k])
-                }
-            }
-            
-            return ar;
+        ...mapState(["isAuth", "user", "guest", "data"]),
+        ...mapGetters(["getOnceAllitem"]),
+        params_uid() {
+            return this.$route.params.uid;
+        },
+        data_items() {
+            return this.guest;
         }
     },
     created() {
-        console.log('created');
-        
-        this.fnGetUserInfo(this.$route.params.uid);
-        if (this.$route.params.uid == this.user.uid) {
-            this.stateSelector = this.user;
-        } else {
-            this.stateSelector = this.guest;
-        }
+        this.locFnGetAllCollection();
+        this.fnGetUserInfo(this.params_uid);
     },
     watch: {
         $route() {
-            this.fnGetUserInfo(this.$route.params.uid);
+            //this.fnGetUserInfo(this.params_uid);
         }
     },
     methods: {
-        ...mapActions(["fnGetUserInfo"]),
-        ...mapMutations(['geUserInfoNull'])
+        ...mapActions(["fnGetUserInfo", "fnGetAllCollection"]),
+        ...mapMutations(["geCmmPayload", "geIsLoading"]),
+        locFnGetAllCollection() {
+            this.fnGetAllCollection(res => {
+                this.geCmmPayload({
+                    k: "data",
+                    v: res
+                });
+            });
+        }
     },
-    components: { ItemSort },
-    beforeDestroy(){
-        this.geUserInfoNull()
-    }
+    components: { ItemSort }
 };
 </script>

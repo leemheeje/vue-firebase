@@ -25,24 +25,23 @@ const FnExtends = {
 	},
 	userUpateExtend: {
 		methods: {
-			userUpateExtend(p, n) {
-				let org_o = p
-				let ext_o = n
-				if (org_o && typeof org_o === 'object' && !Array.isArray(org_o)) {
-					for (let k in org_o) {
-						if (ext_o && typeof ext_o === 'object' && !Array.isArray(ext_o)) {
-							for (let v in ext_o) {
-									if(k == v){
-										for (let c in ext_o[v]) {
-											org_o[k][c] = ext_o[v][c]
-										}
-									}
-							}
-						}
-					}
-				}
-				return org_o
-			}
+			// userUpateExtend(p, n) {
+			// 	let org_o = p
+			// 	let ext_o = n
+			// 	let new_o = {}
+			// 	if (org_o && typeof org_o === 'object' && !Array.isArray(org_o) && ext_o && typeof ext_o === 'object' && !Array.isArray(ext_o)) {
+			// 		for (let k in ext_o) {
+			// 			new_o[k] = ext_o[k]
+			// 		}
+			// 		for (let c in org_o) {
+			// 			if(typeof new_o[c] == 'undefined'){
+			// 				new_o[c] = org_o[c]
+			// 			}
+			// 		}
+					
+			// 	}
+			// 	return new_o
+			// }
 		}
 	}
 }

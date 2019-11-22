@@ -4,6 +4,7 @@ export const state = {
     isLoading: true,
     isMypage:false,
     isItemFavorit:false,
+    data:null,
     isLoadingStyle:{
         opacity: 1,
         color: '#2196f3',
@@ -21,23 +22,13 @@ export const state = {
         uid: '',
         name: '',
         thumb: '',
+        intro: '',
+        user_skills_model: '',
     },
     userDetailView:{
-        modalDetailViewShow:false
+        modalDetailViewShow:false,
+        item_id:'',
+        item_user_uid:'',
+        isItemFavorit:true
     },
-    item_id:'',
-    userthumb:'',
-    usernm:'',
-    userid:'',
-    item_user_uid:'',
-    item_title:'',
-    item_intro:'',
-    item_favorite:'',
-    item_comment:'',
-    item_create_date:'',
-    item_view:'',
-    item_thumb:'',
-    item_user_nm:'',
-    item_user_email:'',
-    item_user_thum:''
 };

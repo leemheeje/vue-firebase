@@ -4,19 +4,20 @@
             <div class="cmmRibBar tp0">
                 <div class="cmmItemsWrap slick">
                     <ItemSort
-                        :sortitems="allitems"
+                        v-if="comp_data"
+                        :sortitems="comp_data"
                         :sort="`f`"
                         :limit_length="7"
                         :slick="true"
                         :no_btn="true"
-                        v-if="allitems"
+                        :allitems="true"
                     ></ItemSort>
                 </div>
             </div>
             <div class="innerWrap">
                 <div class="cmmTit sm MT40 MMB20">All Items</div>
                 <div class="cmmItemsWrap">
-                    <ItemSort v-if="compAllitems" :sortitems="compAllitems"></ItemSort>
+                    <ItemSort :allitems="true" v-if="comp_data" :sortitems="comp_data"></ItemSort>
                 </div>
             </div>
         </div>
@@ -25,35 +26,35 @@
 
 <script>
 import ItemSort from "@/components/ItemSort";
-import extendData from "@/data";
 import { mapActions, mapMutations, mapState } from "vuex";
-import { watch } from 'fs';
+import { watch } from "fs";
 export default {
-    extends: extendData,
-    data() {
-        return {
-            allitems: null
-        };
-    },
-    components: {
-        ItemSort,
-    },
     computed:{
-        compAllitems(){
-            return this.allitems
+        ...mapState(['data']),
+        comp_data(){
+            return this.data
         }
     },
+    components: {
+        ItemSort
+    },
     created() {
-        this.geIsLoading(true)
-        this.fnGetAllCollection(res => {
-            this.allitems = res;
-            this.geIsLoading(false)
-        });
+        this.locFnGetAllCollection()
     },
     mounted() {},
     methods: {
         ...mapActions(["fnGetAllCollection"]),
-        ...mapMutations(['geIsLoading'])
+        ...mapMutations(["geIsLoading", "geCmmPayload"]),
+        locFnGetAllCollection(){
+            this.geIsLoading(true);
+            this.fnGetAllCollection(res => {
+                this.geCmmPayload({
+                    k: "data",
+                    v: res,
+                });
+                this.geIsLoading(false);
+            });
+        }
     }
 };
 </script>

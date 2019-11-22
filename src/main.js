@@ -52,6 +52,26 @@ Vue.prototype.$current_date_live = (c) => {
 }
 Vue.prototype.$http = axios;
 Vue.prototype.$Msg = Msg;
+Vue.prototype.$extend = (p, n) => {
+  let org_o = p
+  let ext_o = n
+  let new_o = {}
+  if (org_o && typeof org_o === 'object' && !Array.isArray(org_o) && ext_o && typeof ext_o === 'object' && !Array.isArray(ext_o)) {
+    for (let k in ext_o) {
+      new_o[k] = ext_o[k]
+    }
+    for (let c in org_o) {
+      if (typeof new_o[c] == 'undefined') {
+        new_o[c] = org_o[c]
+      }
+    }
+
+  }
+  return new_o
+};
+
+
+
 Vue.component('btn', Btns)
 Vue.component('modal', Modal)
 Vue.component('roundbox', RoundBox)
@@ -93,17 +113,17 @@ Vue.filter('date_after_day', s => {
   switch (mi.length) {
     case 1:
     case 2:
-        st = `분전`
-        break
+      st = `분전`
+      break
     case 3:
     case 4:
-        // if (Math.floor(t / 60)) {
-        //   st = `${Math.round(t / 60)}시간전`
-        //   t = ''
-        // } else {
-        //   st = `분전`
-        // }
-        st = `분전`
+      // if (Math.floor(t / 60)) {
+      //   st = `${Math.round(t / 60)}시간전`
+      //   t = ''
+      // } else {
+      //   st = `분전`
+      // }
+      st = `분전`
       break
     case 5:
     case 6:

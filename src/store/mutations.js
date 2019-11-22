@@ -1,31 +1,20 @@
 import router from '@/router'
+import vue from 'vue'
 import vuex from '@/store'
 export const mutations = {
-	geCmmPayload:(state, payload)=>{
+	geCmmPayload: (state, payload) => {
 		state[payload.k] = payload.v
+		if (payload.storage) {
+			localStorage.setItem(payload.k, payload.v)
+		}
 	},
 	geGuestUserItem: (state, payload) => {
 		state.guest.useritems = payload
 	},
-	geUserInfo: (state, payload) => {
-		console.log(payload.data.useritems);
-		
-		state.guest = payload.data
-		// if (payload.me) {
-		// 	state.user = payload.data
-		// } else {
-		// 	state.guest = payload.data
-		// }
-	},
-	geUserInfoNull:(state)=>{
-		for (const k in state.guest) {
-			state.guest[k] = null
-		}
-	},
 	geIsLoading: (state, payload) => {
 		if (typeof payload === 'boolean') {
 			state.isLoading = payload;
-		}else if(typeof payload === 'object'){ 
+		} else if (typeof payload === 'object') {
 			state.isLoadingStyle = {
 				extends: state.isLoadingStyle,
 				opacity: .7,
@@ -48,25 +37,11 @@ export const mutations = {
 		})
 	},
 	geUserDetailView: (state, payload) => {
-		let o = {}
 		if (typeof payload === 'object') {
-			if(typeof payload.k === 'string'){
-				state.userDetailView[payload.k] = payload.v
-			}else{
-				let ar = payload.k.forEach((a, i) => {
-					o[a] = payload.v[i];
-				})
-				o['modalDetailViewShow'] = true;
-				state.userDetailView = o
-			}
-			
+			let exo = vue.prototype.$extend(state.userDetailView,payload)
+			state.userDetailView = exo
 		} else if (typeof payload === 'boolean') {
 			state.userDetailView.modalDetailViewShow = payload
-		}
-		if(state.userDetailView.modalDetailViewShow){
-			//router.push({query:{item:o.item_id}})
-		}else{
-			//router.replace({query:null})
 		}
 	},
 	geTransDirection: (state, payload) => {
@@ -75,4 +50,21 @@ export const mutations = {
 			state.transDirection = true
 		}, 500) //페이지 트렌지션 하는 시간
 	},
+	// 여기부터
+	geOnceAllitemUpdate: (state, payload) => {
+		/**
+		 * @params  item_id = string
+		 * @params  userDetailView = string
+		 * @params  value = typeof object && !Array.isArray(object)
+		 */
+		let c = null
+		state.data.forEach((items, index) => {
+			if (items.item_id == payload.item_id && items.item_user_uid == payload.item_user_uid) {
+				c = index
+			}
+		})
+		for (let k in payload.value) {
+			state.data[c][k] = payload.value[k]
+		}
+	}
 };

@@ -41,39 +41,15 @@
         </div>
         <Slick ref="slick" :options="slickOptions" v-if="slick">
             <Item
-                :item_user_thumb="key.item_user_thumb"
-                :item_user_nm="key.item_user_nm"
-                :item_user_email="key.item_user_email"
                 :item_user_uid="key.item_user_uid"
-                :uid="key.uid"
-                :item_title="key.item_title"
                 :item_id="key.item_id"
-                :item_intro="key.item_intro"
-                :item_favorite="key.item_favorite"
-                :item_favorite_group="key.item_favorite_group"
-                :item_comment="key.item_comment"
-                :item_create_date="key.item_create_date"
-                :item_view="key.item_view"
-                :item_thumb="key.item_thumb"
                 v-for="(key, index) in compSortitems"
                 :key="index"
             ></Item>
         </Slick>
         <Item
-            :item_user_thumb="key.item_user_thumb"
-            :item_user_nm="key.item_user_nm"
-            :item_user_email="key.item_user_email"
             :item_user_uid="key.item_user_uid"
-            :uid="key.uid"
-            :item_title="key.item_title"
             :item_id="key.item_id"
-            :item_intro="key.item_intro"
-            :item_favorite="key.item_favorite"
-            :item_favorite_group="key.item_favorite_group"
-            :item_comment="key.item_comment"
-            :item_create_date="key.item_create_date"
-            :item_view="key.item_view"
-            :item_thumb="key.item_thumb"
             v-for="(key, index) in compSortitems"
             :key="index"
             v-else
@@ -83,8 +59,9 @@
 <script>
 import Slick from "vue-slick";
 import Item from "@/components/Item";
+import { mapState, mapMutations } from "vuex";
 export default {
-    props: ["sortitems", "sort", "limit_length", "slick", "no_btn"],
+    props: ['sortitems',"allitems", "sort", "limit_length", "slick", "no_btn"],
     data() {
         return {
             sortdata: null,
@@ -132,19 +109,22 @@ export default {
         };
     },
     created() {
-        console.log(this.sortitems);
         let s = `n`;
-        let ar = this.sortitems;
-        this.sortdata = ar;
+        let g_ar = this.compSortitems;
+
+        this.sortdata = g_ar;
+        
         if (this.sort) s = this.sort;
         this.locFnSort(s);
     },
-    computed:{
-        compSortitems(){
+    computed: {
+        ...mapState(["data", "guest"]),
+        compSortitems() {
             return this.sortitems
         }
     },
     methods: {
+        ...mapMutations(["geCmmPayload", "geGuestUserItem"]),
         locFnSort(s) {
             let t = "";
             let txt = "";
@@ -169,6 +149,14 @@ export default {
                 this.sortdata = this.locFnSortApply(t);
                 this.sortbtn_class = s;
                 this.vTxt = txt;
+                if (this.allitems) {
+                    this.geCmmPayload({
+                        k: "data",
+                        v: this.sortdata
+                    });
+                } else {
+                    this.geGuestUserItem(this.sortdata);
+                }
             }
         },
         locFnSortApply(l) {
