@@ -193,14 +193,15 @@ body {
 .commtWrap .comtItem .comtThumb{width: 40px; height: 40px; border-radius: 50%; background: no-repeat center center; background-size: cover; display: block; position: absolute; left: 0; top: 20px;}
 .commtWrap .comtItem .comtTxts{}
 .commtWrap .comtItem .comtTxts .btnsWrap{display: inline-block;}
-.commtWrap .comtItem .comtTxts .nm{font-size: 16px; word-break: break-all; color: $normal; padding-top: 6px; display: block;}
+.commtWrap .comtItem .comtTxts .btnsWrap .btns{margin: 2px;}
+.commtWrap .comtItem .comtTxts .nm{font-size: 16px; word-break: break-all; color: $normal; padding-top: 6px; display: inline-block;}
 .commtWrap .comtItem .comtTxts .em{font-size: 12px; position: relative; padding-left: 10px; margin-left: 10px; color: $gray2; font-weight: 300;}
 .commtWrap .comtItem .comtTxts .em:after{content: ''; width: 1px; height: 60%; top: 20%; left: 0; position: absolute; background: #ddd;}
-.commtWrap .comtItem .comtTxts .tt{font-size: 14px; word-break: break-all; color: $normal; padding-top: 5px; display: block; font-family: 'Noto Sans KR',"맑은 고딕","Malgun Gothic",Sans-serif; white-space: pre-wrap;}
+.commtWrap .comtItem .comtTxts .tt{font-size: 14px; word-break: break-all; color: $normal; padding-top: 8px; padding-bottom: 5px; display: block; font-family: 'Noto Sans KR',"맑은 고딕","Malgun Gothic",Sans-serif; white-space: pre-wrap;}
 .commtWrap .comtItem .comtTxts .dt{font-size: 12px; word-break: break-all; color: $gray2; display: inline-block; margin-top: 5px; margin-right: 10px; min-width: 50px;}
-.commtWrap .comtItem .comtTxts .cmModify{margin-top: 10px;}
-.commtWrap .comtItem .comtTxts .cmModify .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: 14px; color: $normal; border-radius: 5px; border: 1px solid #eee;}
-.commtWrap .comtItem .comtTxts .cmModify .textarea:focus{outline: none;}
+.commtWrap .comtItem .cmModify{margin-top: 10px;}
+.commtWrap .comtItem .cmModify .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: 14px; color: $normal; border-radius: 5px; border: 1px solid #eee;}
+.commtWrap .comtItem .cmModify .textarea:focus{outline: none;}
 .modalItemView .deComtField{display: block; padding: 15px 15px; background-color: $gray1; position: relative;}
 .modalItemView .deComtField .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: $font-size; color: $normal; border-radius: 5px; border: 1px solid #eee;}
 .modalItemView .deComtField .textarea:focus{outline: none;}

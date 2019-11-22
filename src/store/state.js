@@ -5,6 +5,7 @@ export const state = {
     isMypage:false,
     isItemFavorit:false,
     data:null,
+    main_best:null,
     isLoadingStyle:{
         opacity: 1,
         color: '#2196f3',

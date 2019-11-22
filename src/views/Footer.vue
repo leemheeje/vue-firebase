@@ -172,7 +172,7 @@
                                         >
                                         <btn
                                             href="javascript:;"
-                                            class="btns sm blue ML05"
+                                            class="btns sm blue"
                                             v-if="k.comment_modify"
                                             @eventBus_click="
                                                 locUpdateComments(
@@ -185,22 +185,25 @@
                                         >
                                         <btn
                                             href="javascript:;"
-                                            class="btns sm blue"
-                                            v-if="
-                                                k.uid != user.uid &&
-                                                    items.item_user_uid ==
-                                                        user.uid
-                                            "
-                                            >답변달기</btn
-                                        >
+                                            :class="`btns sm blue ${Object.keys(k.comment_reply).length ? 'outline' : ''}`"
+                                            v-if="((items.item_user_uid == user.uid|| replyDisable) && k.email != user.email) && !k.comment_reply_modify"
+                                            @eventBus_click="locReplyComment(
+                                                    true,
+                                                    k.date,
+                                                    k.uid
+                                                )"
+                                            >
+                                            <template v-if="!Object.keys(k.comment_reply).length">
+                                                <span>답변달기</span>
+                                            </template>
+                                            <template v-else>
+                                                <span>답변수정</span>
+                                            </template>
+                                            </btn>
                                         <btn
                                             href="javascript:;"
-                                            class="btns sm red ML05"
-                                            v-if="
-                                                k.uid != user.uid &&
-                                                    items.item_user_uid ==
-                                                        user.uid
-                                            "
+                                            class="btns sm red"
+                                            v-if="(items.item_user_uid == user.uid|| deleteDisable) && k.email != user.email"
                                             @eventBus_click="
                                                 locUpdateComments(
                                                     false,
@@ -210,7 +213,32 @@
                                             "
                                             >댓글삭제</btn
                                         >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm gray"
+                                            v-if="((items.item_user_uid == user.uid|| replyDisable) && k.email != user.email) && k.comment_reply_modify"
+                                             @eventBus_click="locReplyComment(
+                                                    false,
+                                                    k.date,
+                                                    k.uid
+                                                )"
+                                            >답변취소하기</btn
+                                        >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm green"
+                                            v-if="((items.item_user_uid == user.uid|| replyDisable) && k.email != user.email) && k.comment_reply_modify"
+                                            @eventBus_click="locUpdateReplyComment(
+                                                true,
+                                                k.date,
+                                                k.uid
+                                            )"
+                                            >답변등록하기</btn
+                                        >
                                     </div>
+                                </div>
+                                <div class="cmModify" v-if="k.comment_reply_modify">
+                                    <textarea class="textarea" v-model="comment_reply_value" placeholder="답변을 작성해주세요."></textarea>
                                 </div>
                                 <!-- 대댓글 -->
                                 <div
@@ -222,18 +250,16 @@
                                         <span
                                             class="comtThumb"
                                             :style="
-                                                `background-image:url(${k.userthumb})`
+                                                `background-image:url(${k.comment_reply.thumb})`
                                             "
                                         ></span>
                                         <div class="comtTxts">
                                             <div class="nm">
-                                                {{ k.name }}
+                                                {{ k.comment_reply.name }}
                                             </div>
-                                            <div class="tt">
-                                                {{ k.stitle }}
-                                            </div>
+                                            <pre class="tt">{{ k.comment_reply.comment_reply_value }}</pre>
                                             <div class="dt">
-                                                2019-09-30 15:30:16
+                                                {{ k.comment_reply.date | date_after_day }}
                                             </div>
                                         </div>
                                     </div>
@@ -293,7 +319,10 @@ export default {
             item_user_uid: null,
             comment_value: "",
             comment_value_modify: "",
-            isModify: false
+            deleteDisable: false,
+            replyDisable: false,
+            comment_reply_value: "",
+            comment_reply_modify: "",
         };
     },
     computed: {
@@ -312,6 +341,15 @@ export default {
                     item_id: this.item_id,
                     item_user_uid: this.item_user_uid
                 });
+                if (this.Auth) {
+                    if (this.user.uid != this.item_user_uid) {
+                        this.deleteDisable = true;
+                        this.replyDisable = true;
+                    }else{
+                        this.deleteDisable = false;
+                        this.replyDisable = false;
+                    }
+                }
             }
         }
     },
@@ -411,6 +449,7 @@ export default {
                     this.$extend(defaults, {
                         value: {
                             comment_modify: false,
+                            date: this.$current_date_live(new Date()),
                             comment_value: this.comment_value_modify
                         }
                     })
@@ -429,7 +468,46 @@ export default {
             }
             this.comment_value_modify = "";
         },
-        locDeleteComment() {}
+        locReplyComment(bool, date, uid) {
+            console.log(date, uid);
+            //코멘트 그룹 수정
+            this.geOnceAllitemUpdate({
+                target: "comment",
+                item_id: this.items.item_id,
+                item_user_uid: this.items.item_user_uid,
+                date: date,
+                uid: uid,
+                value: {
+                    comment_reply_modify: bool
+                }
+            });
+        },
+        locUpdateReplyComment(bool, date, uid){
+            let defaults = {
+                target: "comment",
+                item_id: this.items.item_id,
+                item_user_uid: this.items.item_user_uid,
+                date: date,
+                uid: uid
+            };
+            if(bool){
+                this.fnOnceAllitemInComment(
+                    this.$extend(defaults, {
+                        value: {
+                            comment_reply_modify:false,
+                            comment_reply: {
+                                name:this.user.name,
+                                email:this.user.email,
+                                thumb:this.user.thumb,
+                                date : this.$current_date_live(new Date()),
+                                uid:this.user.uid,
+                                comment_reply_value : this.comment_reply_value
+                            }
+                        }
+                    })
+                );
+            }
+        }
     },
     components: { Slick },
     mixins: [userMypageView]

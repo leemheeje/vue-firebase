@@ -113,7 +113,6 @@ export default {
         let g_ar = this.compSortitems;
 
         this.sortdata = g_ar;
-        
         if (this.sort) s = this.sort;
         this.locFnSort(s);
     },
