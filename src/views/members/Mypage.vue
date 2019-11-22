@@ -36,7 +36,7 @@
         </div>
         <router-link
             :to="{ name: 'create', params: user.uid }"
-            v-if="isAuth"
+            v-if="isAuth && user.uid == $route.params.uid"
             class="animated bounceIn btnCreate"
             ><i class="fas fa-plus"></i
         ></router-link>
@@ -67,7 +67,7 @@ export default {
     },
     watch: {
         $route() {
-            //this.fnGetUserInfo(this.params_uid);
+            this.fnGetUserInfo(this.params_uid);
         }
     },
     methods: {

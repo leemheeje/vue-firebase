@@ -46,6 +46,7 @@ export const actions = {
 			usernm,
 			userthumb,
 		} = payload;
+
 		vue.prototype.$firebase.auth().createUserWithEmailAndPassword(userid, payload.userpw).then(res => {
 			console.log('이메일 가입 성공 : ', res);
 			res.user.updateProfile({
@@ -175,7 +176,7 @@ export const actions = {
 					thumb: data.userthumb,
 					intro: data.userintro,
 					user_skills_model: data.user_skills_model,
-					useritems : useritems
+					useritems: useritems
 				}
 			});
 			commit('geIsLoading', false);
@@ -236,6 +237,35 @@ export const actions = {
 			let items = useritems[`item${payload.item_id}`]
 			let $extend_items = $extend(items, payload.value)
 			useritems[`item${payload.item_id}`] = $extend_items;
+			firestore.update({
+				useritems: useritems
+			})
+		})
+	},
+	fnOnceAllitemInComment: ({
+		commit
+	}, payload) => {
+		commit('geOnceAllitemUpdate', payload)
+		let firestore = vue.prototype.$firestore.collection('userinfo').doc(payload.item_user_uid)
+		let $extend = vue.prototype.$extend
+		firestore.get().then(res => {
+			let useritems = res.data().useritems
+			let items = useritems[`item${payload.item_id}`].item_comment_group //array
+			let c = 0
+			let t_items = items.filter((itm, i) => {
+				if (itm.date == payload.date && itm.uid == payload.uid) {
+					return c = i
+				}
+			})
+			let $extend_items = null
+			if (payload.value === false) {
+				items.splice(c, 1)
+				useritems[`item${payload.item_id}`].item_comment--
+				useritems[`item${payload.item_id}`].item_comment_group = items;
+			} else {
+				$extend_items = $extend(items[c], payload.value)
+				useritems[`item${payload.item_id}`].item_comment_group[c] = $extend_items;
+			}
 			firestore.update({
 				useritems: useritems
 			})

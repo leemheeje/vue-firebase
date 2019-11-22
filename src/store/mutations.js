@@ -38,7 +38,7 @@ export const mutations = {
 	},
 	geUserDetailView: (state, payload) => {
 		if (typeof payload === 'object') {
-			let exo = vue.prototype.$extend(state.userDetailView,payload)
+			let exo = vue.prototype.$extend(state.userDetailView, payload)
 			state.userDetailView = exo
 		} else if (typeof payload === 'boolean') {
 			state.userDetailView.modalDetailViewShow = payload
@@ -54,7 +54,7 @@ export const mutations = {
 	geOnceAllitemUpdate: (state, payload) => {
 		/**
 		 * @params  item_id = string
-		 * @params  userDetailView = string
+		 * @params  item_user_uid = string
 		 * @params  value = typeof object && !Array.isArray(object)
 		 */
 		let c = null
@@ -63,8 +63,26 @@ export const mutations = {
 				c = index
 			}
 		})
-		for (let k in payload.value) {
-			state.data[c][k] = payload.value[k]
+		if (payload.target != 'comment') {
+			for (let k in payload.value) {
+				state.data[c][k] = payload.value[k]
+			}
+		} else {
+			let d = null
+			state.data[c].item_comment_group.forEach((items, index) => {
+				if (items.date == payload.date && items.uid == payload.uid) {
+					d = index
+				}
+			})
+			if (payload.value === false) {
+				state.data[c].item_comment--
+				state.data[c].item_comment_group.splice(d, 1)
+			} else {
+				for (let k in payload.value) {
+					state.data[c].item_comment_group[d][k] = payload.value[k]
+				}
+			}
 		}
-	}
+
+	},
 };

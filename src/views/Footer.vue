@@ -99,45 +99,138 @@
                                 items.item_comment
                             }}개의 댓글
                         </div>
-                        <div class="commtWrap MT20 MB20">
-                            <div class="comtItem">
-                                <span
+                        <div
+                            class="commtWrap MT20 MB20"
+                            v-if="items.item_comment_group.length"
+                        >
+                            <div
+                                class="comtItem"
+                                v-for="(k, i) in items.item_comment_group"
+                                :key="i"
+                            >
+                                <router-link
                                     class="comtThumb"
-                                    :style="
-                                        `background-image:url(${items.userthumb})`
-                                    "
-                                ></span>
+                                    :style="`background-image:url(${k.thumb})`"
+                                    :to="{
+                                        name: 'mypage',
+                                        params: { uid: k.uid }
+                                    }"
+                                ></router-link>
                                 <div class="comtTxts">
-                                    <div class="nm">
-                                        {{ items.usernm }}
+                                    <router-link
+                                        class="nm"
+                                        :to="{
+                                            name: 'mypage',
+                                            params: { uid: k.uid }
+                                        }"
+                                    >
+                                        {{ k.name }}
+                                        <span class="em">{{ k.email }}</span>
+                                    </router-link>
+                                    <pre class="tt" v-if="!k.comment_modify">{{
+                                        k.comment_value
+                                    }}</pre>
+                                    <div class="cmModify" v-else>
+                                        <textarea
+                                            class="textarea"
+                                            placeholder="내용을 입력해주세요"
+                                            v-model="comment_value_modify"
+                                        ></textarea>
                                     </div>
-                                    <div class="tt">
-                                        Tere is my new shot for Travel app
-                                        Travel App Ilustration by: Diego Leal
-                                        and P-A Rochat Thanks a lot. Press "L"
-                                        if u like it ! and do not forget to
-                                        Follow it's important for me Cheers! :)
-                                        If you want to work with me or just say
-                                        something ... write to me:
+                                    <div class="dt">
+                                        {{ k.date | date_after_day }}
                                     </div>
-                                    <div class="dt">2019-09-30 15:30:16</div>
+                                    <div class="btnsWrap">
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm green"
+                                            v-if="
+                                                k.uid == user.uid &&
+                                                    !k.comment_modify
+                                            "
+                                            @eventBus_click="
+                                                locModifyComments(
+                                                    true,
+                                                    k.date,
+                                                    k.uid
+                                                )
+                                            "
+                                            >내용 수정하기</btn
+                                        >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm green outline"
+                                            @eventBus_click="
+                                                locModifyComments(
+                                                    false,
+                                                    k.date,
+                                                    k.uid
+                                                )
+                                            "
+                                            v-if="k.comment_modify"
+                                            >수정 취소하기</btn
+                                        >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm blue ML05"
+                                            v-if="k.comment_modify"
+                                            @eventBus_click="
+                                                locUpdateComments(
+                                                    true,
+                                                    k.date,
+                                                    k.uid
+                                                )
+                                            "
+                                            >수정내용 적용하기</btn
+                                        >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm blue"
+                                            v-if="
+                                                k.uid != user.uid &&
+                                                    items.item_user_uid ==
+                                                        user.uid
+                                            "
+                                            >답변달기</btn
+                                        >
+                                        <btn
+                                            href="javascript:;"
+                                            class="btns sm red ML05"
+                                            v-if="
+                                                k.uid != user.uid &&
+                                                    items.item_user_uid ==
+                                                        user.uid
+                                            "
+                                            @eventBus_click="
+                                                locUpdateComments(
+                                                    false,
+                                                    k.date,
+                                                    k.uid
+                                                )
+                                            "
+                                            >댓글삭제</btn
+                                        >
+                                    </div>
                                 </div>
                                 <!-- 대댓글 -->
-                                <div class="commtWrap MT20 MB20">
+                                <div
+                                    class="commtWrap MT20 MB20"
+                                    v-if="Object.keys(k.comment_reply).length"
+                                >
                                     <i class="fas fa-reply"></i>
                                     <div class="comtItem">
                                         <span
                                             class="comtThumb"
                                             :style="
-                                                `background-image:url(${items.userthumb})`
+                                                `background-image:url(${k.userthumb})`
                                             "
                                         ></span>
                                         <div class="comtTxts">
                                             <div class="nm">
-                                                {{ items.usernm }}
+                                                {{ k.name }}
                                             </div>
                                             <div class="tt">
-                                                {{ items.stitle }}
+                                                {{ k.stitle }}
                                             </div>
                                             <div class="dt">
                                                 2019-09-30 15:30:16
@@ -146,32 +239,26 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="comtItem">
-                                <span
-                                    class="comtThumb"
-                                    :style="
-                                        `background-image:url(${items.userthumb})`
-                                    "
-                                ></span>
-                                <div class="comtTxts">
-                                    <div class="nm">
-                                        {{ items.usernm }}
-                                    </div>
-                                    <div class="tt">
-                                        {{ items.stitle }}
-                                    </div>
-                                    <div class="dt">2019-09-30 15:30:16</div>
-                                </div>
-                            </div>
+                        </div>
+                        <div
+                            class="commtWrap MT20 MB20 TXTC"
+                            style="font-size: 13px;"
+                            v-else
+                        >
+                            댓글을 작성해주세요.
                         </div>
                     </div>
                     <div class="deComtField" v-if="isAuth">
                         <textarea
                             class="textarea"
                             placeholder="댓글을 작성해주세요."
+                            v-model="comment_value"
                         ></textarea>
-                        <btn class="block blue MT10">댓글등록</btn>
+                        <btn
+                            class="block blue MT10"
+                            @eventBus_click="locAddComments"
+                            >댓글등록</btn
+                        >
                     </div>
                     <div class="deComtField" v-else>
                         <div class="deComtDimm">
@@ -202,8 +289,11 @@ export default {
                 adaptiveHeight: true
             },
             items: null,
-            item_id:null,
-            item_user_uid:null,
+            item_id: null,
+            item_user_uid: null,
+            comment_value: "",
+            comment_value_modify: "",
+            isModify: false
         };
     },
     computed: {
@@ -216,8 +306,8 @@ export default {
     watch: {
         isModalShow() {
             if (this.isModalShow) {
-                this.item_id= this.userDetailView.item_id
-                this.item_user_uid= this.userDetailView.item_user_uid
+                this.item_id = this.userDetailView.item_id;
+                this.item_user_uid = this.userDetailView.item_user_uid;
                 this.items = this.getOnceAllitem({
                     item_id: this.item_id,
                     item_user_uid: this.item_user_uid
@@ -226,8 +316,8 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["geUserDetailView"]),
-        ...mapActions(["fnOnceAllitemUpdate"]),
+        ...mapMutations(["geUserDetailView", "geOnceAllitemUpdate"]),
+        ...mapActions(["fnOnceAllitemUpdate", "fnOnceAllitemInComment"]),
         login() {
             this.geUserDetailView(false);
             setTimeout(() => {
@@ -262,7 +352,84 @@ export default {
             this.geUserDetailView({
                 isItemFavorit: true
             });
-        }
+        },
+        locAddComments() {
+            //this.items
+            //this.user.name
+            //this.user.email
+            //this.user.thumb
+            //this.user.uid / 댓글유저 페이지갈때
+            //this.comment_value
+            if (this.comment_value != "") {
+                this.items.item_comment_group.push({
+                    name: this.user.name,
+                    email: this.user.email,
+                    thumb: this.user.thumb,
+                    date: this.$current_date_live(new Date()),
+                    uid: this.user.uid,
+                    comment_value: this.comment_value,
+                    comment_modify: false,
+                    comment_reply_modify: false,
+                    comment_reply: {}
+                });
+                this.items.item_comment = this.items.item_comment + 1;
+                this.comment_value = "";
+                this.fnOnceAllitemUpdate({
+                    item_id: this.items.item_id,
+                    item_user_uid: this.items.item_user_uid,
+                    value: {
+                        item_comment_group: this.items.item_comment_group,
+                        item_comment: this.items.item_comment
+                    }
+                });
+            }
+        },
+        locModifyComments(bool, date, uid) {
+            console.log(date, uid);
+            //코멘트 그룹 수정
+            this.geOnceAllitemUpdate({
+                target: "comment",
+                item_id: this.items.item_id,
+                item_user_uid: this.items.item_user_uid,
+                date: date,
+                uid: uid,
+                value: {
+                    comment_modify: bool
+                }
+            });
+        }, //comment_value_modify
+        locUpdateComments(bool, date, uid) {
+            let defaults = {
+                target: "comment",
+                item_id: this.items.item_id,
+                item_user_uid: this.items.item_user_uid,
+                date: date,
+                uid: uid
+            };
+            if (bool) {
+                this.fnOnceAllitemInComment(
+                    this.$extend(defaults, {
+                        value: {
+                            comment_modify: false,
+                            comment_value: this.comment_value_modify
+                        }
+                    })
+                );
+            } else {
+                this.$Ui.confirm(
+                    "댓글을 삭제하시겠습니까?\n삭제시 복구 불가합니다.",
+                    () => {
+                        this.fnOnceAllitemInComment(
+                            this.$extend(defaults, {
+                                value: false
+                            })
+                        );
+                    }
+                );
+            }
+            this.comment_value_modify = "";
+        },
+        locDeleteComment() {}
     },
     components: { Slick },
     mixins: [userMypageView]

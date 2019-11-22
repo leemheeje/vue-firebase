@@ -233,6 +233,7 @@ input[type='text'],input[type='password'],input[type='image'],input[type='search
 .btns.blue{background-color: #2196f3; color: #fff;}
 .btns.gray{background-color: #999; color: #000;}
 .btns.green{background-color: #20a69b; color: #fff;}
+.btns.red{background-color: #ea4335; color: #fff;}
 .btns.outline{background: none; border-color: #999; color: #999; border-width: 2px;}
 .btns.outline1px{border-width: 1px;}
 .btns.blue.outline{border-color: #2196f3; color: #2196f3;}

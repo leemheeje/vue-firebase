@@ -218,6 +218,7 @@ export default {
                 usernm: this.usernm,
                 userthumb: this.userthumb,
                 usercomp: this.usercomp,
+                userpw: this.userpw,
                 userintro: this.userintro,
                 user_skills_model: this.user_skills_model,
                 useritems: {}
