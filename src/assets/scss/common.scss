@@ -173,7 +173,7 @@ body {
 .modalItemView .txts .tt{word-break: break-all; line-height: 26px; font-size: 18px; color: $normal; display: block; padding-top: 8px;}
 .modalItemView .txts .st{word-break: break-all; line-height: 22px; font-size: 14px; color: $gray2; display: block; min-height: 20px; margin-top: 5px;}
 .modalItemView .txts .et{font-size: 13px; color: $gray2; margin-top: 15px; display: block;}
-.modalItemView .txts .sts{margin-top: 15px; font-size: 16px; line-height: 23px; display: inline-block;}
+.modalItemView .txts .sts{font-size: 16px; line-height: 23px; display: inline-block;}
 .modalItemView .txts .et{display: inline-block; color: #555;  margin-left: 10px; padding-left: 10px; position: relative;}
 .modalItemView .txts .et:before{content: ''; position: absolute; left: 0; top: 20%; background: #555; width: 1px; height: 60%;}
 .modalItemView .txts .dt{display: block; font-size: 12px; color: #999; margin-top: 5px;}
@@ -197,7 +197,7 @@ body {
 .commtWrap .comtItem .comtTxts .nm{font-size: 16px; word-break: break-all; color: $normal; padding-top: 6px; display: inline-block;}
 .commtWrap .comtItem .comtTxts .em{font-size: 12px; position: relative; padding-left: 10px; margin-left: 10px; color: $gray2; font-weight: 300;}
 .commtWrap .comtItem .comtTxts .em:after{content: ''; width: 1px; height: 60%; top: 20%; left: 0; position: absolute; background: #ddd;}
-.commtWrap .comtItem .comtTxts .tt{font-size: 14px; word-break: break-all; color: $normal; padding-top: 8px; padding-bottom: 5px; display: block; font-family: 'Noto Sans KR',"맑은 고딕","Malgun Gothic",Sans-serif; white-space: pre-wrap;}
+.commtWrap .comtItem .comtTxts .tt{font-size: 14px; word-break: break-all; color: $normal; padding-top: 3px; padding-bottom: 2px; display: block; font-family: 'Noto Sans KR',"맑은 고딕","Malgun Gothic",Sans-serif; white-space: pre-wrap;}
 .commtWrap .comtItem .comtTxts .dt{font-size: 12px; word-break: break-all; color: $gray2; display: inline-block; margin-top: 5px; margin-right: 10px; min-width: 50px;}
 .commtWrap .comtItem .cmModify{margin-top: 10px;}
 .commtWrap .comtItem .cmModify .textarea{width: 100%; padding: 10px; border: none; resize: none; height: 100px; font-size: 14px; color: $normal; border-radius: 5px; border: 1px solid #eee;}
@@ -210,15 +210,14 @@ body {
  .txts{}
 // .cmmItemsWrap .items .modalItemView .txts .u_thub{position: static; width: 80px; height: 80px; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
 .cmmItemsWrap .items .modalItemView .txts{}
-.cmmItemsWrap .items .modalItemView .txts .txtop{padding-left: 75px;}
+.cmmItemsWrap .items .modalItemView .txts .txtop{padding-left: 75px;} 
 .cmmItemsWrap .items .modalItemView .txts .u_thub{width: 60px; height: 60px;}
 .cmmItemsWrap .items .modalItemView .txts .tt{white-space: inherit; overflow: visible; text-overflow: inherit; word-break: break-all; line-height: 28px; padding-top: 6px;}
-.cmmItemsWrap .items .modalItemView .txts .st{margin-top: 5px;}
 
 .preloader{color: $primary2; font-size: 80px;}
 .btnCreate{position: fixed; right: 15px; bottom: 15px; width: 60px; height: 60px; line-height: 60px; background: $primary2; text-align: center; border-radius: 50%; box-shadow: 10px 10px 15px rgba(0,0,0,0.15);}
 .btnCreate i{color: #fff;}
-
+.cmmInput .cmmInputFile .fkf_input{@include ellipsis();}
 .mypage_userinfo {
 	background: #fff;
 }
@@ -319,7 +318,7 @@ body {
 	.cmmRibBar .cmmItemsWrap .slick-arrow{display: none !important;}
 	.modalItemView .cmmRibBar .img{height: 300px;}
 	.modalItemView .cmmRibBar .img.only{height: auto;}
-	.modalItemView .cmmRibBar .slick-slide .img{height: auto;}
+	.modalItemView .cmmRibBar .slick-slide .img{height: 250px;}
 	.modalItemView .cmmRibBar .img img{max-height: 300px;}
 	.cmmSortWrap .btnsWrap{top: -60px;}
 	.cmmSortWrap .btnsWrap a{display: none;}

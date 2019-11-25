@@ -26,11 +26,16 @@
                     </div>
                     <div class="row MT30">
                         <div class="col8">
-                            <input
-                                type="file"
-                                @change="locFnUploadFile"
-                                multiple
-                            />
+                            <div class="cmmInput">
+                                <span class="lb required">이미지등록</span>
+                                <div class="cmmInputFile fakFile" >
+                                    <div class="ip">
+                                        <input  type="file" @change="locFnUploadFile" multiple id="clientInfoSubmit" style="display: none;" accept="image/*"/>
+                                        <span class="fkf_input">{{fakFile_txt}}<small class="ML10 colorGray" >{{fakFile_txt_ant}}</small></span>
+                                    </div>
+                                    <label for="clientInfoSubmit" class="btns blue">파일첨부</label>									
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,6 +58,7 @@
 </template>
 <script>
 import { mapState,mapActions, mapMutations } from "vuex";
+import { locFnUploadFile } from "@/extend";
 const ar = ["pffiles"];
 export default {
     data() {
@@ -60,7 +66,9 @@ export default {
             pf_file_target: null,
             pf_title: "",
             pf_intro: "",
-            pt_date: ""
+            pt_date: "",
+            fakFile_txt:'파일을 등록해주세요.',
+            fakFile_txt_ant:''
         };
     },
     computed:{
@@ -69,10 +77,11 @@ export default {
     methods: {
         ...mapActions(["fnUserFileUpload"]),
         ...mapMutations(["geIsLoading"]),
-        locFnUploadFile(event) {
-            this.pf_file_target = event.target;
-        },
         locFnPortFolioUpdate() {
+            if(!this.pf_title || !this.pf_intro || !this.pf_file_target){
+                this.$Ui.alert('필수정보를 입력해주세요.')
+                return
+            }
             let img_ar = [];
             let getTime = this.$current_date_live(new Date())
             this.geIsLoading({
@@ -124,6 +133,7 @@ export default {
                 }
             });
         }
-    }
+    },
+    mixins:[locFnUploadFile]
 };
 </script>

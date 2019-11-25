@@ -70,12 +70,12 @@
                                     :key="i"
                                 >
                                     <span class="VALIGN"></span>
-                                    <img :src="k" alt="" />
+                                    <a :href="k" target="_blank"><img :src="k" alt="" @click="locFnFullView(k)" /></a>
                                 </div>
                             </Slick>
                             <div class="img only" v-else>
                                 <span class="VALIGN"></span>
-                                <img :src="items.item_thumb" alt="" />
+                                <a :href="items.item_thumb" target="_blank"><img :src="items.item_thumb" alt="" @click="locFnFullView(items.item_thumb)"/></a>
                             </div>
                         </div>
                         <div class="fblb">
@@ -507,6 +507,10 @@ export default {
                     })
                 );
             }
+        },
+        locFnFullView(img){
+            console.log(img);
+            
         }
     },
     components: { Slick },

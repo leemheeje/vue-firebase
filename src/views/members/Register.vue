@@ -52,7 +52,16 @@
                     </div>
                     <div class="row MT30">
                         <div class="col4">
-                            <input @change="fileUpload" type="file" />
+                            <div class="cmmInput">
+                                <span class="lb required">대표이미지</span>
+                                <div class="cmmInputFile fakFile" >
+                                    <div class="ip">
+                                        <input @change="locFnUploadFile" type="file" id="clientInfoSubmit" style="display: none;" accept="image/*"/>
+                                        <span class="fkf_input">{{fakFile_txt}}</span>
+                                    </div>
+                                    <label for="clientInfoSubmit" class="btns blue">파일첨부</label>									
+                                </div>
+                            </div>
                         </div>
                         <div class="col4 MMT30">
                             <forminput
@@ -101,6 +110,7 @@
 </template>
 <script>
 import { mapActions, mapMutations } from "vuex";
+import { locFnUploadFile } from "@/extend";
 export default {
     data() {
         return {
@@ -188,13 +198,11 @@ export default {
             usernm: "",
             usercomp: "",
             userintro: "df",
-            userthumb: null
+            pf_file_target: null,
+            fakFile_txt:'파일을 등록해주세요.',
         };
     },
     methods: {
-        fileUpload(event) {
-            this.userthumb = event.target;
-        },
         ...mapActions(["fnUserCreate", "fnUserFileUpload"]),
         ...mapMutations(["geUserDetailView"]),
         register() {
@@ -202,7 +210,7 @@ export default {
                 !this.userid ||
                 !this.userpw ||
                 !this.usernm ||
-                !this.userthumb ||
+                !this.pf_file_target ||
                 !this.userintro||
                 !this.user_skills_model.length
             ) {
@@ -216,7 +224,7 @@ export default {
             let userinfo = {
                 userid: this.userid,
                 usernm: this.usernm,
-                userthumb: this.userthumb,
+                userthumb: this.pf_file_target,
                 usercomp: this.usercomp,
                 userpw: this.userpw,
                 userintro: this.userintro,
@@ -225,6 +233,7 @@ export default {
             };
             this.fnUserCreate(userinfo);
         }
-    }
+    },
+    mixins:[locFnUploadFile]
 };
 </script>
