@@ -4,7 +4,7 @@
             <div class="cmmRibBar tp0">
                 <div class="cmmItemsWrap slick">
                     <ItemSort
-                        v-if="comp_data_slide"
+                        v-if="comp_data_slide && mainBestView"
                         :sortitems="comp_data_slide"
                         :sort="`f`"
                         :limit_length="7"
@@ -19,7 +19,7 @@
                 <div class="cmmItemsWrap">
                     <ItemSort
                         :allitems="true"
-                        v-if="comp_data"
+                        v-if="comp_data && mainItemsView"
                         :sortitems="comp_data"
                     ></ItemSort>
                 </div>
@@ -33,6 +33,12 @@ import ItemSort from "@/components/ItemSort";
 import { mapActions, mapMutations, mapState } from "vuex";
 import { watch } from "fs";
 export default {
+    data(){
+        return {
+            mainBestView : false,
+            mainItemsView : false,
+        }
+    },
     computed: {
         ...mapState(["data", "main_best"]),
         comp_data_slide() {
@@ -48,6 +54,11 @@ export default {
     created() {
         this.locFnGetAllCollection();
     },
+    watch:{
+        $route(){
+            this.locFnGetAllCollection();
+        }
+    },
     mounted() {},
     methods: {
         ...mapActions(["fnGetAllCollection"]),
@@ -60,6 +71,7 @@ export default {
                     k: "data",
                     v: res
                 });
+                this.mainItemsView = true
                 this.geIsLoading(false);
             });
             this.fnGetAllCollection(res => {
@@ -67,9 +79,14 @@ export default {
                     k: "main_best",
                     v: res
                 });
+                this.mainBestView = true
                 this.geIsLoading(false);
             });
         }
+    },
+    destroyed(){
+        this.mainBestView = false
+        this.mainItemsView = false
     }
 };
 </script>

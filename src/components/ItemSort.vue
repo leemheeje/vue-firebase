@@ -61,7 +61,7 @@ import Slick from "vue-slick";
 import Item from "@/components/Item";
 import { mapState, mapMutations } from "vuex";
 export default {
-    props: ['sortitems',"allitems", "sort", "limit_length", "slick", "no_btn"],
+    props: ["sortitems", "allitems", "sort", "limit_length", "slick", "no_btn"],
     data() {
         return {
             sortdata: null,
@@ -113,13 +113,17 @@ export default {
         let g_ar = this.compSortitems;
 
         this.sortdata = g_ar;
+        console.log(this.sort);
+        
         if (this.sort) s = this.sort;
+        console.log(g_ar);
+
         this.locFnSort(s);
     },
     computed: {
         ...mapState(["data", "guest"]),
         compSortitems() {
-            return this.sortitems
+            return this.sortitems;
         }
     },
     methods: {
@@ -140,11 +144,16 @@ export default {
                     t = "item_comment";
                     txt = "댓글순";
                     break;
+                case "n":
+                    t = "item_create_date";
+                    txt = "최신순";
+                    break;
                 default:
                     t = "item_create_date";
                     txt = "최신순";
             }
             if (t) {
+
                 this.sortdata = this.locFnSortApply(t);
                 this.sortbtn_class = s;
                 this.vTxt = txt;

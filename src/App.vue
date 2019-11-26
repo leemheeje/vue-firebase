@@ -82,13 +82,6 @@ export default {
             setTimeout(() => this.geIsLoading(false), 500);
         }
     },
-    watch: {
-        $route() {
-            if (this.isAuth) {
-                this.fnSignInCallBack();
-            }
-        }
-    },
     methods: {
         ...mapActions(["fnSignInCallBack"]),
         ...mapMutations(["geIsLoading", "geCmmPayload"])

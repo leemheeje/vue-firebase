@@ -31,7 +31,7 @@
             </div>
 
             <div class="cmmItemsWrap">
-                <ItemSort v-if="guest.useritems" :sortitems="guest.useritems"></ItemSort>
+                <ItemSort v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems"></ItemSort>
             </div>
         </div>
         <router-link
@@ -48,7 +48,8 @@ import ItemSort from "@/components/ItemSort";
 export default {
     data() {
         return {
-            stateSelector: null
+            stateSelector: null,
+            mypageItemView: false,
         };
     },
     computed: {
@@ -66,22 +67,27 @@ export default {
     },
     watch: {
         $route() {
-            this.fnGetUserInfo(this.params_uid);
+            this.locFnGetAllCollection();
         }
     },
     methods: {
         ...mapActions(["fnGetUserInfo", "fnGetAllCollection"]),
         ...mapMutations(["geCmmPayload", "geIsLoading"]),
         locFnGetAllCollection() {
+            this.geIsLoading(true);
             this.fnGetAllCollection(async res => {
                 this.geCmmPayload({
                     k: "data",
                     v: res
                 });
                 await this.fnGetUserInfo(this.params_uid)
+                this.mypageItemView = true
             });
         }
     },
-    components: { ItemSort }
+    components: { ItemSort },
+    destroyed(){
+        this.mypageItemView = false
+    }
 };
 </script>

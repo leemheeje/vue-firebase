@@ -43,6 +43,7 @@ Vue.config.productionTip = false
 Vue.prototype.$firebase = firebase;
 Vue.prototype.$isMobile = isMobile;
 Vue.prototype.$Ui = ui_conf;
+Vue.prototype.$provider = new firebase.auth.GoogleAuthProvider();;
 Vue.prototype.$firestore = firebase.firestore();
 Vue.prototype.$storage = firebase.storage();
 Vue.prototype.$current_date = date();

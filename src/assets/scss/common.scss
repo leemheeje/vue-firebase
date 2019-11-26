@@ -42,6 +42,11 @@ body {
 
 
 .btns.block{display: block;}
+.btns.gray1{background: #4285f4; border-radius: 3px; color: #fff;}
+.btns.snslogin{position: relative; padding: 0 50px;}
+.btns.snslogin .ico{position: absolute; width: 44px; left: 3px; top: 50%; transform: translateY(-50%); background: #fff; border-radius: 3px; height: calc(100% - 6px);}
+.btns.snslogin .ico i{color: #e93d2f; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);}
+.btns.snslogin .ico i.google:after{content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat url(../images/common/ico_google.png) center center; background-size: 17px;}
 .btns.init{
     min-width: 0;
     padding: 0;
