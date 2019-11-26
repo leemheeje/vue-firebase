@@ -63,7 +63,6 @@ export default {
     },
     created() {
         this.locFnGetAllCollection();
-        this.fnGetUserInfo(this.params_uid);
     },
     watch: {
         $route() {
@@ -74,11 +73,12 @@ export default {
         ...mapActions(["fnGetUserInfo", "fnGetAllCollection"]),
         ...mapMutations(["geCmmPayload", "geIsLoading"]),
         locFnGetAllCollection() {
-            this.fnGetAllCollection(res => {
+            this.fnGetAllCollection(async res => {
                 this.geCmmPayload({
                     k: "data",
                     v: res
                 });
+                await this.fnGetUserInfo(this.params_uid)
             });
         }
     },

@@ -129,8 +129,15 @@ export const actions = {
 	fnSignInCallBack: ({
 		commit
 	}, callback) => {
+		//vue.prototype.$firebase.auth().setPersistence(vue.prototype.$firebase.auth.Auth.Persistence.LOCAL)
 		vue.prototype.$firebase.auth().onAuthStateChanged(user => {
+			console.log('onAuthStateChanged');
+			
 			if (user) {
+				commit('geCmmPayload', {
+					k: 'isAuth',
+					v: true
+				})
 				vue.prototype.$firestore.collection("userinfo").doc(user.uid).get().then(res => {
 					commit('geSignIn', {
 						uid: user.uid,
@@ -159,6 +166,7 @@ export const actions = {
 		state
 	}, payload) => {
 		commit('geIsLoading', true);
+
 		vue.prototype.$firestore.collection("userinfo").doc(payload).get().then(res => {
 			let data = res.data()
 			let useritems = []
@@ -167,6 +175,7 @@ export const actions = {
 					useritems.push(data.useritems[k])
 				}
 			}
+
 			commit('geCmmPayload', {
 				k: 'guest',
 				v: {

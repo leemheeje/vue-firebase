@@ -5,7 +5,7 @@ export const mutations = {
 	geCmmPayload: (state, payload) => {
 		state[payload.k] = payload.v
 		if (payload.storage) {
-			localStorage.setItem(payload.k, payload.v)
+			//localStorage.setItem(payload.k, payload.v)
 		}
 	},
 	geGuestUserItem: (state, payload) => {
@@ -25,13 +25,13 @@ export const mutations = {
 	geSignIn: (state, payload) => {
 		state.isAuth = true
 		state.user = payload
-		localStorage.setItem('access-token', payload.uid)
+		//localStorage.setItem('access-token', payload.uid)
 		if (typeof payload === 'function') payload.callback()
 	},
 	geSignOut: state => {
 		state.isAuth = false
 		state.user = {}
-		localStorage.removeItem('access-token')
+		//localStorage.removeItem('access-token')
 		router.push({
 			name: 'main'
 		})

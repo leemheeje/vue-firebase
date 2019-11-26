@@ -2,7 +2,7 @@
     <div class="navibar">
         <div class="innerWrap">
             <div class="ltbox">
-                <btn href="javascript:;" class="init menubtn" v-if="isMain">
+                <btn href="javascript:;" class="init menubtn" v-if="isMain" style="display: none;">
                     <i class="fas fa-align-left"></i>
                 </btn>
                 <btn href="javascript:;" @eventBus_click="fnBackBtn" class="init menubtn" v-else>

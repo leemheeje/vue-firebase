@@ -30,7 +30,7 @@
                                 <span class="lb required">이미지등록</span>
                                 <div class="cmmInputFile fakFile" >
                                     <div class="ip">
-                                        <input  type="file" @change="locFnUploadFile" multiple id="clientInfoSubmit" style="display: none;" accept="image/*"/>
+                                        <input  type="file" @change="locFnUploadFile" multiple="multiple" id="clientInfoSubmit" style="display: none;" accept="image/*"/>
                                         <span class="fkf_input">{{fakFile_txt}}<small class="ML10 colorGray" >{{fakFile_txt_ant}}</small></span>
                                     </div>
                                     <label for="clientInfoSubmit" class="btns blue">파일첨부</label>									

@@ -157,7 +157,7 @@ body {
 .modalItemView .modalItemCloseBtn{position: absolute; left: 0; top: 0; width: 54px; text-align: center;}
 .modalItemView .modalItemCloseBtn i{line-height: 60px; color: #555; display: block; font-size: 14px;}
 .modalItemView .modalItemFavoritBtn{position: absolute; right: 0; top: 0; width: 54px; height: 60px; text-align: center;}
-.modalItemView .modalItemFavoritBtn i{line-height: 60px; color: $primary; display: block; font-size: 14px; position: relative; z-index: 1;}
+.modalItemView .modalItemFavoritBtn i{color: $primary; font-size: 14px; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);}
 .modalItemView .modalItemFavoritBtn .cir{width: 40px; height: 40px; border-radius: 50%; background-color: #fff; display: inline-block; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border: 1px solid $primary;}
 .modalItemView .modalItemFavoritBtn.disabled .cir{background-color: $gray1; border-color: #fff;}
 .modalItemView .modalItemFavoritBtn.active .cir{background-color: $primary2; border-color: #fff;}

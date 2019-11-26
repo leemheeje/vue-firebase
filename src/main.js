@@ -2,8 +2,8 @@ import '@/assets/scss/common.scss'
 import Vue from 'vue'
 import App from '@/App.vue'
 import axios from 'axios'
-import router from '@/router'
 import store from '@/store'
+import router from '@/router'
 import {
   Msg
 } from '@/msg'
@@ -80,6 +80,12 @@ Vue.component('fileupload', FileUpload)
 Vue.filter('filter_ellipsis', (s, n) => {
   return s;
 })
+// Vue.prototype.$firebase.auth().setPersistence(Vue.prototype.$firebase.auth.Auth.Persistence.LOCAL).then(()=>{
+//   console.log(Vue.prototype.$firebase.auth().currentUser);
+
+//   //store.dispatch('fnSignInCallBack')
+// })
+
 Vue.filter('date_format', (s, format) => {
   //@params = ex > 20191104
   let regexp = /([0-9]{4})([0-9]{2})([0-9]{2})/i
@@ -150,8 +156,14 @@ Vue.filter('date_after_day', s => {
   }
   return `${t}${st}`;
 })
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+
+Vue.prototype.$firebase.auth().onAuthStateChanged(async res => {
+  if (res) {
+    await store.dispatch('fnSignInCallBack')
+  }
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
+})

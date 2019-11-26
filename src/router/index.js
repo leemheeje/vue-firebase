@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 Vue.use(VueRouter)
-const isAuth = (to, from, next) => {
-  if (!localStorage.getItem('access-token')) {
+const isAuth = async (to, from, next) => {
+  if (!store.state.isAuth) {
     alert('로그인이 필요합니다.')
     next({
       name: 'login'
@@ -13,7 +13,7 @@ const isAuth = (to, from, next) => {
   next();
 }
 const unAuth = (to, from, next) => {
-  if (localStorage.getItem('access-token')) {
+  if (store.state.isAuth) {
     alert('이미 로그인 되어있습니다.')
     next({
       name: 'main'
@@ -23,8 +23,8 @@ const unAuth = (to, from, next) => {
   next();
 }
 const afterEach = ((to, from) => {})
-const beforeEach = ((to, from,next) => {
-  store.commit('geUserDetailView' , false)
+const beforeEach = ((to, from, next) => {
+  store.commit('geUserDetailView', false)
   next()
 })
 const routes = [{
@@ -35,33 +35,35 @@ const routes = [{
     path: '/',
     name: 'main',
     component: () => import('@/views/Main'),
+    //beforeEnter: isAuth,
   },
   {
     path: '',
     name: 'members',
     component: () => import('@/views/members/Members'),
     children: [{
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/members/Login'),
-      beforeEnter: unAuth,
-    }, {
-      path: '/register',
-      name: 'register',
-      component: () => import('@/views/members/Register'),
-      beforeEnter: unAuth,
-    }, {
-      path: '/mypage/:uid',
-      name: 'mypage',
-      component: () => import('@/views/members/Mypage'),
-      //beforeEnter: isAuth
-    },
-    {
-      path: '/create/:uid',
-      name: 'create',
-      component: () => import('@/views/members/Create'),
-      beforeEnter: isAuth
-    }]
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/members/Login'),
+        beforeEnter: unAuth,
+      }, {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/views/members/Register'),
+        beforeEnter: unAuth,
+      }, {
+        path: '/mypage/:uid',
+        name: 'mypage',
+        component: () => import('@/views/members/Mypage'),
+        // beforeEnter: isAuth
+      },
+      {
+        path: '/create/:uid',
+        name: 'create',
+        component: () => import('@/views/members/Create'),
+        beforeEnter: isAuth
+      }
+    ]
   }
 ]
 
