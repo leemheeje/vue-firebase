@@ -121,14 +121,16 @@ export default {
                 this.sortdata = this.locFnSortApply(t);
                 this.sortbtn_class = s;
                 this.vTxt = txt;
+                
                 if (this.allitems) {
                     this.geCmmPayload({
                         k: "data",
                         v: this.sortdata
                     });
                 } else {
-                    this.geGuestUserItem(this.sortdata);
+                    this.geGuestUserItem(this.compSortitems);
                 }
+                
             }
         },
         locFnSortApply(l) {

@@ -43,10 +43,12 @@ body {
 
 .btns.block{display: block;}
 .btns.gray1{background: #4285f4; border-radius: 3px; color: #fff;}
-.btns.snslogin{position: relative; padding: 0 50px;}
+.btns.gray1.tp2{background: #5070a9; border-radius: 3px; color: #fff;}
+.btns.snslogin{position: relative; padding-left: 50px; padding-right: 0; font-size: 15px;;}
 .btns.snslogin .ico{position: absolute; width: 44px; left: 3px; top: 50%; transform: translateY(-50%); background: #fff; border-radius: 3px; height: calc(100% - 6px);}
 .btns.snslogin .ico i{color: #e93d2f; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);}
 .btns.snslogin .ico i.google:after{content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat url(../images/common/ico_google.png) center center; background-size: 17px;}
+.btns.snslogin .ico i.facebook:after{content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat url(../images/common/ico_facebook.png) center center; background-size: 10px;}
 .btns.init{
     min-width: 0;
     padding: 0;
@@ -89,6 +91,11 @@ body {
 .mainWrap .mainAside{font-size: 16px; position: absolute; right: 15px; top: 20px; width: 385px;  }
 .mainWrap .mainAside .mainAsideInner{background-color: #ffe1a4; min-height: 300px; border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,.1);}
 .mainWrap .cmmTit.sm{padding-left: 20px;}
+
+
+.loginArea{}
+.loginArea .snsWrap{}
+
 
 .cmmItemsWrap{}
 .cmmItemsWrap .items{display: block;}

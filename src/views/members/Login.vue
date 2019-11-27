@@ -4,6 +4,22 @@
         <div class="row">
             <div class="col12 TXTC">
                 <div class="loginArea">
+                    <div class="row MT30 MB20">
+                        <div class="col col6">
+                            <btn class="block gray1 snslogin MMB10" @eventBus_click="locFnSnsLogin('g')">
+                                <span class="ico">
+                                <i class="icos google"></i>
+                            </span> Sign in with Google
+                            </btn>
+                        </div>
+                        <div class="col col6">
+                            <btn class="block gray1 snslogin tp2" @eventBus_click="locFnSnsLogin('f')">
+                                <span class="ico">
+                                <i class="icos facebook"></i>
+                            </span> Sign in with Facebook
+                            </btn>
+                        </div>
+                    </div>
                     <roundbox>
                         <forminput id="userid" label="이메일" @eventBus_keyup_enter="login" v-model="userid" type="text"></forminput>
                         <forminput id="userpw" class="" label="비밀번호" @eventBus_keyup_enter="login" v-model="userpw" type="password"></forminput>
@@ -13,11 +29,7 @@
                             <router-link :to="{ name: 'main' }" class="btns outline md ML10">홈으로</router-link>
                         </div>
                     </roundbox>
-                    <btn class="block gray1 snslogin MT10" @eventBus_click="google">
-                        <span class="ico">
-                                <i class="icos google"></i>
-                            </span> Sign in with Google
-                    </btn>
+
                 </div>
             </div>
         </div>
@@ -45,22 +57,37 @@ export default {
                 userpw: this.userpw
             });
         },
-        google() {
-            this.$firebase.auth().signInWithPopup(this.$provider).then(res => {
+        locFnSnsLogin(n) {
+            let provider = ''
+            switch (n) {
+                case 'g':
+                    provider = this.$provider_google
+                    break;
+                case 'f':
+                    provider = this.$provider_facebook
+                    break;
+            }
+            if (!provider) return this.$Ui.alert('provider 올바르지않습니다')
+            this.$firebase.auth().signInWithPopup(provider).then(async res => {
                 this.$Ui.alert(this.$Msg.error.msg2);
                 console.log(res);
-
-                this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                let isUserItems = false
+                await this.$firestore.collection("userinfo").doc(res.user.uid).get().then(userinfo => {
+                    if (Object.keys(userinfo.data().useritems).length) {
+                        isUserItems = userinfo.data().useritems
+                    }
+                })
+                await this.$firestore.collection("userinfo").doc(res.user.uid).set({
                     userid: res.user.email,
                     usernm: res.user.displayName,
                     userthumb: res.user.photoURL,
-                    useritems: {}
+                    useritems: isUserItems ? isUserItems : {}
                 });
                 this.$router.push({
                     name: "main"
                 });
             });
-        }
+        },
     }
 };
 </script>

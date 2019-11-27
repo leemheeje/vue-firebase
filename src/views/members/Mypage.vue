@@ -30,8 +30,7 @@
             <ItemSort v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems"></ItemSort>
         </div>
     </div>
-    <router-link :to="{ name: 'create', params: user.uid }" v-if="isAuth && user.uid == $route.params.uid" class="animated bounceIn btnCreate"><i class="fas fa-plus"></i
-        ></router-link>
+    <router-link :to="{ name: 'create', params: user.uid }" v-if="isAuth && user.uid == $route.params.uid" class="animated bounceIn btnCreate"><i class="fas fa-plus"></i></router-link>
     </div>
 </template>
 <script>

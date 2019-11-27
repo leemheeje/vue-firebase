@@ -5,6 +5,7 @@ const FnExtends = {
 			userMypageView() {
 				if (this.userDetailView.modalDetailViewShow) {
 					this.geUserDetailView(false)
+					this.geIsLoading(true)
 					setTimeout(() => {
 						this.$router.push({
 							name: 'mypage',

@@ -90,7 +90,7 @@ export default {
         },
     },
     methods: {
-        ...mapMutations(["geUserDetailView"]),
+        ...mapMutations(["geUserDetailView",'geIsLoading']),
         ...mapActions(["fnUpdateUserItemInfo", "fnOnceAllitemUpdate"]),
         itemDetailView(s) {
             let chkFavorite = () => {

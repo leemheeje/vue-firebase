@@ -284,7 +284,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["geUserDetailView", "geOnceAllitemUpdate"]),
+        ...mapMutations(["geUserDetailView", "geOnceAllitemUpdate",'geIsLoading']),
         ...mapActions(["fnOnceAllitemUpdate", "fnOnceAllitemInComment"]),
         login() {
             this.geUserDetailView(false);
