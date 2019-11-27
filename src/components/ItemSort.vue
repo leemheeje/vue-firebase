@@ -134,7 +134,7 @@ export default {
             }
         },
         locFnSortApply(l) {
-            let ar = this.sortdata.sort((a, b) => {
+            let ar = this.compSortitems.sort((a, b) => {
                 if (a[l] > b[l]) {
                     return -1;
                 }
