@@ -143,7 +143,7 @@ export const actions = {
 						uid: user.uid,
 						name: user.displayName,
 						email: user.email,
-						thumb: res.data().userthumb,
+						thumb: res.data().photoURL? res.data().photoURL :res.data().userthumb,
 					})
 					if (typeof callback === 'function') callback();
 					commit('geIsLoading', false);

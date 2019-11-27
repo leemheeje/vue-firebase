@@ -48,7 +48,17 @@ export default {
         google() {
             this.$firebase.auth().signInWithPopup(this.$provider).then(res => {
                 this.$Ui.alert(this.$Msg.error.msg2);
-                this.$router.push({ name: "main" });
+                console.log(res);
+
+                this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                    userid: res.user.email,
+                    usernm: res.user.displayName,
+                    userthumb: res.user.photoURL,
+                    useritems: {}
+                });
+                this.$router.push({
+                    name: "main"
+                });
             });
         }
     }

@@ -15,16 +15,6 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
 ## 파이어베이스 컨피그 생성
 ```
 프로젝트 root에 'firebaseConfig.js' 파일 생성 후
