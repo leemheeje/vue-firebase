@@ -1,31 +1,19 @@
 <template>
-    <div class="container">
-        <div class="mainWrap">
-            <div class="cmmRibBar tp0">
-                <div class="cmmItemsWrap slick">
-                    <ItemSort
-                        v-if="comp_data_slide && mainBestView"
-                        :sortitems="comp_data_slide"
-                        :sort="`f`"
-                        :limit_length="7"
-                        :slick="true"
-                        :no_btn="true"
-                        :allitems="false"
-                    ></ItemSort>
-                </div>
+<div class="container">
+    <div class="mainWrap">
+        <div class="cmmRibBar tp0">
+            <div class="cmmItemsWrap slick">
+                <ItemSort v-if="comp_data_slide && mainBestView" :sortitems="comp_data_slide" :sort="`f`" :limit_length="7" :slick="true" :no_btn="true" :allitems="false"></ItemSort>
             </div>
-            <div class="innerWrap">
-                <div class="cmmTit sm MT40 MMB20">All Items</div>
-                <div class="cmmItemsWrap">
-                    <ItemSort
-                        :allitems="true"
-                        v-if="comp_data && mainItemsView"
-                        :sortitems="comp_data"
-                    ></ItemSort>
-                </div>
+        </div>
+        <div class="innerWrap">
+            <div class="cmmTit sm MT40 MMB20">All Items</div>
+            <div class="cmmItemsWrap">
+                <ItemSort :allitems="true" v-if="comp_data && mainItemsView" :sortitems="comp_data"></ItemSort>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -33,10 +21,10 @@ import ItemSort from "@/components/ItemSort";
 import { mapActions, mapMutations, mapState } from "vuex";
 import { watch } from "fs";
 export default {
-    data(){
+    data() {
         return {
-            mainBestView : false,
-            mainItemsView : false,
+            mainBestView: false,
+            mainItemsView: false,
         }
     },
     computed: {
@@ -54,8 +42,8 @@ export default {
     created() {
         this.locFnGetAllCollection();
     },
-    watch:{
-        $route(){
+    watch: {
+        $route() {
             this.locFnGetAllCollection();
         }
     },
@@ -84,7 +72,7 @@ export default {
             });
         }
     },
-    destroyed(){
+    destroyed() {
         this.mainBestView = false
         this.mainItemsView = false
     }

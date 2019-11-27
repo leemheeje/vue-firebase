@@ -1,11 +1,7 @@
 <template>
-    <transition
-        name="slide2"
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
-    >
-        <router-view />
-    </transition>
+<transition name="slide2" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <router-view />
+</transition>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";

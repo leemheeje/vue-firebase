@@ -1,60 +1,25 @@
 <template>
-    <div class="cmmSortWrap">
-        <div class="btnsWrap" v-if="!no_btn">
-            <div class="cmmSelect">
-                <select @change="locFnSortSelect">
+<div class="cmmSortWrap">
+    <div class="btnsWrap" v-if="!no_btn">
+        <div class="cmmSelect">
+            <select @change="locFnSortSelect">
                     <option value="n">최신순</option>
                     <option value="v">조회순</option>
                     <option value="f">좋아요순</option>
                     <option value="c">댓글순</option>
                 </select>
-                <span class="vTxt">{{ vTxt }}</span>
-            </div>
-            <btn
-                href="javascript:;"
-                ref="sortbtn"
-                @eventBus_click="locFnSort(`n`)"
-                :class="`green sm ${sortbtn_class == 'n' ? '' : 'outline'}`"
-                >최신순</btn
-            >
-            <btn
-                href="javascript:;"
-                ref="sortbtn"
-                @eventBus_click="locFnSort(`v`)"
-                :class="`green sm ${sortbtn_class == 'v' ? '' : 'outline'}`"
-                >조회순</btn
-            >
-            <btn
-                href="javascript:;"
-                ref="sortbtn"
-                @eventBus_click="locFnSort(`f`)"
-                :class="`green sm ${sortbtn_class == 'f' ? '' : 'outline'}`"
-                >좋아요순</btn
-            >
-            <btn
-                href="javascript:;"
-                ref="sortbtn"
-                @eventBus_click="locFnSort(`c`)"
-                :class="`green sm ${sortbtn_class == 'c' ? '' : 'outline'}`"
-                >댓글순</btn
-            >
+            <span class="vTxt">{{ vTxt }}</span>
         </div>
-        <Slick ref="slick" :options="slickOptions" v-if="slick">
-            <Item
-                :item_user_uid="key.item_user_uid"
-                :item_id="key.item_id"
-                v-for="(key, index) in compSortitems"
-                :key="index"
-            ></Item>
-        </Slick>
-        <Item
-            :item_user_uid="key.item_user_uid"
-            :item_id="key.item_id"
-            v-for="(key, index) in compSortitems"
-            :key="index"
-            v-else
-        ></Item>
+        <btn href="javascript:;" ref="sortbtn" @eventBus_click="locFnSort(`n`)" :class="`green sm ${sortbtn_class == 'n' ? '' : 'outline'}`">최신순</btn>
+        <btn href="javascript:;" ref="sortbtn" @eventBus_click="locFnSort(`v`)" :class="`green sm ${sortbtn_class == 'v' ? '' : 'outline'}`">조회순</btn>
+        <btn href="javascript:;" ref="sortbtn" @eventBus_click="locFnSort(`f`)" :class="`green sm ${sortbtn_class == 'f' ? '' : 'outline'}`">좋아요순</btn>
+        <btn href="javascript:;" ref="sortbtn" @eventBus_click="locFnSort(`c`)" :class="`green sm ${sortbtn_class == 'c' ? '' : 'outline'}`">댓글순</btn>
     </div>
+    <Slick ref="slick" :options="slickOptions" v-if="slick">
+        <Item :item_user_uid="key.item_user_uid" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index"></Item>
+    </Slick>
+    <Item :item_user_uid="key.item_user_uid" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index" v-else></Item>
+</div>
 </template>
 <script>
 import Slick from "vue-slick";
@@ -72,8 +37,7 @@ export default {
                 dots: true,
                 autoplay: true,
                 autoplaySpeed: 3000,
-                responsive: [
-                    {
+                responsive: [{
                         breakpoint: 2561,
                         settings: {
                             slidesToShow: 5,
@@ -114,7 +78,7 @@ export default {
 
         this.sortdata = g_ar;
         console.log(this.sort);
-        
+
         if (this.sort) s = this.sort;
         console.log(g_ar);
 

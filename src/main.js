@@ -113,7 +113,7 @@ Vue.filter('date_after_day', s => {
   if (mi.length == 1 || mi.length == 2) {
     t = `1`
   } else if (mi.length % 2 == 0) {
-    t = `${smi[0]+smi[1]}`
+    t = `${smi[0] + smi[1]}`
   } else {
     t = `${smi[0]}`
   }

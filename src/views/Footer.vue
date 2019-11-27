@@ -1,204 +1,134 @@
 <template>
-    <div class="footer">
-        <modal
-            :show="userDetailView.modalDetailViewShow"
-            v-slot:itemsDetailView
-        >
-            <div class="modalItemView">
-                <div class="hdtop">
-                    <a
-                        href="javascript:;"
-                        @click.prevent="geUserDetailView(false)"
-                        class="modalItemCloseBtn"
-                    >
+<div class="footer">
+    <modal :show="userDetailView.modalDetailViewShow" v-slot:itemsDetailView>
+        <div class="modalItemView">
+            <div class="hdtop">
+                <a href="javascript:;" @click.prevent="geUserDetailView(false)" class="modalItemCloseBtn">
                         <i class="fas fa-chevron-down"></i>
                     </a>
-                    <div class="tit">아이템 상세보기</div>
-                    <btn
-                        href="javascript:;"
-                        class="init modalItemFavoritBtn"
-                        :class="
+                <div class="tit">아이템 상세보기</div>
+                <btn href="javascript:;" class="init modalItemFavoritBtn" :class="
                             !isAuth
                                 ? 'disabled'
                                 : userDetailView.isItemFavorit
                                 ? 'active'
                                 : ''
-                        "
-                        @eventBus_click="locAddFaviorit"
-                    >
-                        <span class="cir"> </span>
-                        <i class="fas fa-thumbs-up"></i>
-                    </btn>
-                </div>
-                <div class="hdcont">
-                    <div class="txts">
-                        <a
-                            href="javascript:;"
-                            @click="userMypageView"
-                            class="txtop"
-                        >
-                            <div
-                                class="u_thub"
-                                :style="
+                        " @eventBus_click="locAddFaviorit">
+                    <span class="cir"> </span>
+                    <i class="fas fa-thumbs-up"></i>
+                </btn>
+            </div>
+            <div class="hdcont">
+                <div class="txts">
+                    <a href="javascript:;" @click="userMypageView" class="txtop">
+                        <div class="u_thub" :style="
                                     `background-image: url(${items.item_user_thumb});`
-                                "
-                            ></div>
-                            <span class="tt">{{ items.item_title }}</span>
-                            <span class="st">{{ items.item_intro }}</span>
-                            <span class="sts">{{ items.item_user_nm }}</span>
-                            <span class="et">{{ items.item_user_email }}</span>
-                            <span class="dt">{{
+                                "></div>
+                        <span class="tt">{{ items.item_title }}</span>
+                        <span class="st">{{ items.item_intro }}</span>
+                        <span class="sts">{{ items.item_user_nm }}</span>
+                        <span class="et">{{ items.item_user_email }}</span>
+                        <span class="dt">{{
                                 items.item_create_date | date_after_day
                             }}</span>
-                        </a>
-                    </div>
-                    <div class="deFov"></div>
-                    <div class="deVisual">
-                        <div class="cmmRibBar">
-                            <Slick
-                                ref="userInfoSlick"
-                                class="slick"
-                                :options="slickOptions"
-                                v-if="
+                    </a>
+                </div>
+                <div class="deFov"></div>
+                <div class="deVisual">
+                    <div class="cmmRibBar">
+                        <Slick ref="userInfoSlick" class="slick" :options="slickOptions" v-if="
                                     items.item_thumb &&
                                         items.item_thumb.length > 1
-                                "
-                            >
-                                <div
-                                    class="img"
-                                    v-for="(k, i) in items.item_thumb"
-                                    :key="i"
-                                >
-                                    <span class="VALIGN"></span>
-                                    <a :href="k" target="_blank"><img :src="k" alt="" @click="locFnFullView(k)" /></a>
-                                </div>
-                            </Slick>
-                            <div class="img only" v-else>
+                                ">
+                            <div class="img" v-for="(k, i) in items.item_thumb" :key="i">
                                 <span class="VALIGN"></span>
-                                <a :href="items.item_thumb" target="_blank"><img :src="items.item_thumb" alt="" @click="locFnFullView(items.item_thumb)"/></a>
+                                <a :href="k" target="_blank"><img :src="k" alt="" @click="locFnFullView(k)" /></a>
                             </div>
-                        </div>
-                        <div class="fblb">
-                            <span class="flb tp0">
-                                <i class="fas fa-eye"></i>
-                                <span class="t">{{ items.item_view }}</span>
-                            </span>
-                            <span class="flb tp1">
-                                <i class="far fa-thumbs-up"></i>
-                                <span class="t">{{ items.item_favorite }}</span>
-                            </span>
-                            <span class="flb tp2">
-                                <i class="fas fa-comment-dots"></i>
-                                <span class="t">{{ items.item_comment }}</span>
-                            </span>
+                        </Slick>
+                        <div class="img only" v-else>
+                            <span class="VALIGN"></span>
+                            <a :href="items.item_thumb" target="_blank"><img :src="items.item_thumb" alt="" @click="locFnFullView(items.item_thumb)"/></a>
                         </div>
                     </div>
-                    <div class="deComt">
-                        <div class="cmmsTit sm">
-                            <i class="fas fa-comment-dots"></i>&nbsp;{{
-                                items.item_comment
-                            }}개의 댓글
-                        </div>
-                        <div
-                            class="commtWrap MT20 MB20"
-                            v-if="items.item_comment_group.length"
-                        >
-                            <div
-                                class="comtItem"
-                                v-for="(k, i) in items.item_comment_group"
-                                :key="i"
-                            >
-                                <router-link
-                                    class="comtThumb"
-                                    :style="`background-image:url(${k.thumb})`"
-                                    :to="{
+                    <div class="fblb">
+                        <span class="flb tp0">
+                                <i class="fas fa-eye"></i>
+                                <span class="t">{{ items.item_view }}</span>
+                        </span>
+                        <span class="flb tp1">
+                                <i class="far fa-thumbs-up"></i>
+                                <span class="t">{{ items.item_favorite }}</span>
+                        </span>
+                        <span class="flb tp2">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="t">{{ items.item_comment }}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="deComt">
+                    <div class="cmmsTit sm">
+                        <i class="fas fa-comment-dots"></i>&nbsp;{{ items.item_comment }}개의 댓글
+                    </div>
+                    <div class="commtWrap MT20 MB20" v-if="items.item_comment_group.length">
+                        <div class="comtItem" v-for="(k, i) in items.item_comment_group" :key="i">
+                            <router-link class="comtThumb" :style="`background-image:url(${k.thumb})`" :to="{
                                         name: 'mypage',
                                         params: { uid: k.uid }
-                                    }"
-                                ></router-link>
-                                <div class="comtTxts">
-                                    <router-link
-                                        class="nm"
-                                        :to="{
+                                    }"></router-link>
+                            <div class="comtTxts">
+                                <router-link class="nm" :to="{
                                             name: 'mypage',
                                             params: { uid: k.uid }
-                                        }"
-                                    >
-                                        {{ k.name }}
-                                        <span class="em">{{ k.email }}</span>
-                                    </router-link>
-                                    <pre class="tt" v-if="!k.comment_modify">{{
+                                        }">
+                                    {{ k.name }}
+                                    <span class="em">{{ k.email }}</span>
+                                </router-link>
+                                <pre class="tt" v-if="!k.comment_modify">{{
                                         k.comment_value
                                     }}</pre>
-                                    <div class="cmModify" v-else>
-                                        <textarea
-                                            class="textarea"
-                                            placeholder="내용을 입력해주세요"
-                                            v-model="comment_value_modify"
-                                        ></textarea>
-                                    </div>
-                                    <div class="dt">
-                                        {{ k.date | date_after_day }}
-                                    </div>
-                                    <div class="btnsWrap">
-                                        <btn
-                                            href="javascript:;"
-                                            class="btns sm green"
-                                            v-if="
+                                <div class="cmModify" v-else>
+                                    <textarea class="textarea" placeholder="내용을 입력해주세요" v-model="comment_value_modify"></textarea>
+                                </div>
+                                <div class="dt">
+                                    {{ k.date | date_after_day }}
+                                </div>
+                                <div class="btnsWrap">
+                                    <btn href="javascript:;" class="btns sm green" v-if="
                                                 k.uid == user.uid &&
                                                     !k.comment_modify
-                                            "
-                                            @eventBus_click="
+                                            " @eventBus_click="
                                                 locModifyComments(
                                                     true,
                                                     k.date,
                                                     k.uid
                                                 )
-                                            "
-                                            >내용 수정하기</btn
-                                        >
-                                        <btn
-                                            href="javascript:;"
-                                            class="btns sm green outline"
-                                            @eventBus_click="
+                                            ">내용 수정하기</btn>
+                                    <btn href="javascript:;" class="btns sm green outline" @eventBus_click="
                                                 locModifyComments(
                                                     false,
                                                     k.date,
                                                     k.uid
                                                 )
-                                            "
-                                            v-if="k.comment_modify"
-                                            >수정 취소하기</btn
-                                        >
-                                        <btn
-                                            href="javascript:;"
-                                            class="btns sm blue"
-                                            v-if="k.comment_modify"
-                                            @eventBus_click="
+                                            " v-if="k.comment_modify">수정 취소하기</btn>
+                                    <btn href="javascript:;" class="btns sm blue" v-if="k.comment_modify" @eventBus_click="
                                                 locUpdateComments(
                                                     true,
                                                     k.date,
                                                     k.uid
                                                 )
-                                            "
-                                            >수정내용 적용하기</btn
-                                        >
-                                        <btn
-                                            href="javascript:;"
-                                            :class="`btns sm blue ${Object.keys(k.comment_reply).length ? 'outline' : ''}`"
-                                            v-if="((items.item_user_uid == user.uid|| replyDisable) && k.email != user.email) && !k.comment_reply_modify"
-                                            @eventBus_click="locReplyComment(
+                                            ">수정내용 적용하기</btn>
+                                    <btn href="javascript:;" :class="`btns sm blue ${Object.keys(k.comment_reply).length ? 'outline' : ''}`" v-if="((items.item_user_uid == user.uid|| replyDisable) && k.email != user.email) && !k.comment_reply_modify" @eventBus_click="locReplyComment(
                                                     true,
                                                     k.date,
                                                     k.uid
-                                                )"
-                                            >
-                                            <template v-if="!Object.keys(k.comment_reply).length">
+                                                )">
+                                        <template v-if="!Object.keys(k.comment_reply).length">
                                                 <span>답변달기</span>
-                                            </template>
-                                            <template v-else>
-                                                <span>답변수정</span>
-                                            </template>
+</template>
+
+<template v-else>
+<span>답변수정</span>
+</template>
                                             </btn>
                                         <btn
                                             href="javascript:;"
@@ -345,7 +275,7 @@ export default {
                     if (this.user.uid != this.item_user_uid) {
                         this.deleteDisable = true;
                         this.replyDisable = true;
-                    }else{
+                    } else {
                         this.deleteDisable = false;
                         this.replyDisable = false;
                     }
@@ -482,7 +412,7 @@ export default {
                 }
             });
         },
-        locUpdateReplyComment(bool, date, uid){
+        locUpdateReplyComment(bool, date, uid) {
             let defaults = {
                 target: "comment",
                 item_id: this.items.item_id,
@@ -490,27 +420,27 @@ export default {
                 date: date,
                 uid: uid
             };
-            if(bool){
+            if (bool) {
                 this.fnOnceAllitemInComment(
                     this.$extend(defaults, {
                         value: {
-                            comment_reply_modify:false,
+                            comment_reply_modify: false,
                             comment_reply: {
-                                name:this.user.name,
-                                email:this.user.email,
-                                thumb:this.user.thumb,
-                                date : this.$current_date_live(new Date()),
-                                uid:this.user.uid,
-                                comment_reply_value : this.comment_reply_value
+                                name: this.user.name,
+                                email: this.user.email,
+                                thumb: this.user.thumb,
+                                date: this.$current_date_live(new Date()),
+                                uid: this.user.uid,
+                                comment_reply_value: this.comment_reply_value
                             }
                         }
                     })
                 );
             }
         },
-        locFnFullView(img){
+        locFnFullView(img) {
             console.log(img);
-            
+
         }
     },
     components: { Slick },

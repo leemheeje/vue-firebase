@@ -1,17 +1,17 @@
 <template>
-  <a :href="href" class="btns" :class="cssClass" :id="id" @click="eventBusClick">
+<a :href="href" class="btns" :class="cssClass" :id="id" @click="eventBusClick">
     <slot></slot>
-  </a>
+</a>
 </template>
 <script>
 export default {
-  props:['href', 'cssClass', 'id', 'isIco'],
-  methods:{
-    eventBusClick(){
-      this.$emit('eventBus_click' , {
-        $el : this.$el
-      });
+    props: ['href', 'cssClass', 'id', 'isIco'],
+    methods: {
+        eventBusClick() {
+            this.$emit('eventBus_click', {
+                $el: this.$el
+            });
+        }
     }
-  }
 };
 </script>

@@ -1,40 +1,25 @@
 <template>
-    <div id="app">
-        <div class="wrap">
-            <div class="vld-parent">
-                <transition name="fade">
-                    <Loading
-                        :active.sync="isLoading"
-                        :opacity="isLoadingStyle.opacity"
-                        :color="isLoadingStyle.color"
-                        :width="isLoadingStyle.width"
-                    >
-                        <slot name="detault">
-                            <i
-                                class="fab fa-meetup animated pulse infinite preloader"
-                            ></i>
-                        </slot>
-                    </Loading>
-                </transition>
-            </div>
-            <Header v-if="currentMembersPage"></Header>
-            <transition
-                name="slide"
-                :enter-active-class="`animated ${transitionDirection.ea}`"
-                :leave-active-class="`animated ${transitionDirection.la}`"
-            >
-                <router-view />
+<div id="app">
+    <div class="wrap">
+        <div class="vld-parent">
+            <transition name="fade">
+                <Loading :active.sync="isLoading" :opacity="isLoadingStyle.opacity" :color="isLoadingStyle.color" :width="isLoadingStyle.width">
+                    <slot name="detault">
+                        <i class="fab fa-meetup animated pulse infinite preloader"></i>
+                    </slot>
+                </Loading>
             </transition>
-            <Footer v-if="currentMembersPage"></Footer>
         </div>
-        <transition
-            name="dimm"
-            enter-active-class="fadeIn"
-            leave-active-class="fadeOut"
-        >
-            <div class="dimm" v-if="userDetailView.modalDetailViewShow"></div>
+        <Header v-if="currentMembersPage"></Header>
+        <transition name="slide" :enter-active-class="`animated ${transitionDirection.ea}`" :leave-active-class="`animated ${transitionDirection.la}`">
+            <router-view />
         </transition>
+        <Footer v-if="currentMembersPage"></Footer>
     </div>
+    <transition name="dimm" enter-active-class="fadeIn" leave-active-class="fadeOut">
+        <div class="dimm" v-if="userDetailView.modalDetailViewShow"></div>
+    </transition>
+</div>
 </template>
 
 <script>
@@ -93,11 +78,13 @@ export default {
     }
 };
 </script>
+
 <style scoped>
 .animated {
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
 }
+
 @media only screen and (min-width: 1301px) {
     .dimm {
         position: fixed;

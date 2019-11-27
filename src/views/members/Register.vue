@@ -1,112 +1,67 @@
 <template>
-    <div class="container">
-        <div class="innerWrap">
-            <roundbox>
-                <div class="cmmTit">회원가입</div>
-                <div class="reserFormArea MT30">
-                    <div class="row">
-                        <div class="col4">
-                            <forminput
-                                label="이메일"
-                                required="true"
-                                v-model="userid"
-                                type="email"
-                            ></forminput>
-                        </div>
-                        <div class="col4 MMT30">
-                            <forminput
-                                label="이름"
-                                required="true"
-                                v-model="usernm"
-                                type="text"
-                            ></forminput>
-                        </div>
+<div class="container">
+    <div class="innerWrap">
+        <roundbox>
+            <div class="cmmTit">회원가입</div>
+            <div class="reserFormArea MT30">
+                <div class="row">
+                    <div class="col4">
+                        <forminput label="이메일" required="true" v-model="userid" type="email"></forminput>
                     </div>
-                    <div class="row MT30">
-                        <div class="col4">
-                            <forminput
-                                label="비밀번호"
-                                required="true"
-                                v-model="userpw"
-                                type="password"
-                            ></forminput>
-                        </div>
-                        <div class="col4 MMT30">
-                            <forminput
-                                label="비밀번호 확인"
-                                required="true"
-                                v-model="userpwcf"
-                                type="password"
-                            ></forminput>
-                        </div>
+                    <div class="col4 MMT30">
+                        <forminput label="이름" required="true" v-model="usernm" type="text"></forminput>
                     </div>
-                    <div class="row MT30">
-                        <div class="col8">
-                            <forminput
-                                label="간략소개"
-                                required="true"
-                                v-model="userintro"
-                                formType="textarea"
-                            ></forminput>
-                        </div>
+                </div>
+                <div class="row MT30">
+                    <div class="col4">
+                        <forminput label="비밀번호" required="true" v-model="userpw" type="password"></forminput>
                     </div>
-                    <div class="row MT30">
-                        <div class="col4">
-                            <div class="cmmInput">
-                                <span class="lb required">대표이미지</span>
-                                <div class="cmmInputFile fakFile" >
-                                    <div class="ip">
-                                        <input @change="locFnUploadFile" type="file" id="clientInfoSubmit" style="display: none;" accept="image/*"/>
-                                        <span class="fkf_input">{{fakFile_txt}}</span>
-                                    </div>
-                                    <label for="clientInfoSubmit" class="btns blue">파일첨부</label>									
+                    <div class="col4 MMT30">
+                        <forminput label="비밀번호 확인" required="true" v-model="userpwcf" type="password"></forminput>
+                    </div>
+                </div>
+                <div class="row MT30">
+                    <div class="col8">
+                        <forminput label="간략소개" required="true" v-model="userintro" formType="textarea"></forminput>
+                    </div>
+                </div>
+                <div class="row MT30">
+                    <div class="col4">
+                        <div class="cmmInput">
+                            <span class="lb required">대표이미지</span>
+                            <div class="cmmInputFile fakFile">
+                                <div class="ip">
+                                    <input @change="locFnUploadFile" type="file" id="clientInfoSubmit" style="display: none;" accept="image/*" />
+                                    <span class="fkf_input">{{fakFile_txt}}</span>
                                 </div>
+                                <label for="clientInfoSubmit" class="btns blue">파일첨부</label>
                             </div>
                         </div>
-                        <div class="col4 MMT30">
-                            <forminput
-                                label="소속/직급"
-                                required="true"
-                                v-model="usercomp"
-                                type="text"
-                            ></forminput>
-                        </div>
                     </div>
-
-                    <div class="cmmsTit MT60 required">관련스킬 <small>(하나이상 선택해주세요.)</small></div>
-                    <div class="row MT30">
-                        <div class="col12">
-
-                            <div
-                                class="cmmInput radiochk meta"
-                                formType="checkbox"
-                                v-for="(k, i) in skills"
-                                :key="i"
-                            >
-                                <input
-                                    type="checkbox"
-                                    :id="`chk${i}`"
-                                    :name="`chk${i}`"
-                                    :value="k"
-                                    v-model="user_skills_model"
-                                />
-                                <label :for="`chk${i}`" class="lb">{{ k }}</label>
-                            </div>
-
-                        </div>
+                    <div class="col4 MMT30">
+                        <forminput label="소속/직급" required="true" v-model="usercomp" type="text"></forminput>
                     </div>
                 </div>
-                <div class="btnsWrap MT50 TXTC">
-                    <btn href="javascript:;" class="blue" @eventBus_click="register">회원가입</btn>
-                    <router-link
-                        :to="{ name: 'main' }"
-                        class="btns outline ML10"
-                        >홈으로</router-link
-                    >
+
+                <div class="cmmsTit MT60 required">관련스킬 <small>(하나이상 선택해주세요.)</small></div>
+                <div class="row MT30">
+                    <div class="col12">
+
+                        <div class="cmmInput radiochk meta" formType="checkbox" v-for="(k, i) in skills" :key="i">
+                            <input type="checkbox" :id="`chk${i}`" :name="`chk${i}`" :value="k" v-model="user_skills_model" />
+                            <label :for="`chk${i}`" class="lb">{{ k }}</label>
+                        </div>
+
+                    </div>
                 </div>
-            </roundbox>
-        </div>
+            </div>
+            <div class="btnsWrap MT50 TXTC">
+                <btn href="javascript:;" class="blue" @eventBus_click="register">회원가입</btn>
+                <router-link :to="{ name: 'main' }" class="btns outline ML10">홈으로</router-link>
+            </div>
+        </roundbox>
     </div>
+</div>
 </template>
 <script>
 import { mapActions, mapMutations } from "vuex";
@@ -199,19 +154,18 @@ export default {
             usercomp: "",
             userintro: "df",
             pf_file_target: null,
-            fakFile_txt:'파일을 등록해주세요.',
+            fakFile_txt: '파일을 등록해주세요.',
         };
     },
     methods: {
         ...mapActions(["fnUserCreate", "fnUserFileUpload"]),
         ...mapMutations(["geUserDetailView"]),
         register() {
-            if (
-                !this.userid ||
+            if (!this.userid ||
                 !this.userpw ||
                 !this.usernm ||
                 !this.pf_file_target ||
-                !this.userintro||
+                !this.userintro ||
                 !this.user_skills_model.length
             ) {
                 alert("회원정보를 입력해주세요");
@@ -234,6 +188,6 @@ export default {
             this.fnUserCreate(userinfo);
         }
     },
-    mixins:[locFnUploadFile]
+    mixins: [locFnUploadFile]
 };
 </script>
