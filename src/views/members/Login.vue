@@ -70,19 +70,27 @@ export default {
             if (!provider) return this.$Ui.alert('provider 올바르지않습니다')
             this.$firebase.auth().signInWithPopup(provider).then(async res => {
                 this.$Ui.alert(this.$Msg.error.msg2);
-                console.log(res);
                 let isUserItems = false
                 await this.$firestore.collection("userinfo").doc(res.user.uid).get().then(userinfo => {
-                    if (Object.keys(userinfo.data().useritems).length) {
-                        isUserItems = userinfo.data().useritems
+                    if (!userinfo.exists) {
+                        this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                            userid: res.user.email,
+                            usernm: res.user.displayName,
+                            userthumb: res.user.photoURL,
+                            useritems: {}
+                        });
+                    } else {
+                        if (typeof userinfo.data().useritems !== 'undifined' && Object.keys(userinfo.data().useritems).length) {
+                            isUserItems = userinfo.data().useritems
+                        }
+                        this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                            userid: res.user.email,
+                            usernm: res.user.displayName,
+                            userthumb: res.user.photoURL,
+                            useritems: isUserItems ? isUserItems : {}
+                        });
                     }
                 })
-                await this.$firestore.collection("userinfo").doc(res.user.uid).set({
-                    userid: res.user.email,
-                    usernm: res.user.displayName,
-                    userthumb: res.user.photoURL,
-                    useritems: isUserItems ? isUserItems : {}
-                });
                 this.$router.push({
                     name: "main"
                 });

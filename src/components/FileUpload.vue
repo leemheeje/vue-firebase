@@ -21,14 +21,11 @@ export default {
          * @return undefined
          */
         inputFile: function(newFile, oldFile) {
-            console.log(123);
 
             if (newFile && oldFile && !newFile.active && oldFile.active) {
                 // Get response data
-                console.log('response', newFile.response)
                 if (newFile.xhr) {
                     //  Get the response status code
-                    console.log('status', newFile.xhr.status)
                 }
             }
         },

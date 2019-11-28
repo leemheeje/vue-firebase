@@ -81,7 +81,6 @@ export default {
                             let res_d = [];
                             this.pt_date = getTime //ymdhm
                             if (d.useritems) {
-                                console.log(this.user.thumb);
 
                                 res_d[`useritems`] = d.useritems;
                                 res_d[`useritems`][`item${getTime}`] = {

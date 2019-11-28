@@ -329,7 +329,7 @@ export default {
             //this.user.uid / 댓글유저 페이지갈때
             //this.comment_value
             if (this.comment_value != "") {
-                this.items.item_comment_group.push({
+                this.items.item_comment_group.unshift({
                     name: this.user.name,
                     email: this.user.email,
                     thumb: this.user.thumb,
@@ -353,7 +353,6 @@ export default {
             }
         },
         locModifyComments(bool, date, uid) {
-            console.log(date, uid);
             //코멘트 그룹 수정
             this.geOnceAllitemUpdate({
                 target: "comment",
@@ -399,7 +398,6 @@ export default {
             this.comment_value_modify = "";
         },
         locReplyComment(bool, date, uid) {
-            console.log(date, uid);
             //코멘트 그룹 수정
             this.geOnceAllitemUpdate({
                 target: "comment",
@@ -439,7 +437,6 @@ export default {
             }
         },
         locFnFullView(img) {
-            console.log(img);
 
         }
     },

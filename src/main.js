@@ -82,17 +82,19 @@ Vue.component('fileupload', FileUpload)
 Vue.filter('filter_ellipsis', (s, n) => {
   return s;
 })
-// Vue.prototype.$firebase.auth().setPersistence(Vue.prototype.$firebase.auth.Auth.Persistence.LOCAL).then(()=>{
-//   console.log(Vue.prototype.$firebase.auth().currentUser);
 
-//   //store.dispatch('fnSignInCallBack')
-// })
-
+Vue.filter('filter_comma', (s, format) => {
+  let str = s.toString();
+	if(str.indexOf(',') != -1 || str.indexOf('원') != -1) {
+		str = str.replace(/[^0-9]/g, '');
+	}
+	let regexp = /\B(?=(\d{3})+(?!\d))/g;
+	return str.toString().replace(regexp, ',');
+})
 Vue.filter('date_format', (s, format) => {
   //@params = ex > 20191104
   let regexp = /([0-9]{4})([0-9]{2})([0-9]{2})/i
   let t = typeof s !== 'string' ? String(s) : s;
-  console.log(t);
 
   let f = format
   if (!f) {
@@ -105,7 +107,6 @@ Vue.filter('date_after_day', s => {
   let gt = String(date('full'))
   let st = ''
   if (isNaN(n) || isNaN(gt)) {
-    //console.log(`-filters 'date_after_day' NaN error`);
     return
   }
   let mi = String(gt - n)

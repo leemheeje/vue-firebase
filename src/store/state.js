@@ -25,6 +25,7 @@ export const state = {
         thumb: '',
         intro: '',
         user_skills_model: '',
+        useritems:[]
     },
     userDetailView:{
         modalDetailViewShow:false,

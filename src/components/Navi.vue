@@ -5,7 +5,7 @@
                 <btn href="javascript:;" class="init menubtn" v-if="isMain" style="display: none;">
                     <i class="fas fa-align-left"></i>
                 </btn>
-                <btn href="javascript:;" @eventBus_click="fnBackBtn" class="init menubtn" v-else>
+                <btn href="javascript:;" @eventBus_click="fnBackBtn" class="init menubtn mobileShow" v-else>
                     <i class="fas fa-chevron-left"></i>
                 </btn>
             </div>
@@ -16,20 +16,28 @@
                 <div class="rtboxin">
                     <template v-if="isAuth">
                         <router-link :to="{name: 'mypage', params:{uid:user.uid}}" href="javascript:;" class="btns init rtbtn tp2" title="마이페이지">
-                           <i class="fas fa-user-circle"></i>
+                           <span class="gnb_thumb" :style="`background-image: url(${user.thumb})`"></span>
+                           <span class="gnb_nm">{{user.name}}</span>
                         </router-link>
                         <btn @eventBus_click="fnSignOut" href="javascript:;" class="init rtbtn tp1" title="로그아웃">
                             <i class="fas fa-sign-out-alt"></i>
+                            <span class="txt mobileHide">로그아웃</span>
                         </btn>
                     </template>
                     <template v-else>
                         <router-link href="javascript:;" :to="{name:'login'}" class="btns init rtbtn tp0" title="로그인">
                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="txt mobileHide">로그인</span>
                         </router-link>
                         <router-link href="javascript:;" :to="{name:'register'}" class="btns init rtbtn tp1" title="회원가입">
                             <i class="fas fa-user-plus"></i>
+                            <span class="txt mobileHide">회원가입</span>
                         </router-link>
                     </template>
+                    <router-link href="javascript:;" :to="{name:'home'}" class="btns init rtbtn tp1 mobileHide" title="홈으로이동">
+                           <i class="fas fa-home"></i>
+                        <span class="txt">홈</span>
+                    </router-link>
                 </div>
             </div>
         </div>

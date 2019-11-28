@@ -22,7 +22,6 @@ export const actions = {
 	},
 	fnUserFileUploadCallback: ({}, payload) => {
 		let snapshot = null
-		console.log(payload);
 
 		payload.task.on('state_changed', snapshot => {
 			snapshot = snapshot
@@ -48,7 +47,6 @@ export const actions = {
 		} = payload;
 
 		vue.prototype.$firebase.auth().createUserWithEmailAndPassword(userid, payload.userpw).then(res => {
-			console.log('이메일 가입 성공 : ', res);
 			res.user.updateProfile({
 				displayName: usernm,
 			}).then(() => {
@@ -58,8 +56,6 @@ export const actions = {
 						payload.userthumb = c;
 						payload.uid = res.user.uid;
 						vue.prototype.$firestore.collection("userinfo").doc(res.user.uid).set(payload);
-						console.log('userName 업데이트 성공')
-						console.log(res);
 						dispatch('fnSignInCallBack', () => {
 							router.push({
 								name: 'main'
@@ -71,7 +67,6 @@ export const actions = {
 				console.error('userName 업데이트 실패 : ', err);
 			})
 		}).catch(err => {
-			console.log(err);
 
 			switch (err.code) {
 				case "auth/email-already-in-use":
@@ -100,7 +95,6 @@ export const actions = {
 			userpw
 		} = payload;
 		vue.prototype.$firebase.auth().signInWithEmailAndPassword(userid, userpw).then(res => {
-			console.log(res);
 			vue.prototype.$Ui.alert(vue.prototype.$Msg.error.msg2)
 			dispatch('fnSignInCallBack', () => {
 				router.push({
@@ -131,7 +125,6 @@ export const actions = {
 	}, callback) => {
 		//vue.prototype.$firebase.auth().setPersistence(vue.prototype.$firebase.auth.Auth.Persistence.LOCAL)
 		vue.prototype.$firebase.auth().onAuthStateChanged(user => {
-			console.log('onAuthStateChanged');
 			
 			if (user) {
 				commit('geCmmPayload', {
@@ -143,7 +136,7 @@ export const actions = {
 						uid: user.uid,
 						name: user.displayName,
 						email: user.email,
-						thumb: res.data().photoURL? res.data().photoURL :res.data().userthumb,
+						thumb: user.photoURL? user.photoURL :res.data().userthumb,
 					})
 					if (typeof callback === 'function') callback();
 					commit('geIsLoading', false);
@@ -188,6 +181,7 @@ export const actions = {
 					useritems: useritems
 				}
 			});
+			
 			commit('geIsLoading', false);
 		});
 	},

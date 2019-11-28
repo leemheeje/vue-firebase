@@ -16,9 +16,9 @@
         <btn href="javascript:;" ref="sortbtn" @eventBus_click="locFnSort(`c`)" :class="`green sm ${sortbtn_class == 'c' ? '' : 'outline'}`">댓글순</btn>
     </div>
     <Slick ref="slick" :options="slickOptions" v-if="slick">
-        <Item :item_user_uid="key.item_user_uid" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index"></Item>
+        <Item :item_user_uid="key.item_user_uid" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index" :isMypage="isMypage"></Item>
     </Slick>
-    <Item :item_user_uid="key.item_user_uid" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index" v-else></Item>
+    <Item :item_user_uid="key.item_user_uid" :isMypage="isMypage" :item_id="key.item_id" v-for="(key, index) in compSortitems" :key="index" v-else></Item>
 </div>
 </template>
 <script>
@@ -26,7 +26,7 @@ import Slick from "vue-slick";
 import Item from "@/components/Item";
 import { mapState, mapMutations } from "vuex";
 export default {
-    props: ["sortitems", "allitems", "sort", "limit_length", "slick", "no_btn"],
+    props: ["sortitems", "allitems", "sort", "limit_length", "slick", "no_btn", 'isMypage'],
     data() {
         return {
             sortdata: null,
@@ -77,10 +77,8 @@ export default {
         let g_ar = this.compSortitems;
 
         this.sortdata = g_ar;
-        console.log(this.sort);
 
         if (this.sort) s = this.sort;
-        console.log(g_ar);
 
         this.locFnSort(s);
     },
@@ -121,7 +119,7 @@ export default {
                 this.sortdata = this.locFnSortApply(t);
                 this.sortbtn_class = s;
                 this.vTxt = txt;
-                
+
                 if (this.allitems) {
                     this.geCmmPayload({
                         k: "data",
@@ -130,7 +128,7 @@ export default {
                 } else {
                     this.geGuestUserItem(this.compSortitems);
                 }
-                
+
             }
         },
         locFnSortApply(l) {
