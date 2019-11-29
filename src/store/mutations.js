@@ -8,8 +8,22 @@ export const mutations = {
 			//localStorage.setItem(payload.k, payload.v)
 		}
 	},
+	geCmmPayload2: (state, payload) => {
+		state[payload.k] = payload.v
+		if (payload.storage) {
+			//localStorage.setItem(payload.k, payload.v)
+		}
+	},
 	geGuestUserItem: (state, payload) => {
-		state.guest.useritems = payload
+		let useritems_sort = payload.sort((a,b)=>{
+			if(a['item_create_date']>b['item_create_date']){
+				return -1
+			}else if(a['item_create_date']<b['item_create_date']){
+				return 1
+			}
+			return 0
+		})
+		state.guest.useritems = useritems_sort
 	},
 	geIsLoading: (state, payload) => {
 		if (typeof payload === 'boolean') {

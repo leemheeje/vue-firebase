@@ -8,6 +8,7 @@ export const actions = {
 		if (payload.data) {
 			pad = payload.data;
 		}
+		
 		let storageRef = vue.prototype.$storage.ref();
 		let files = [] //리스폰스 리턴용
 		for (var i = 0; i < pad.files.length; i++) {
@@ -154,13 +155,13 @@ export const actions = {
 			}).catch(err => {})
 		}
 	},
-	fnGetUserInfo: ({
+	fnGetUserInfo:  async ({
 		commit,
 		state
 	}, payload) => {
 		commit('geIsLoading', true);
-
-		vue.prototype.$firestore.collection("userinfo").doc(payload).get().then(res => {
+		
+		await vue.prototype.$firestore.collection("userinfo").doc(payload).get().then(res => {
 			let data = res.data()
 			let useritems = []
 			for (let k in data.useritems) {
@@ -168,7 +169,6 @@ export const actions = {
 					useritems.push(data.useritems[k])
 				}
 			}
-
 			commit('geCmmPayload', {
 				k: 'guest',
 				v: {

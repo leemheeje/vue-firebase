@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         ...mapActions(["fnSignInCallBack"]),
-        ...mapMutations(["geIsLoading", "geCmmPayload"])
+        ...mapMutations(["geIsLoading"])
     },
     components: {
         Header,

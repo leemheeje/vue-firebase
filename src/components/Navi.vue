@@ -35,7 +35,7 @@
                             <span class="txt mobileHide">회원가입</span>
                         </router-link>
                     </template>
-                    <router-link href="javascript:;" :to="{name:'home'}" class="btns init rtbtn tp1 mobileHide" title="홈으로이동">
+                    <router-link href="javascript:;" :to="{name:'main'}" class="btns init rtbtn tp1 mobileHide" title="홈으로이동">
                            <i class="fas fa-home"></i>
                         <span class="txt">홈</span>
                     </router-link>

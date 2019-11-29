@@ -73,12 +73,11 @@ export default {
         };
     },
     created() {
-        let s = `n`;
         let g_ar = this.compSortitems;
 
         this.sortdata = g_ar;
 
-        if (this.sort) s = this.sort;
+        let s = this.sort;
 
         this.locFnSort(s);
     },
@@ -86,7 +85,7 @@ export default {
         ...mapState(["data", "guest"]),
         compSortitems() {
             return this.sortitems;
-        }
+        },
     },
     methods: {
         ...mapMutations(["geCmmPayload", "geGuestUserItem"]),

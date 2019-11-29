@@ -123,7 +123,7 @@ body {
 .cmmItemsWrap .items .txtop{position: relative; padding-left: 50px; display: block;}
 .cmmItemsWrap .items .txts .u_thub{width: 40px; height: 40px; display: block; position: absolute; background: no-repeat center center; background-size: cover; border-radius: 50%; left: 0; bottom: -10px;}
 .cmmItemsWrap .items .txts .tt{line-height: 32px; font-size: 16px; color: $normal; @include ellipsis(); margin-left: -50px;}
-.cmmItemsWrap .items .txts .st{line-height: 21px; font-size: 14px; color: $gray2; word-break: break-all; display: block; margin-bottom: 10px; margin-left: -50px; font-weight: 300; overflow: hidden;}
+.cmmItemsWrap .items .txts .st{line-height: 21px; font-size: 14px; color: $gray2; word-break: break-all; display: block; margin-bottom: 10px; margin-left: -50px; font-weight: 300; overflow: hidden; height: 42px;}
 .cmmItemsWrap .items .txts .sts{margin-top: 20px; font-size: 13px; display: inline-block; }
 .cmmItemsWrap .items .txts .dt{font-size: 13px; color: $gray2; margin-top: 5px; display: inline-block; padding-left: 10px; margin-left: 10px; color: #999; position: relative;}
 .cmmItemsWrap .items .txts .dt:before{content: ''; width: 1px; height: 60%; left: 0; top: 20%; background: #999; position: absolute;}
@@ -288,7 +288,8 @@ body {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 100%;
+	max-width: inherit;
+	height: 100%;
 }
 
 .mypage_userinfo .user_name {
@@ -438,5 +439,5 @@ body {
 
 @media only screen and (min-width: 1921px){
 	.loginArea{width: 500px;}
-	.cmmItemsWrap .items{width: 16.666%;}
+	.cmmItemsWrap .items{width: 25%;}
 }

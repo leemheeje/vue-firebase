@@ -29,12 +29,12 @@
             </div>
         </div>
 
-        
+
         <div class="mypage_right" :class="item_detail_view?'active':''">
             <div class="mypage_box">
                 <div class="tit">총 게시물 현황</div>
                 <ul class="list_txt MT15">
-                    <li class="tp">
+                   <li class="tp">
                         <i class="fas fa-eye"></i>
                         <span class="txt">{{data_view_math | filter_comma}}명이 확인하였습니다.</span>
                     </li>
@@ -85,11 +85,11 @@
 
         <div class="cmmItemsWrap">
             <div class="cmmitembox">
-                <ItemSort v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems" :no_btn="true"></ItemSort>
+                <ItemSort sort="n" v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems" :no_btn="true"></ItemSort>
             </div>
         </div>
 
-        
+
     </div>
     <router-link :to="{ name: 'create', params: user.uid }" v-if="isAuth && user.uid == $route.params.uid" class="animated bounceIn btnCreate"><i class="fas fa-plus"></i></router-link>
 </div>
@@ -97,6 +97,7 @@
 <script>
 import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 import ItemSort from "@/components/ItemSort";
+import { log } from 'util';
 export default {
     data() {
         return {
@@ -177,8 +178,6 @@ export default {
         data_favo_many() {
             if (this.guest.useritems.length >= 1) {
                 let v_array0 = this.locFnSortFavorite(`item_favorite`)
-                console.log(v_array0);
-                
                 return v_array0[0]
             } else {
                 return false
@@ -194,6 +193,7 @@ export default {
         },
     },
     created() {
+
         this.locFnGetAllCollection();
     },
     watch: {
@@ -205,7 +205,6 @@ export default {
         ...mapActions(["fnGetUserInfo", "fnGetAllCollection"]),
         ...mapMutations(["geCmmPayload", "geIsLoading", 'geUserDetailView']),
         locFnGetAllCollection() {
-            this.geIsLoading(true);
             this.fnGetAllCollection(async res => {
                 this.geCmmPayload({
                     k: "data",
@@ -214,14 +213,22 @@ export default {
                 await this.fnGetUserInfo(this.params_uid)
                 this.mypageItemView = true
             });
+
         },
         locFnMath(params) {
             if (typeof params !== 'undefined') {
                 let { array, key } = params
-                let reducer = (n, c) => n[key] + c[key]
                 let sum = array ? array[0][key] : ''
                 if (array.length > 1) {
-                    sum = array.reduce(reducer)
+                    sum = array.reduce((n, c) => {
+                        if(typeof n === 'object'){
+                            n = n[key]
+                        }
+                        return Number(n + c[key])
+                    })
+
+                }else{
+                    sum = array[0][key]
                 }
                 return sum
             } else {

@@ -76,7 +76,8 @@ export default {
                         .collection("userinfo")
                         .doc(this.$route.params.uid)
                         .get()
-                        .then(res => {
+                        .then(async res => {
+                            console.log(1);
                             let d = res.data();
                             let res_d = [];
                             this.pt_date = getTime //ymdhm
@@ -99,11 +100,13 @@ export default {
                                     item_user_thumb: this.user.thumb,
                                     item_user_uid: this.user.uid,
                                 };
-                                this.$firestore
+                                await this.$firestore
                                     .collection("userinfo")
                                     .doc(this.$route.params.uid)
                                     .update({
                                         useritems: res_d[`useritems`]
+                                    }).then(res=>{
+                                        
                                     });
                             }
                             this.geIsLoading(false);
