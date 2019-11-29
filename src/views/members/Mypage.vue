@@ -51,8 +51,10 @@
             <div class="mypage_box" v-if="guest.useritems.length && data_last_comt.leng">
                 <div class="tit">
                     최근에 달린 댓글
+                    <template v-if="isAuth && user.uid == $route.params.uid">
                     <span style="cursor: default;" class="btns sm outline green ML10" v-if="Object.keys(data_last_comt.comment_reply).length">답변완료</span>
                     <a href="javascript:;" @click="itemDetailView(`data_last_comt`)" class="btns sm green ML10" v-else>답변달기</a>
+                    </template>
                 </div>
                 <div class="list_conf">
                     <a href="javascript:;" class="conf_th" @click="itemDetailView(`data_last_comt`)" :style="`background-image:url(${data_last_comt.thumb})`"></a>

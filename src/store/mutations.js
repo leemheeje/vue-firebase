@@ -46,6 +46,7 @@ export const mutations = {
 		state.isAuth = false
 		state.user = {}
 		//localStorage.removeItem('access-token')
+		location.href = '/'
 		router.push({
 			name: 'main'
 		})

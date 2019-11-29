@@ -58,6 +58,7 @@ export const actions = {
 						payload.uid = res.user.uid;
 						vue.prototype.$firestore.collection("userinfo").doc(res.user.uid).set(payload);
 						dispatch('fnSignInCallBack', () => {
+							window.location.href = '/'
 							router.push({
 								name: 'main'
 							})

@@ -71,9 +71,9 @@ export default {
             this.$firebase.auth().signInWithPopup(provider).then(async res => {
                 this.$Ui.alert(this.$Msg.error.msg2);
                 let isUserItems = false
-                await this.$firestore.collection("userinfo").doc(res.user.uid).get().then(userinfo => {
+                await this.$firestore.collection("userinfo").doc(res.user.uid).get().then(async userinfo => {
                     if (!userinfo.exists) {
-                        this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                        await this.$firestore.collection("userinfo").doc(res.user.uid).set({
                             userid: res.user.email,
                             usernm: res.user.displayName,
                             userthumb: res.user.photoURL,
@@ -83,17 +83,18 @@ export default {
                         if (typeof userinfo.data().useritems !== 'undifined' && Object.keys(userinfo.data().useritems).length) {
                             isUserItems = userinfo.data().useritems
                         }
-                        this.$firestore.collection("userinfo").doc(res.user.uid).set({
+                        await this.$firestore.collection("userinfo").doc(res.user.uid).set({
                             userid: res.user.email,
                             usernm: res.user.displayName,
                             userthumb: res.user.photoURL,
                             useritems: isUserItems ? isUserItems : {}
                         });
                     }
+                    // this.$router.push({
+                    //     name: "main"
+                    // });
+                    window.location.href = '/'
                 })
-                this.$router.push({
-                    name: "main"
-                });
             });
         },
     }
