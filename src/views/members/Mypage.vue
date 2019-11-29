@@ -2,7 +2,7 @@
 <div class="container gray">
     <div class="mypageWrap">
         <div class="mypage_userinfo">
-            <div class="lrow">
+            <div class="mypage_box active">
                 <div class="user_t">
                     <span class="thumb">
                             <img :src="guest.thumb" />
@@ -15,9 +15,12 @@
                     <div class="user_email">{{ guest.email }}</div>
                 </div>
             </div>
-            <div class="lrow" v-if="guest.user_skills_model">
-                <div class="title">skill</div>
-                <div class="cont">
+            <a href="javascript:;" class="btns block init mobileShow mobItemDetailBtn" @click="!item_detail_view ? item_detail_view = true : item_detail_view = false">
+                {{!item_detail_view ? '등록게시물 상세정보 확인하기' : '등록게시물 상세정보 닫기'}}
+            </a>
+            <div class="mypage_box MT10" :class="item_detail_view?'active':''" v-if="guest.user_skills_model">
+                <div class="tit">보유한 스킬</div>
+                <div class="cont MT15">
                     <div class="tag_area cmmInput radiochk meta" v-for="(k, i) in guest.user_skills_model" :key="i">
                         <span class="lb">{{ k }}</span>
                         <!-- <ahref href="/" class="tag" v-if="userSkills" v-for="(key,index) in userSkills">{{guestSkills[index]}}</ahref> -->
@@ -26,12 +29,8 @@
             </div>
         </div>
 
-        <div class="cmmItemsWrap">
-            <div class="cmmitembox">
-                <ItemSort v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems" :no_btn="true"></ItemSort>
-            </div>
-        </div>
-        <div class="mypage_right">
+        
+        <div class="mypage_right" :class="item_detail_view?'active':''">
             <div class="mypage_box">
                 <div class="tit">총 게시물 현황</div>
                 <ul class="list_txt MT15">
@@ -82,6 +81,15 @@
 
 
         </div>
+
+
+        <div class="cmmItemsWrap">
+            <div class="cmmitembox">
+                <ItemSort v-if="guest.useritems && mypageItemView" :sortitems="guest.useritems" :no_btn="true"></ItemSort>
+            </div>
+        </div>
+
+        
     </div>
     <router-link :to="{ name: 'create', params: user.uid }" v-if="isAuth && user.uid == $route.params.uid" class="animated bounceIn btnCreate"><i class="fas fa-plus"></i></router-link>
 </div>
@@ -94,6 +102,7 @@ export default {
         return {
             stateSelector: null,
             mypageItemView: false,
+            item_detail_view: false
         };
     },
     computed: {

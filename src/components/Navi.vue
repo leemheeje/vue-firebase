@@ -16,8 +16,9 @@
                 <div class="rtboxin">
                     <template v-if="isAuth">
                         <router-link :to="{name: 'mypage', params:{uid:user.uid}}" href="javascript:;" class="btns init rtbtn tp2" title="마이페이지">
-                           <span class="gnb_thumb" :style="`background-image: url(${user.thumb})`"></span>
-                           <span class="gnb_nm">{{user.name}}</span>
+                            <i class="fas fa-user-circle mobileShow"></i>
+                           <span class="mobileHide gnb_thumb" :style="`background-image: url(${user.thumb})`"></span>
+                           <span class="mobileHide gnb_nm">{{user.name}}</span>
                         </router-link>
                         <btn @eventBus_click="fnSignOut" href="javascript:;" class="init rtbtn tp1" title="로그아웃">
                             <i class="fas fa-sign-out-alt"></i>
